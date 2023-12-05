@@ -100,6 +100,42 @@ def create_listings():
     db.session.add_all(listings)
     db.session.commit()
     
+def create_user_listings():
+    user_listings = []
+
+    ul1 = UserListing(
+        user_id=1,
+        listing_id=1
+    )
+    ul2 = UserListing(
+        user_id=1,
+        listing_id=2
+    )
+    ul3 = UserListing(
+        user_id=2,
+        listing_id=1
+    )
+    ul4 = UserListing(
+        user_id=2,
+        listing_id=2
+    )
+    ul5 = UserListing(
+        user_id=3,
+        listing_id=3
+    )
+    ul6 = UserListing(
+        user_id=3,
+        listing_id=2
+    )
+
+    user_listings.append(ul1)
+    user_listings.append(ul2)
+    user_listings.append(ul3)
+    user_listings.append(ul4)
+    user_listings.append(ul5)
+    user_listings.append(ul6)
+    db.session.add_all(user_listings)
+    db.session.commit()
 
 if __name__ == '__main__':
     fake = Faker()
@@ -108,3 +144,4 @@ if __name__ == '__main__':
         create_users()
         create_listings()
         create_businesses()
+        create_user_listings()
