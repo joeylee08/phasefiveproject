@@ -24,25 +24,34 @@ app.secret_key = SECRET_KEY
 class Login(Resource):
     def post(self):
         try:
-            current_id = request.get_json()['user_id']
+            username = request.get_json()['username']
+            password = request.get_json()['password']
             login_type = request.get_json()['login_type']
              
             if login_type == 'user':   
-                current_user = User.query.filter_by(id=current_id).first().to_dict()
+                current_user = User.query.filter_by(username=username).first()
+
+                if not current_user or not current_user.authenticate(password):
+                    return make_response({"error" : "invalid credentials"}, 422)
+                
                 session['login_type'] = 'user'
                 
             else:
-                current_user = Business.query.filter_by(id=current_id).first().to_dict() 
+                current_user = Business.query.filter_by(username=username).first()
+
+                if not current_user or not current_user.authenticate(password):
+                    return make_response({"error" : "invalid credentials"}, 422)
+                
                 session['login_type'] = 'business'
             
             if current_user:
-                    session['current_id'] = current_id
-                    return make_response(current_user, 200)
+                    session['current_id'] = current_user.to_dict()['id']
+                    return make_response(current_user.to_dict(), 200)
             else:
                 return make_response({}, 404)
 
-        except Exception:
-            return make_response({}, 404)
+        except Exception as e:
+            return make_response({'error' : str(e)}, 404)
 
 class Logout(Resource):
     def get(self):
@@ -65,6 +74,7 @@ class Signup(Resource):
                 new_user = Business(**body)
                 session['login_type'] = 'business'
 
+            new_user.password_hash = body['password']
             db.session.add(new_user)
             db.session.commit()
             session['current_id'] = new_user.id
