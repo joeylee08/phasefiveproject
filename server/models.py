@@ -77,8 +77,6 @@ class Business(db.Model, SerializerMixin):
     business_name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False, )
     password = db.Column(db.String, nullable=False, )
-    EIN = db.Column(db.String)
-    verified = db.Column(db.Boolean, server_default='false')
     created_at = db.Column(db.DateTime, server_default=func.now())
 
     # RELATIONSHIPS
