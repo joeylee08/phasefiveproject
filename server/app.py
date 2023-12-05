@@ -27,18 +27,30 @@ class Login(Resource):
     def post(self):
         try:
             current_id = request.get_json()['user_id']
-            session['current_id'] = current_id
-            ipdb.set_trace()
             current_user = User.query.filter_by(id=current_id).first().to_dict()
-            return make_response(current_user, 200)
+            if current_user:
+                session['current_id'] = current_id
+                return make_response(current_user, 200)
         except Exception:
-            return make_response({'Error:', 'User not found.'}, 404)
+            return make_response({}, 404)
 
 class Logout(Resource):
-    pass
+    def get(self):
+        try:
+            session['current_id'] = '0'
+            return make_response({}, 200)
+        except Exception:
+            return make_response({}, 400)
 
 class CurrentUser(Resource):
-    pass
+    def get(self):
+        try:
+            current_id = session['current_id']
+            current_user = User.query.filter_by(id=current_id).first().to_dict()
+            if current_user:
+                return make_response(current_user, 200)
+        except Exception:
+            return make_response({}, 404)
 
 api.add_resource(Login, '/login')
 api.add_resource(Logout, '/logout')
