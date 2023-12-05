@@ -15,17 +15,17 @@ def create_users():
     u1 = User(
         username='johnsmith12',
         email='js12@fis.com',
-        password='password',
+        password='password'
     )
     u2 = User(
         username='brendasong88',
         email='bs88@fis.com',
-        password='password',
+        password='password'
     )
     u3 = User(
         username='floydrose54',
         email='fr54@fis.com',
-        password='password',
+        password='password'
     )
     users.append(u1)
     users.append(u2)

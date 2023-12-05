@@ -46,16 +46,16 @@ class Listing(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     product = db.Column(db.String)
     quantity = db.Column(db.Integer)
-    expiration_date = db.Column(db.DateTime)
+    expiration_date = db.Column(db.String)
     business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'))
     posted_by = db.Column(db.String)
     location = db.Column(db.String)
     notes = db.Column(db.String)
-    vegan_safe = db.Column(db.Boolean, server_default='false')
-    non_dairy = db.Column(db.Boolean, server_default='false')
-    gluten_free = db.Column(db.Boolean, server_default='false')
-    nut_free = db.Column(db.Boolean, server_default='false')
-    soy_free = db.Column(db.Boolean, server_default='false')
+    vegan_safe = db.Column(db.Boolean, server_default='true')
+    non_dairy = db.Column(db.Boolean, server_default='true')
+    gluten_free = db.Column(db.Boolean, server_default='true')
+    nut_free = db.Column(db.Boolean, server_default='true')
+    soy_free = db.Column(db.Boolean, server_default='true')
     created_at = db.Column(db.DateTime, server_default=func.now())
 
     # RELATIONSHIPS
@@ -86,11 +86,3 @@ class Business(db.Model, SerializerMixin):
 
     # SERIALIZATION
     serialize_rules = ('-listings.business',)
-
-
-
-
-
-
-
-
