@@ -41,24 +41,21 @@ def create_businesses():
         username='mjspies',
         business_name='Mary Jane\'s Pies',
         email='mjspies12@fis.com',
-        password='password',
-        EIN='123456789'
+        password='password'
     )
     b2 = Business(
         type='restaurant',
         username='arpdenver',
         business_name='Alfredo Rosales Pizzeria',
         email='arpd@fis.com',
-        password='password',
-        EIN='123456789'
+        password='password'
     )
     b3 = Business(
         type='grocery',
         username='swportland',
         business_name='Safeway Portland',
         email='swp12@fis.com',
-        password='password',
-        EIN='123456789'
+        password='password'
     )
     businesses.append(b1)
     businesses.append(b2)
