@@ -25,10 +25,22 @@ class Login(Resource):
     def post(self):
         try:
             current_id = request.get_json()['user_id']
-            current_user = User.query.filter_by(id=current_id).first().to_dict()
+            login_type = request.get_json()['login_type']
+             
+            if login_type == 'user':   
+                current_user = User.query.filter_by(id=current_id).first().to_dict()
+                session['login_type'] = 'user'
+                
+            else:
+                current_user = Business.query.filter_by(id=current_id).first().to_dict() 
+                session['login_type'] = 'business'
+            
             if current_user:
-                session['current_id'] = current_id
-                return make_response(current_user, 200)
+                    session['current_id'] = current_id
+                    return make_response(current_user, 200)
+            else:
+                return make_response({}, 400)
+
         except Exception:
             return make_response({}, 404)
 
@@ -36,7 +48,27 @@ class Logout(Resource):
     def get(self):
         try:
             session['current_id'] = '0'
+            session['login_type'] = ''
             return make_response({}, 200)
+        except Exception:
+            return make_response({}, 400)
+        
+class Signup(Resource):
+    def post(self):
+        try:
+            body = request.get_json()
+
+            if body['login_type'] == 'user':
+                new_user = User(**body)
+                session['login_type'] = 'user'
+            else:
+                new_user = Business(**body)
+                session['login_type'] = 'business'
+
+            db.session.add(new_user)
+            db.session.commit()
+            session['current_id'] = new_user.id
+            return make_response(new_user.to_dict(), 200)
         except Exception:
             return make_response({}, 400)
 
@@ -44,15 +76,31 @@ class CurrentUser(Resource):
     def get(self):
         try:
             current_id = session['current_id']
-            current_user = User.query.filter_by(id=current_id).first().to_dict()
+            login_type = session['login_type']
+            if login_type == 'user':
+                current_user = User.query.filter_by(id=current_id).first().to_dict()
+            else:
+                current_user = Business.query.filter_by(id=current_id).first().to_dict()
+            
             if current_user:
                 return make_response(current_user, 200)
         except Exception:
             return make_response({}, 404)
 
+class Listings(Resource):
+    def get(self):
+        try:
+            all_listings = [listing.to_dict() for listing in Listing.query]
+            return make_response(all_listings, 200)
+        except Exception:
+            return make_response({}, 404)
+
+
 api.add_resource(Login, '/login')
 api.add_resource(Logout, '/logout')
+api.add_resource(Signup, '/signup')
 api.add_resource(CurrentUser, '/currentuser')
+api.add_resource(Listings, '/listings')
 
 
 if __name__ == '__main__':

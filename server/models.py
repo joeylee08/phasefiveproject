@@ -9,6 +9,7 @@ class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
+    login_type = db.Column(db.Integer, server_default='user')
     username = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
@@ -70,11 +71,12 @@ class Business(db.Model, SerializerMixin):
     __tablename__ = 'businesses'
 
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.String, nullable=False, )
-    username = db.Column(db.String, nullable=False, )
+    login_type = db.Column(db.Integer, server_default='business')
+    type = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=False)
     business_name = db.Column(db.String, nullable=False)
-    email = db.Column(db.String, nullable=False, )
-    password = db.Column(db.String, nullable=False, )
+    email = db.Column(db.String, nullable=False)
+    password = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
 
     # RELATIONSHIPS
