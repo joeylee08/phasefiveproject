@@ -11,9 +11,9 @@ class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, required=True)
-    email = db.Column(db.String, required=True)
-    password = db.Column(db.String, required=True)
+    username = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False)
+    password = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
 
     # RELATIONSHIPS
@@ -30,8 +30,8 @@ class UserListing(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, server_default=func.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), required=True)
-    listing_id = db.Column(db.Integer, db.ForeignKey('listings.id'), required=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    listing_id = db.Column(db.Integer, db.ForeignKey('listings.id'), nullable=False)
 
     # RELATIONSHIPS
     user = db.relationship('User', back_populates='user_listings')
@@ -44,12 +44,12 @@ class Listing(db.Model, SerializerMixin):
     __tablename__ = 'listings'
 
     id = db.Column(db.Integer, primary_key=True)
-    product = db.Column(db.String, required=True)
-    quantity = db.Column(db.Integer, required=True)
-    expiration_date = db.Column(db.Datetime, required=True)
-    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), required=True)
-    posted_by = db.Column(db.String, required=True)
-    location = db.Column(db.String, required=True)
+    product = db.Column(db.String, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    expiration_date = db.Column(db.String, nullable=False)
+    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)
+    posted_by = db.Column(db.String, nullable=False)
+    location = db.Column(db.String, nullable=False)
     notes = db.Column(db.String)
     vegan_safe = db.Column(db.Boolean, server_default='true')
     non_dairy = db.Column(db.Boolean, server_default='true')
@@ -72,11 +72,11 @@ class Business(db.Model, SerializerMixin):
     __tablename__ = 'businesses'
 
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.String, required=True, )
-    username = db.Column(db.String, required=True, )
-    business_name = db.Column(db.String, required=True)
-    email = db.Column(db.String, required=True, )
-    password = db.Column(db.String, required=True, )
+    type = db.Column(db.String, nullable=False, )
+    username = db.Column(db.String, nullable=False, )
+    business_name = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False, )
+    password = db.Column(db.String, nullable=False, )
     EIN = db.Column(db.String)
     verified = db.Column(db.Boolean, server_default='false')
     created_at = db.Column(db.DateTime, server_default=func.now())

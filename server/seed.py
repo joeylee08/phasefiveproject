@@ -9,6 +9,7 @@ from faker import Faker
 # Local imports
 from app import app
 from models import db, User, UserListing, Listing, Business
+from datetime import date, timedelta
 
 def create_users():
     users = []
@@ -66,11 +67,12 @@ def create_businesses():
     db.session.commit()
 
 def create_listings():
+    formatted_date = date.today().strftime("%m/%d/%y")
     listings = []
     l1 = Listing(
         product='Chef Boyardee Canned Ravioli',
         quantity=25,
-        expiration_date='12/17/23',
+        expiration_date=formatted_date,
         business_id = 3,
         posted_by='Safeway Portland',
         location='5234 State Hwy, Portland OR',
@@ -79,7 +81,7 @@ def create_listings():
     l2 = Listing(
         product='Large Pepperoni Pizzas, Frozen',
         quantity=12,
-        expiration_date='12/30/23',
+        expiration_date=formatted_date,
         business_id = 2,
         posted_by='Alfredo Rosales Pizzeria',
         location='12 Mountain Way, Denver CO',
@@ -88,7 +90,7 @@ def create_listings():
     l3 = Listing(
         product='Assorted Family Size Pies',
         quantity=8,
-        expiration_date='12/12/23',
+        expiration_date=formatted_date,
         business_id = 1,
         posted_by='Mary Jane\'s Pies',
         location='1223 Beach Blvd, Santa Ana CA',
