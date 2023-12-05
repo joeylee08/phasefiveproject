@@ -37,7 +37,7 @@ class UserListing(db.Model, SerializerMixin):
     listing = db.relationship('Listing', back_populates='user_listings')
 
     # SERIALIZATION
-    serialize_rules = ('-user.user_listings', '-listing.user_listing')
+    serialize_only = ('id', 'user_id', 'listing_id')
 
 class Listing(db.Model, SerializerMixin):
     __tablename__ = 'listings'

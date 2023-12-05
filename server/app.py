@@ -107,6 +107,50 @@ class Listings(Resource):
             db.session.rollback()
             return make_response({}, 400)
 
+class ListingById(Resource):
+    def get(self, id):
+        try:
+            target = db.session.get(Listing, id)
+            return make_response(target.to_dict(), 200)
+        except Exception:
+            return make_response({}, 404)
+        
+    def patch(self, id):
+        pass
+
+    def delete(self, id):
+        try:
+            target = db.session.get(Listing, id)
+            db.session.delete(target)
+            db.session.commit()
+            return make_response({}, 204)
+        except Exception:
+            db.session.rollback()
+            return make_response({}, 404)
+        
+class UserListings(Resource):
+    def post(self):
+        try:
+            body = request.get_json()
+            new_ul = UserListing(**body)
+            db.session.add(new_ul)
+            db.session.commit()
+            return make_response(new_ul.to_dict(), 201)
+        except Exception:
+            db.session.rollback()
+            return make_response({}, 400)
+        
+class UserListingById(Resource):
+    def delete(self, id):
+        try:
+            target = db.session.get(UserListing, id)
+            db.session.delete(target)
+            db.session.commit()
+            return make_response({}, 204)
+        except Exception:
+            db.session.rollback()
+            return make_response({}, 404)
+
 class UserById(Resource):
     def get(self, id):
         try:
@@ -148,36 +192,17 @@ class BusinessById(Resource):
         except Exception:
             db.session.rollback()
             return make_response({}, 404)
-        
-class ListingById(Resource):
-    def get(self, id):
-        try:
-            target = db.session.get(Listing, id)
-            return make_response(target.to_dict(), 200)
-        except Exception:
-            return make_response({}, 404)
-        
-    def patch(self, id):
-        pass
-
-    def delete(self, id):
-        try:
-            target = db.session.get(Listing, id)
-            db.session.delete(target)
-            db.session.commit()
-            return make_response({}, 204)
-        except Exception:
-            db.session.rollback()
-            return make_response({}, 404)
 
 api.add_resource(Login, '/login')
 api.add_resource(Logout, '/logout')
 api.add_resource(Signup, '/signup')
 api.add_resource(CurrentUser, '/currentuser')
 api.add_resource(Listings, '/listings')
+api.add_resource(UserListings, '/userlistings')
 api.add_resource(UserById, '/userbyid/<int:id>')
 api.add_resource(BusinessById, '/businessbyid/<int:id>')
 api.add_resource(ListingById, '/listingbyid/<int:id>')
+api.add_resource(UserListingById, '/userlistingbyid/<int:id>')
 
 
 if __name__ == '__main__':
