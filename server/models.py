@@ -12,7 +12,7 @@ class User(db.Model, SerializerMixin):
     login_type = db.Column(db.Integer, server_default='user')
     username = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
-    password = db.Column(db.String, nullable=False)
+    _password_hash = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
 
     # RELATIONSHIPS
@@ -23,6 +23,19 @@ class User(db.Model, SerializerMixin):
 
     # SERIALIZATION
     serialize_rules = ('-user_listings.user', '-listings.users')
+
+    # PASSWORD HASHING
+    @hybrid_property
+    def password_hash(self):
+        return self._password_hash
+    
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
+        self._password_hash = password_hash
+
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(self._password_hash, password)
 
 class UserListing(db.Model, SerializerMixin):
     __tablename__ = 'userlistings'
@@ -76,7 +89,7 @@ class Business(db.Model, SerializerMixin):
     username = db.Column(db.String, nullable=False)
     business_name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
-    password = db.Column(db.String, nullable=False)
+    _password_hash = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
 
     # RELATIONSHIPS
@@ -84,3 +97,16 @@ class Business(db.Model, SerializerMixin):
 
     # SERIALIZATION
     serialize_rules = ('-listings.business',)
+
+    # PASSWORD HASHING
+    @hybrid_property
+    def password_hash(self):
+        return self._password_hash
+    
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
+        self._password_hash = password_hash
+
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(self._password_hash, password)

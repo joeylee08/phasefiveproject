@@ -16,18 +16,19 @@ def create_users():
     u1 = User(
         username='johnsmith12',
         email='js12@fis.com',
-        password='password'
     )
+    u1.password_hash = 'password'
     u2 = User(
         username='brendasong88',
-        email='bs88@fis.com',
-        password='password'
+        email='bs88@fis.com'
     )
+    u2.password_hash = 'password'
     u3 = User(
         username='floydrose54',
-        email='fr54@fis.com',
-        password='password'
+        email='fr54@fis.com'
     )
+    u3.password_hash = 'password'
+
     users.append(u1)
     users.append(u2)
     users.append(u3)
@@ -40,23 +41,24 @@ def create_businesses():
         type='bakery',
         username='mjspies',
         business_name='Mary Jane\'s Pies',
-        email='mjspies12@fis.com',
-        password='password'
+        email='mjspies12@fis.com'
     )
+    b1.password_hash = 'password'
     b2 = Business(
         type='restaurant',
         username='arpdenver',
         business_name='Alfredo Rosales Pizzeria',
-        email='arpd@fis.com',
-        password='password'
+        email='arpd@fis.com'
     )
+    b2.password_hash = 'password'
     b3 = Business(
         type='grocery',
         username='swportland',
         business_name='Safeway Portland',
-        email='swp12@fis.com',
-        password='password'
+        email='swp12@fis.com'
     )
+    b3.password_hash = 'password'
+
     businesses.append(b1)
     businesses.append(b2)
     businesses.append(b3)
