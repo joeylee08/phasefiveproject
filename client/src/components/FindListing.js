@@ -1,6 +1,6 @@
 const FindListing = () => {
   return (
-    <h1>test</h1>
+    <h1>find listing</h1>
   )
 }
 

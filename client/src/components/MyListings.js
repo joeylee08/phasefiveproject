@@ -1,6 +1,6 @@
 const MyListings = () => {
   return (
-    <h1>test</h1>
+    <h1>my listings</h1>
   )
 }
 

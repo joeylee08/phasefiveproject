@@ -11,24 +11,24 @@ function Router() {
   const loginType = 'user'
   const base_routes = (
     <>
-      <Route path='/' element={Login} />
+      <Route path='/' element={<Login/>} />
     </>
   )
   const user_routes = (
     <>
-      <Route path='/' element={Home} />
-      <Route path='/mylistings' element={MyListings} />
-      <Route path='/findlisting' element={FindListing} />
-      <Route path='/profile' element={Profile} />
+      <Route path='/' element={<Home/>} />
+      <Route path='/mylistings' element={<MyListings/>} />
+      <Route path='/findlisting' element={<FindListing/>} />
+      <Route path='/profile' element={<Profile/>} />
     </>
   )
 
   const business_routes = (
     <>
-      <Route path='/' element={Home} />
-      <Route path='/mylistings' element={MyListings} />
-      <Route path='/createlisting' element={CreateListing} />
-      <Route path='/profile' element={Profile} />
+      <Route path='/' element={<Home/>} />
+      <Route path='/mylistings' element={<MyListings/>} />
+      <Route path='/createlisting' element={<CreateListing/>} />
+      <Route path='/profile' element={<Profile/>} />
     </>
   )
 
@@ -41,7 +41,7 @@ function Router() {
   return (
     <>
       <Routes>
-        {business_routes}
+        {routes}
         <Route path="/:error" element={<Error />} />
       </Routes>
     </>
