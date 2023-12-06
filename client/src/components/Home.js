@@ -2,11 +2,11 @@ import NavBar from './NavBar'
 import Header from './Header'
 
 
-const Home = () => {
+const Home = ({loginType}) => {
   return (
     <div className='container'>
       <Header title={'Home'}/>
-      <NavBar loginType={'user'}/>
+      <NavBar loginType={loginType}/>
       <div className='content'>
 
       </div>

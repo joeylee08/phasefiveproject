@@ -10,7 +10,7 @@ import { useContext } from 'react';
 import UserContext from './App';
 
 function Router({ setCurrentUser, setLoginType }) {
-  // const loginType = useContext(UserContext).loginType
+  const loginType = 'user'
 
   const base_routes = (
     <>
@@ -19,7 +19,7 @@ function Router({ setCurrentUser, setLoginType }) {
   )
   const user_routes = (
     <>
-      <Route path='/' element={<Home/>} />
+      <Route path='/' element={<Home loginType={loginType}/>} />
       <Route path='/mylistings' element={<MyListings/>} />
       <Route path='/findlisting' element={<FindListing/>} />
       <Route path='/profile' element={<Profile/>} />
@@ -28,7 +28,7 @@ function Router({ setCurrentUser, setLoginType }) {
 
   const business_routes = (
     <>
-      <Route path='/' element={<Home/>} />
+      <Route path='/' element={<Home loginType={loginType}/>} />
       <Route path='/mylistings' element={<MyListings/>} />
       <Route path='/createlisting' element={<CreateListing/>} />
       <Route path='/profile' element={<Profile/>} />
@@ -36,7 +36,6 @@ function Router({ setCurrentUser, setLoginType }) {
   )
 
   let routes;
-  let loginType = 'user'
 
   if (loginType === 'user') routes = user_routes
   else if (loginType === 'business') routes = business_routes
@@ -45,7 +44,7 @@ function Router({ setCurrentUser, setLoginType }) {
   return (
     <>
       <Routes>
-        {base_routes}
+        {routes}
         <Route path="/:error" element={<Error />} />
       </Routes>
     </>

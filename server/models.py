@@ -10,8 +10,8 @@ class User(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     login_type = db.Column(db.Integer, server_default='user')
-    username = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=False)
     _password_hash = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
 

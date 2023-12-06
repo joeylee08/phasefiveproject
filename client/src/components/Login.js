@@ -26,7 +26,7 @@ const Login = ({ setCurrentUser, setLoginType }) => {
     initialValues: {
       login_type: '',
       username: '',
-      _password_hash: '' 
+      password: '' 
     },
     validationSchema: fsLogin,
     onSubmit: (values) => {
@@ -51,8 +51,7 @@ const Login = ({ setCurrentUser, setLoginType }) => {
       login_type: '',
       email: '',
       username: '',
-      _password_hash: '',
-      confirmpassword: ''
+      password: ''
     },
     validationSchema: fsSignup,
     onSubmit: (values) => {
@@ -80,7 +79,7 @@ const Login = ({ setCurrentUser, setLoginType }) => {
     return (
       <>
         <div className='form'>
-          <form id='loginForm' onSubmit={formikLogin.handleSubmit}>
+          <form id='loginForm' action='/' method='post' onSubmit={formikLogin.handleSubmit}>
             <div id='loginSignup'>
             <button className='modalButton' type='button' onClick={() => handleToggleform()}>{isLogin ? 'Signup Instead' : 'Login Instead'}</button>
             </div>
@@ -115,9 +114,9 @@ const Login = ({ setCurrentUser, setLoginType }) => {
               <option value='user'>User</option>
               <option value='business'>Business</option>
             </select>
+            <input id='email' className='loginInput' type='email' onChange={formikSignup.handleChange} value={formikSignup.values.email} placeholder="Enter Email"></input>
             <input id='username' className='loginInput' type='text' onChange={formikSignup.handleChange} value={formikSignup.values.username} placeholder="Enter Username"></input>
             <input id='password' className='loginInput' type='password' onChange={formikSignup.handleChange} value={formikSignup.values.password} placeholder="Enter Password"></input>
-            <input id='confirmpassword' className='loginInput' type='password' onChange={formikSignup.handleChange} value={formikSignup.values.confirmpassword} placeholder="Confirm Password"></input>
             <div id='loginButtons'>
               <button className='modalButton' type='submit'>Signup</button>
             </div>

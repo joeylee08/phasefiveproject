@@ -19,7 +19,7 @@ const NavBar = ({ loginType }) => {
         <ul>
           <li><NavLink to='/'>Home</NavLink></li>
           <li><NavLink to='/mylistings'>My Listings</NavLink></li>
-          <li><NavLink to='/createlisting'>Find Listing</NavLink></li>
+          <li><NavLink to='/createlisting'>Create Listing</NavLink></li>
           <li><NavLink to='/profile'>Profile</NavLink></li>
         </ul>
       </nav>
