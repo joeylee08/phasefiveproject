@@ -30,7 +30,6 @@ const Login = ({ setCurrentUser, setLoginType }) => {
     },
     validationSchema: fsLogin,
     onSubmit: (values) => {
-      alert('poo')
       fetch('/login', {
         method: 'POST',
         headers: {
@@ -57,7 +56,6 @@ const Login = ({ setCurrentUser, setLoginType }) => {
     },
     validationSchema: fsSignup,
     onSubmit: (values) => {
-      alert('poo')
       fetch('/signup', {
         method: 'POST',
         headers: {
@@ -84,7 +82,7 @@ const Login = ({ setCurrentUser, setLoginType }) => {
         <div className='form'>
           <form id='loginForm' onSubmit={formikLogin.handleSubmit}>
             <div id='loginSignup'>
-            <button className='modalButton' onClick={() => handleToggleform()}>{isLogin ? 'Signup Instead' : 'Login Instead'}</button>
+            <button className='modalButton' type='button' onClick={() => handleToggleform()}>{isLogin ? 'Signup Instead' : 'Login Instead'}</button>
             </div>
             <h1 className='formTitle'>Login</h1>
             <h3 className='formTag'>Please enter your account type, username, and password.</h3>
@@ -108,7 +106,7 @@ const Login = ({ setCurrentUser, setLoginType }) => {
         <div className='form'>
           <form id='signupForm' onSubmit={formikSignup.handleSubmit}>
             <div id='loginSignup'>
-              <button className='modalButton' onClick={() => handleToggleform()}>{isLogin ? 'Signup Instead' : 'Login Instead'}</button>
+              <button className='modalButton' type='button' onClick={() => handleToggleform()}>{isLogin ? 'Signup Instead' : 'Login Instead'}</button>
             </div>
             <h1 className='formTitle'>Signup</h1>
             <h3 className='formTag'>Please enter your account type, username, and password.</h3>
