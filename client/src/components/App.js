@@ -1,10 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { useEffect, useState, createContext, useContext } from "react";
 import Router from './Router'
+import Login from "./Login";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({})
+  const [loginType, setLoginType] = useState('')
+
+  const CurrentUser = createContext(currentUser)
+  const LoginType = createContext(loginType)
+
+  useEffect(() => {
+    fetch('/currentuser')
+      .then(res => res.json())
+      .then(user => {
+        setCurrentUser(user)
+        setLoginType(user['login_type'])
+      })
+  }, [])
+
   return (
-    <Router />
+    <CurrentUser.Provider value={currentUser}>
+      <LoginType.Provider value={loginType}>
+        <Router currentUser={currentUser} loginType={loginType}/>
+      </LoginType.Provider>
+    </CurrentUser.Provider>
+    
   )
 }
 
