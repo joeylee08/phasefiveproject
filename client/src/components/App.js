@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
+import Router from './Router'
 
 function App() {
-  return <h1>Project Client</h1>;
+  return (
+    <Router />
+  )
 }
 
 export default App;
