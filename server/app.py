@@ -34,8 +34,7 @@ class Login(Resource):
                 if not current_user or not current_user.authenticate(password):
                     return make_response({"error" : "invalid credentials"}, 422)
                 
-                session['login_type'] = 'user'
-                
+                session['login_type'] = 'user'               
             else:
                 current_user = Business.query.filter_by(username=username).first()
 
