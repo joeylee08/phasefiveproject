@@ -4,8 +4,6 @@ import * as yup from 'yup'
 import { useState, useContext } from 'react'
 import UserContext from './App'
 
-const fetchUrl = 'http://127.0.0.1:5555'
-
 const Login = ({ setCurrentUser, setLoginType }) => {
   const navigate = useNavigate()
   const [isLogin, setIsLogin] = useState(true)
@@ -33,7 +31,7 @@ const Login = ({ setCurrentUser, setLoginType }) => {
     validationSchema: fsLogin,
     onSubmit: (values) => {
       alert('poo')
-      fetch(`${fetchUrl}/login`, {
+      fetch('/login', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +58,7 @@ const Login = ({ setCurrentUser, setLoginType }) => {
     validationSchema: fsSignup,
     onSubmit: (values) => {
       alert('poo')
-      fetch(`${fetchUrl}/signup`, {
+      fetch('/signup', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
