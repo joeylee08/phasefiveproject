@@ -5,13 +5,16 @@ import MyListings from './MyListings';
 import FindListing from './FindListing';
 import CreateListing from './CreateListing';
 import Profile from './Profile';
-import Error from './Error'
+import Error from './Error';
+import { useContext } from 'react';
+import UserContext from './App';
 
-function Router() {
-  const loginType = 'user'
+function Router({ setCurrentUser, setLoginType }) {
+  // const loginType = useContext(UserContext).loginType
+
   const base_routes = (
     <>
-      <Route path='/' element={<Login/>} />
+      <Route path='/' element={<Login setCurrentUser={setCurrentUser} setLoginType={setLoginType}/>} />
     </>
   )
   const user_routes = (
@@ -33,6 +36,7 @@ function Router() {
   )
 
   let routes;
+  let loginType = 'user'
 
   if (loginType === 'user') routes = user_routes
   else if (loginType === 'business') routes = business_routes
@@ -41,7 +45,7 @@ function Router() {
   return (
     <>
       <Routes>
-        {routes}
+        {base_routes}
         <Route path="/:error" element={<Error />} />
       </Routes>
     </>

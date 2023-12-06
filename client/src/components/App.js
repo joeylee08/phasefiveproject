@@ -2,12 +2,11 @@ import React, { useEffect, useState, createContext, useContext } from "react";
 import Router from './Router'
 import Login from "./Login";
 
+export const UserContext = createContext(null)
+
 function App() {
   const [currentUser, setCurrentUser] = useState({})
   const [loginType, setLoginType] = useState('')
-
-  const CurrentUser = createContext(currentUser)
-  const LoginType = createContext(loginType)
 
   useEffect(() => {
     fetch('/currentuser')
@@ -18,12 +17,18 @@ function App() {
       })
   }, [])
 
+  const handleSetCurrentUser = (userObj) => {
+    setCurrentUser(userObj)
+  }
+
+  const handleSetLoginType = (loginType) => {
+    setLoginType(loginType)
+  }
+
   return (
-    <CurrentUser.Provider value={currentUser}>
-      <LoginType.Provider value={loginType}>
-        <Router currentUser={currentUser} loginType={loginType}/>
-      </LoginType.Provider>
-    </CurrentUser.Provider>
+    <UserContext.Provider value={{ currentUser, loginType }}>
+      <Router setCurrentUser={handleSetCurrentUser} setLoginType={handleSetLoginType} />
+    </UserContext.Provider>
     
   )
 }
