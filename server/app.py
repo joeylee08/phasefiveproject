@@ -80,7 +80,6 @@ class Signup(Resource):
                     login_type=body['login_type'],
                     business_name=body['business_name'],
                     username=body['username'],
-                    business_name='',
                     email=body['email'],
                     _password_hash=''
                 )

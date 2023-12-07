@@ -46,3 +46,9 @@
 #logoutBtn:hover {
   border: 2px solid red;
 }
+
+.listingCard {
+  width: 200px;
+  height: 250px;
+  border: 2px solid green;
+}
