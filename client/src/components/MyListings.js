@@ -6,7 +6,8 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
   const [myListings, setMyListings] = useState([])
 
   useEffect(() => {
-    fetch(`/userlistingbyid/${currentUser.id}`)
+    if (loginType == 'user') {
+      fetch(`/userlistingbyid/${currentUser.id}`)
       .then(res => res.json())
       .then(data => {
         for (let ul of data) {
@@ -17,12 +18,21 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
             })
         }
       })
+    } else {
+      fetch('/listings')
+      .then(res => res.json())
+      .then(data => {
+        data = data.filter(item => item.business_id == currentUser.id)
+        setMyListings(data)
+      })
+    }
+    
   }, [])
 
   const mapped = myListings.map(item => (
     <div className='listingCard' key={item.id}>
       <h3>{item.product}</h3>
-      <h3>Quantity: {item.quantity}</h3>
+      <h4>Quantity: {item.quantity}</h4>
       <p>Posted By: {item.posted_by}</p>
       <p>Expires: {item.expiration_date}</p>
     </div>
