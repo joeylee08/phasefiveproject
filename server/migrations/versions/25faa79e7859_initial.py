@@ -1,8 +1,8 @@
 """initial
 
-Revision ID: b12efad9f58f
+Revision ID: 25faa79e7859
 Revises: 
-Create Date: 2023-12-05 13:42:26.313665
+Create Date: 2023-12-06 18:54:36.134549
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b12efad9f58f'
+revision = '25faa79e7859'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,9 +21,8 @@ def upgrade():
     op.create_table('businesses',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('login_type', sa.Integer(), server_default='business', nullable=True),
-    sa.Column('type', sa.String(), nullable=False),
     sa.Column('username', sa.String(), nullable=False),
-    sa.Column('business_name', sa.String(), nullable=False),
+    sa.Column('business_name', sa.String(), nullable=True),
     sa.Column('email', sa.String(), nullable=False),
     sa.Column('_password_hash', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
@@ -32,8 +31,8 @@ def upgrade():
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('login_type', sa.Integer(), server_default='user', nullable=True),
-    sa.Column('username', sa.String(), nullable=False),
     sa.Column('email', sa.String(), nullable=False),
+    sa.Column('username', sa.String(), nullable=False),
     sa.Column('_password_hash', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.PrimaryKeyConstraint('id')

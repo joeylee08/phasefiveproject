@@ -38,21 +38,18 @@ def create_users():
 def create_businesses():
     businesses = []
     b1 = Business(
-        type='bakery',
         username='mjspies',
         business_name='Mary Jane\'s Pies',
         email='mjspies12@fis.com'
     )
     b1.password_hash = 'password'
     b2 = Business(
-        type='restaurant',
         username='arpdenver',
         business_name='Alfredo Rosales Pizzeria',
         email='arpd@fis.com'
     )
     b2.password_hash = 'password'
     b3 = Business(
-        type='grocery',
         username='swportland',
         business_name='Safeway Portland',
         email='swp12@fis.com'
@@ -78,6 +75,24 @@ def create_listings():
         notes='Please pickup between 3 and 6 PM.'
     )
     l2 = Listing(
+        product='Nature\s Best Trail Mix Bars',
+        quantity=200,
+        expiration_date=formatted_date,
+        business_id = 3,
+        posted_by='Safeway Portland',
+        location='5234 State Hwy, Portland OR',
+        notes='Please pickup between 3 and 6 PM.'
+    )
+    l3 = Listing(
+        product='Old Trapper Beef Jerky 16oz',
+        quantity=12,
+        expiration_date=formatted_date,
+        business_id = 3,
+        posted_by='Safeway Portland',
+        location='5234 State Hwy, Portland OR',
+        notes='Please pickup between 3 and 6 PM.'
+    )
+    l4 = Listing(
         product='Large Pepperoni Pizzas, Frozen',
         quantity=12,
         expiration_date=formatted_date,
@@ -86,9 +101,27 @@ def create_listings():
         location='12 Mountain Way, Denver CO',
         notes='Please pickup after 8PM.'
     )
-    l3 = Listing(
+    l5 = Listing(
+        product='Breadsticks and dipping sauce',
+        quantity=8,
+        expiration_date=formatted_date,
+        business_id = 2,
+        posted_by='Alfredo Rosales Pizzeria',
+        location='12 Mountain Way, Denver CO',
+        notes='Please pickup after 8PM.'
+    )
+    l6 = Listing(
         product='Assorted Family Size Pies',
         quantity=8,
+        expiration_date=formatted_date,
+        business_id = 1,
+        posted_by='Mary Jane\'s Pies',
+        location='1223 Beach Blvd, Santa Ana CA',
+        notes='Please pickup between 5 and 8 PM.'
+    )
+    l7 = Listing(
+        product='Pumpkin Pie 12 inch',
+        quantity=16,
         expiration_date=formatted_date,
         business_id = 1,
         posted_by='Mary Jane\'s Pies',
@@ -98,6 +131,10 @@ def create_listings():
     listings.append(l1)
     listings.append(l2)
     listings.append(l3)
+    listings.append(l4)
+    listings.append(l5)
+    listings.append(l6)
+    listings.append(l7)
     db.session.add_all(listings)
     db.session.commit()
     
@@ -113,20 +150,36 @@ def create_user_listings():
         listing_id=2
     )
     ul3 = UserListing(
-        user_id=2,
-        listing_id=1
+        user_id=1,
+        listing_id=7
     )
     ul4 = UserListing(
         user_id=2,
         listing_id=2
     )
     ul5 = UserListing(
-        user_id=3,
+        user_id=2,
         listing_id=3
     )
     ul6 = UserListing(
+        user_id=2,
+        listing_id=6
+    )
+    ul7 = UserListing(
         user_id=3,
-        listing_id=2
+        listing_id=5
+    )
+    ul8 = UserListing(
+        user_id=3,
+        listing_id=6
+    )
+    ul9 = UserListing(
+        user_id=3,
+        listing_id=3
+    )
+    ul10 = UserListing(
+        user_id=3,
+        listing_id=1
     )
 
     user_listings.append(ul1)
@@ -135,6 +188,10 @@ def create_user_listings():
     user_listings.append(ul4)
     user_listings.append(ul5)
     user_listings.append(ul6)
+    user_listings.append(ul7)
+    user_listings.append(ul8)
+    user_listings.append(ul9)
+    user_listings.append(ul10)
     db.session.add_all(user_listings)
     db.session.commit()
 
