@@ -1,15 +1,12 @@
 import NavBar from './NavBar'
 import Header from './Header'
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
 import Modal from './Modal'
 
 const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
   const [myListings, setMyListings] = useState([])
   const [isModal, setIsModal] = useState(false)
   const [selectedListing, setSelectedListing] = useState({})
-
-  const navigate = useNavigate()
 
   const handleIsModal = () => {
     setIsModal(isModal => !isModal)

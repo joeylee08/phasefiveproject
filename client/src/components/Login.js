@@ -87,7 +87,7 @@ const Login = ({ setCurrentUser, setLoginType }) => {
             </div>
             <h1 className='formTitle'>Login</h1>
             <div className='loginBar'></div>
-            <h3 className='formTag'>Please enter your account type, username, and password.</h3>
+            <h3 className='formTag'>Please enter your account information.</h3>
             <label htmlFor='login_type'>Account Type:</label>
             <select id='login_type' className='loginInput' onChange={formikLogin.handleChange} value={formikLogin.values.login_type}>
               <option value=''>Select an Account Type</option>
@@ -115,7 +115,7 @@ const Login = ({ setCurrentUser, setLoginType }) => {
             </div>
             <h1 className='formTitle'>Signup</h1>
             <div className='loginBar'></div>
-            <h3 className='formTag'>Please enter your account type, email, username, and password.</h3>
+            <h3 className='formTag'>Please enter your account information.</h3>
             <label htmlFor='login_type'>Account Type:</label>
             <select id='login_type' className='loginInput' onChange={formikSignup.handleChange} value={formikSignup.values.login_type}>
               <option value=''>Select an Account Type</option>
