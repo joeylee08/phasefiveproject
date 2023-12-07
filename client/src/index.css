@@ -1,7 +1,48 @@
-:root {
-  --bg: #282c34;
-  --header: #fff;
-  --link: #61dafb;
-  --text: hsla(0, 0%, 100%, 0.88);
+.container {
+  margin: auto;
+  width: 100%;
+  height: 750px;
+  border: 2px solid black;
+  min-width: 800px;
+  max-width: 1200px;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0px;
+  width: 100%;
+  height: 80px;
+  border: 2px solid blue;
+  text-align: center;
+  padding-top: 2rem;
+  font-size: 2.5rem;
+}
+
+.navbar {
+  margin: 0px;
+  width: 100%;
+  height: 80px;
+  border: 2px solid red;
+}
+
+.linksList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  list-style-type: none;
+  font-size: 1.5rem;
+}
+
+#logoutBtn {
+  width: 8rem;
+  height: 2rem;
+  border: 2px solid green;
+  border-radius: 5px;
+}
+
+#logoutBtn:hover {
+  border: 2px solid red;
+}

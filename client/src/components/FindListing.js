@@ -1,7 +1,17 @@
-const FindListing = () => {
+import NavBar from './NavBar'
+import Header from './Header'
+
+
+const MyListings = ({loginType}) => {
   return (
-    <h1>find listing</h1>
+    <div className='container'>
+      <Header title={'Find Listing'}/>
+      <NavBar loginType={loginType}/>
+      <div className='content'>
+
+      </div>
+    </div>
   )
 }
 
-export default FindListing
+export default MyListings

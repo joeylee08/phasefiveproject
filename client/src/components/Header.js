@@ -1,6 +1,16 @@
-const Header = ({title}) => {
+const Header = ({ title, setCurrentUser, setLoginType }) => {
+  const logout = () => {
+    fetch('/logout')
+      .then(() => {
+        setCurrentUser({})
+        setLoginType('')
+      })
+  }
+  
   return (
-    <h1>{title}</h1>
+    <>
+      <h1 className='header'>{title}<button id='logoutBtn' onClick={logout}>Logout User</button></h1>
+    </>
   )
 }
 

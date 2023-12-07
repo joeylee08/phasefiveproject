@@ -1,6 +1,16 @@
-const CreateListing = () => {
+import NavBar from './NavBar'
+import Header from './Header'
+
+
+const CreateListing = ({loginType}) => {
   return (
-    <h1>create listing</h1>
+    <div className='container'>
+      <Header title={'Create Listing'}/>
+      <NavBar loginType={loginType}/>
+      <div className='content'>
+
+      </div>
+    </div>
   )
 }
 

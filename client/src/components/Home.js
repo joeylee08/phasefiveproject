@@ -2,10 +2,10 @@ import NavBar from './NavBar'
 import Header from './Header'
 
 
-const Home = ({loginType}) => {
+const Home = ({loginType, setCurrentUser, setLoginType}) => {
   return (
     <div className='container'>
-      <Header title={'Home'}/>
+      <Header title={'Home'} setCurrentUser={setCurrentUser} setLoginType={setLoginType}/>
       <NavBar loginType={loginType}/>
       <div className='content'>
 

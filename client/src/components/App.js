@@ -27,7 +27,7 @@ function App() {
 
   return (
     <UserContext.Provider value={{ currentUser, loginType }}>
-      <Router setCurrentUser={handleSetCurrentUser} setLoginType={handleSetLoginType} />
+      <Router currentUser={currentUser} loginType={loginType} setCurrentUser={handleSetCurrentUser} setLoginType={handleSetLoginType} />
     </UserContext.Provider>
     
   )

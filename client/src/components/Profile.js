@@ -1,6 +1,16 @@
-const Profile = () => {
+import NavBar from './NavBar'
+import Header from './Header'
+
+
+const Profile = ({loginType}) => {
   return (
-    <h1>profile</h1>
+    <div className='container'>
+      <Header title={'Profile'}/>
+      <NavBar loginType={loginType}/>
+      <div className='content'>
+
+      </div>
+    </div>
   )
 }
 

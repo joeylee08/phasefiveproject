@@ -5,7 +5,7 @@ const NavBar = ({ loginType }) => {
   if (loginType == 'user') {
     return (
       <nav className='navbar'>
-        <ul>
+        <ul className='linksList'>
           <li><NavLink to='/'>Home</NavLink></li>
           <li><NavLink to='/mylistings'>My Listings</NavLink></li>
           <li><NavLink to='/findlisting'>Find Listing</NavLink></li>
@@ -16,7 +16,7 @@ const NavBar = ({ loginType }) => {
   } else if (loginType == 'business') {
     return (
       <nav className='navbar'>
-        <ul>
+        <ul className='linksList'>
           <li><NavLink to='/'>Home</NavLink></li>
           <li><NavLink to='/mylistings'>My Listings</NavLink></li>
           <li><NavLink to='/createlisting'>Create Listing</NavLink></li>
