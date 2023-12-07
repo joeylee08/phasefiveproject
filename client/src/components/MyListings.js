@@ -6,7 +6,7 @@ import Modal from './Modal'
 
 const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
   const [myListings, setMyListings] = useState([])
-  const [isModal, setIsModal] = useState(true)
+  const [isModal, setIsModal] = useState(false)
 
   const navigate = useNavigate()
 
@@ -88,7 +88,7 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
     <div className='container'>
       <Header title={'My Listings'} setCurrentUser={setCurrentUser} setLoginType={setLoginType}/>
       <NavBar loginType={loginType}/>
-      {isModal ? <Modal handleIsModal={handleIsModal} /> : <h1>NO PENIS</h1>}
+      {isModal ? <Modal handleIsModal={handleIsModal} /> : null}
       <div className='content'>
         {mapped}
       </div>
