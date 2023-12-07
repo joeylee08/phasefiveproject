@@ -18,19 +18,19 @@ function Router({ currentUser, loginType, setCurrentUser, setLoginType }) {
   )
   const user_routes = (
     <>
-      <Route path='/' element={<Home setCurrentUser={setCurrentUser} setLoginType={setLoginType} loginType={loginType}/>} />
-      <Route path='/mylistings' element={<MyListings loginType={loginType}/>} />
-      <Route path='/findlisting' element={<FindListing loginType={loginType}/>} />
-      <Route path='/profile' element={<Profile loginType={loginType}/>} />
+      <Route path='/' element={<Home setCurrentUser={setCurrentUser} setLoginType={setLoginType} currentUser={currentUser} loginType={loginType}/>} />
+      <Route path='/mylistings' element={<MyListings setCurrentUser={setCurrentUser} setLoginType={setLoginType} currentUser={currentUser} loginType={loginType}/>} />
+      <Route path='/findlisting' element={<FindListing setCurrentUser={setCurrentUser} setLoginType={setLoginType} currentUser={currentUser} loginType={loginType}/>} />
+      <Route path='/profile' element={<Profile setCurrentUser={setCurrentUser} setLoginType={setLoginType} currentUser={currentUser} loginType={loginType}/>} />
     </>
   )
 
   const business_routes = (
     <>
-      <Route path='/' element={<Home setCurrentUser={setCurrentUser} setLoginType={setLoginType} loginType={loginType}/>} />
-      <Route path='/mylistings' element={<MyListings loginType={loginType}/>} />
-      <Route path='/createlisting' element={<CreateListing loginType={loginType}/>} />
-      <Route path='/profile' element={<Profile loginType={loginType}/>} />
+      <Route path='/' element={<Home setCurrentUser={setCurrentUser} setLoginType={setLoginType} currentUser={currentUser} loginType={loginType}/>} />
+      <Route path='/mylistings' element={<MyListings setCurrentUser={setCurrentUser} setLoginType={setLoginType} currentUser={currentUser} loginType={loginType}/>} />
+      <Route path='/createlisting' element={<CreateListing setCurrentUser={setCurrentUser} setLoginType={setLoginType} currentUser={currentUser} loginType={loginType}/>} />
+      <Route path='/profile' element={<Profile setCurrentUser={setCurrentUser} setLoginType={setLoginType} currentUser={currentUser} loginType={loginType}/>} />
     </>
   )
 

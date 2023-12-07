@@ -187,6 +187,16 @@ class UserListings(Resource):
             return make_response({"error" : str(e)}, 400)
         
 class UserListingById(Resource):
+    def get(self, id):
+        try:
+            if session['login_type'] != 'user':
+                return make_response({"error" : "unauthorized to access userlistings"}, 422)
+            
+            user_listings = [ul.to_dict() for ul in UserListing.query.filter_by(user_id=id).all()]
+            return make_response(user_listings, 200)
+        except Exception:
+            return make_response({}, 404)
+        
     def delete(self, id):
         try:
             if session['login_type'] != 'user':

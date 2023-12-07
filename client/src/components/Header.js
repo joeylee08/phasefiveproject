@@ -1,9 +1,14 @@
+import { useNavigate } from 'react-router-dom';
+
 const Header = ({ title, setCurrentUser, setLoginType }) => {
+  const navigate = useNavigate()
+
   const logout = () => {
     fetch('/logout')
       .then(() => {
         setCurrentUser({})
         setLoginType('')
+        navigate('/')
       })
   }
   
