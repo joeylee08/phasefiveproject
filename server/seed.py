@@ -75,7 +75,7 @@ def create_listings():
         notes='Please pickup between 3 and 6 PM.'
     )
     l2 = Listing(
-        product='Nature\s Best Trail Mix Bars',
+        product='Nature\'s Best Trail Mix Bars',
         quantity=200,
         expiration_date=formatted_date,
         business_id = 3,

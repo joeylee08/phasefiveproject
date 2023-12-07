@@ -162,6 +162,7 @@ class ListingById(Resource):
             if session['login_type'] != 'business':
                 return make_response({"error" : "unauthorized to delete listing"}, 422)
             
+            
             target = db.session.get(Listing, id)
             db.session.delete(target)
             db.session.commit()
@@ -185,17 +186,22 @@ class UserListings(Resource):
             db.session.rollback()
             return make_response({"error" : str(e)}, 400)
         
-class UserListingById(Resource):
+class ULByUserId(Resource):
     def get(self, id):
         try:
             if session['login_type'] != 'user':
                 return make_response({"error" : "unauthorized to access userlistings"}, 422)
             
             user_listings = [ul.to_dict() for ul in UserListing.query.filter_by(user_id=id).all()]
+            
             return make_response(user_listings, 200)
         except Exception:
             return make_response({}, 404)
-        
+
+
+class UserListingById(Resource):
+    def get(self, id):
+        pass
     def delete(self, id):
         try:
             if session['login_type'] != 'user':
@@ -294,6 +300,7 @@ api.add_resource(CurrentUser, '/currentuser')
 api.add_resource(Listings, '/listings')
 api.add_resource(ListingById, '/listingbyid/<int:id>')
 api.add_resource(UserListings, '/userlistings')
+api.add_resource(ULByUserId, '/ulbyuserid/<int:id>')
 api.add_resource(UserListingById, '/userlistingbyid/<int:id>')
 api.add_resource(UserById, '/userbyid/<int:id>')
 api.add_resource(BusinessById, '/businessbyid/<int:id>')

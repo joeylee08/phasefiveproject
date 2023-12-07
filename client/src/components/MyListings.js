@@ -7,7 +7,7 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
 
   useEffect(() => {
     if (loginType == 'user') {
-      fetch(`/userlistingbyid/${currentUser.id}`)
+      fetch(`/ulbyuserid/${currentUser['id']}`)
       .then(res => res.json())
       .then(data => {
         for (let ul of data) {
@@ -29,12 +29,28 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
     
   }, [])
 
+  const handleDelete = (e) => {
+    const listing_id = e.target.id
+    
+    if (loginType === 'user') {
+      return
+    } else {
+      fetch(`/listingbyid/${listing_id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+    }
+  }
+
   const mapped = myListings.map(item => (
     <div className='listingCard' key={item.id}>
       <h3>{item.product}</h3>
       <h4>Quantity: {item.quantity}</h4>
       <p>Posted By: {item.posted_by}</p>
       <p>Expires: {item.expiration_date}</p>
+      <button type='button' id={item.id} className='deleteBtn' onClick={handleDelete}>DELETE</button>
     </div>
     )
   )
