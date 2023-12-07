@@ -197,7 +197,6 @@ class ULByUserId(Resource):
         except Exception:
             return make_response({}, 404)
 
-
 class UserListingById(Resource):
     def get(self, id):
         pass

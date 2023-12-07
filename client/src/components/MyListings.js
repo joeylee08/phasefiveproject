@@ -2,10 +2,17 @@ import NavBar from './NavBar'
 import Header from './Header'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import Modal from './Modal'
 
 const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
   const [myListings, setMyListings] = useState([])
+  const [isModal, setIsModal] = useState(true)
+
   const navigate = useNavigate()
+
+  const handleIsModal = () => {
+    setIsModal(isModal => !isModal)
+  }
 
   const fetchListings = () => {
     if (loginType == 'user') {
@@ -35,6 +42,10 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
     fetchListings()
   }, [])
 
+  const handleDetails = () => {
+    setIsModal(isModal => !isModal)
+  }
+
   const handleDelete = (e) => {
     const listing_id = e.target.id
 
@@ -60,10 +71,6 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
     }
   }
 
-  const handleEdit = () => {
-    return
-  }
-
   const mapped = myListings.map(item => (
     <div className='listingCard' listing_id={item.id} key={item.id}>
       <h3>{item.product}</h3>
@@ -71,8 +78,8 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
       <p>Posted By: {item.posted_by}</p>
       <p>Expires: {item.expiration_date}</p>
       <div className='btnWrapper'>
-        <button type='button' id={item.id} className='deleteBtn' onClick={handleDelete}>DELETE</button>
-        {loginType === 'business' ? <button type='button' id={item.id} className='editBtn' onClick={handleEdit}>EDIT</button> : null}
+        <button type='button' id={item.id} className='cardBtn' onClick={handleDetails}>DETAILS</button>
+        <button type='button' id={item.id} className='cardBtn' onClick={handleDelete}>DELETE</button>
       </div>
     </div>
     )
@@ -81,6 +88,7 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
     <div className='container'>
       <Header title={'My Listings'} setCurrentUser={setCurrentUser} setLoginType={setLoginType}/>
       <NavBar loginType={loginType}/>
+      {isModal ? <Modal handleIsModal={handleIsModal} /> : <h1>NO PENIS</h1>}
       <div className='content'>
         {mapped}
       </div>
