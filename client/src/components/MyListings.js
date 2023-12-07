@@ -7,6 +7,7 @@ import Modal from './Modal'
 const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
   const [myListings, setMyListings] = useState([])
   const [isModal, setIsModal] = useState(false)
+  const [selectedListing, setSelectedListing] = useState({})
 
   const navigate = useNavigate()
 
@@ -42,8 +43,9 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
     fetchListings()
   }, [])
 
-  const handleDetails = () => {
+  const handleDetails = (item) => {
     setIsModal(isModal => !isModal)
+    setSelectedListing(item)
   }
 
   const handleDelete = (e) => {
@@ -78,7 +80,7 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
       <p>Posted By: {item.posted_by}</p>
       <p>Expires: {item.expiration_date}</p>
       <div className='btnWrapper'>
-        <button type='button' id={item.id} className='cardBtn' onClick={handleDetails}>DETAILS</button>
+        <button type='button' id={item.id} className='cardBtn' onClick={() => handleDetails(item)}>DETAILS</button>
         <button type='button' id={item.id} className='cardBtn' onClick={handleDelete}>DELETE</button>
       </div>
     </div>
@@ -88,7 +90,7 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
     <div className='container'>
       <Header title={'My Listings'} setCurrentUser={setCurrentUser} setLoginType={setLoginType}/>
       <NavBar loginType={loginType}/>
-      {isModal ? <Modal handleIsModal={handleIsModal} /> : null}
+      {isModal ? <Modal loginType={loginType} selectedListing={selectedListing} handleIsModal={handleIsModal} /> : null}
       <div className='content'>
         {mapped}
       </div>
