@@ -31,7 +31,7 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
 
   const handleDelete = (e) => {
     const listing_id = e.target.id
-    
+
     if (loginType === 'user') {
       return
     } else {
@@ -44,13 +44,20 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
     }
   }
 
+  const handleEdit = () => {
+    return
+  }
+
   const mapped = myListings.map(item => (
     <div className='listingCard' key={item.id}>
       <h3>{item.product}</h3>
       <h4>Quantity: {item.quantity}</h4>
       <p>Posted By: {item.posted_by}</p>
       <p>Expires: {item.expiration_date}</p>
-      <button type='button' id={item.id} className='deleteBtn' onClick={handleDelete}>DELETE</button>
+      <div className='btnWrapper'>
+        <button type='button' id={item.id} className='deleteBtn' onClick={handleDelete}>DELETE</button>
+        {loginType === 'business' ? <button type='button' id={item.id} className='editBtn' onClick={handleEdit}>EDIT</button> : null}
+      </div>
     </div>
     )
   )
