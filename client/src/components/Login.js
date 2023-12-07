@@ -49,6 +49,7 @@ const Login = ({ setCurrentUser, setLoginType }) => {
   const formikSignup = useFormik({
     initialValues: {
       login_type: '',
+      business_name: '',
       email: '',
       username: '',
       password: ''
@@ -115,6 +116,7 @@ const Login = ({ setCurrentUser, setLoginType }) => {
               <option value='user'>User</option>
               <option value='business'>Business</option>
             </select>
+            {formikSignup.values.login_type == 'business' ? <input id='business_name' className='loginInput' type='text' onChange={formikSignup.handleChange} value={formikSignup.values.business_name} placeholder="Enter Business Name"></input> : null}
             <input id='email' className='loginInput' type='email' onChange={formikSignup.handleChange} value={formikSignup.values.email} placeholder="Enter Email"></input>
             <input id='username' className='loginInput' type='text' onChange={formikSignup.handleChange} value={formikSignup.values.username} placeholder="Enter Username"></input>
             <input id='password' className='loginInput' type='password' onChange={formikSignup.handleChange} value={formikSignup.values.password} placeholder="Enter Password"></input>

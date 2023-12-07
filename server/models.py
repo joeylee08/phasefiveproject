@@ -85,7 +85,6 @@ class Business(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     login_type = db.Column(db.Integer, server_default='business')
-    type = db.Column(db.String, nullable=False)
     username = db.Column(db.String, nullable=False)
     business_name = db.Column(db.String)
     email = db.Column(db.String, nullable=False)
