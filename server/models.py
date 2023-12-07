@@ -87,7 +87,7 @@ class Business(db.Model, SerializerMixin):
     login_type = db.Column(db.Integer, server_default='business')
     type = db.Column(db.String, nullable=False)
     username = db.Column(db.String, nullable=False)
-    business_name = db.Column(db.String, nullable=False)
+    business_name = db.Column(db.String)
     email = db.Column(db.String, nullable=False)
     _password_hash = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())

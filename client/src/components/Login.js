@@ -18,8 +18,7 @@ const Login = ({ setCurrentUser, setLoginType }) => {
     login_type: yup.string().required('Please select an account type.').min(1),
     email: yup.string().email('Please enter a valid email.').required('Please enter an email.'),
     username: yup.string().required("Please enter a username."),
-    password: yup.string().required("Please enter a password.").min(5),
-    confirmpassword: yup.string().required("Please confirm your password.").min(5),
+    password: yup.string().required("Please enter a password.").min(5)
   })
 
   const formikLogin = useFormik({

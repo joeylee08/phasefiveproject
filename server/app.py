@@ -65,12 +65,25 @@ class Signup(Resource):
     def post(self):
         try:
             body = request.get_json()
-
             if body['login_type'] == 'user':
-                new_user = User(**body)
+                new_user = User(
+                    id=None,
+                    login_type=body['login_type'],
+                    email=body['email'],
+                    username=body['username'],
+                    _password_hash=''
+                )
                 session['login_type'] = 'user'
             else:
-                new_user = Business(**body)
+                new_user = Business(
+                    id=None,
+                    login_type=body['login_type'],
+                    username=body['username'],
+                    type='',
+                    business_name='',
+                    email=body['email'],
+                    _password_hash=''
+                )
                 session['login_type'] = 'business'
 
             new_user.password_hash = body['password']
