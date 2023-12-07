@@ -14,7 +14,7 @@ const Header = ({ title, setCurrentUser, setLoginType }) => {
   
   return (
     <>
-      <h1 className='header'>{title}<button id='logoutBtn' onClick={logout}>Logout User</button></h1>
+      <h1 className='header'>{title}<button id='logoutBtn' onClick={logout}>LOGOUT</button></h1>
     </>
   )
 }

@@ -81,21 +81,25 @@ const Login = ({ setCurrentUser, setLoginType }) => {
     return (
       <>
         <div className='form'>
-          <form id='loginForm' action='/' method='post' onSubmit={formikLogin.handleSubmit}>
+          <form className='loginForm' onSubmit={formikLogin.handleSubmit}>
             <div id='loginSignup'>
-            <button className='modalButton' type='button' onClick={() => handleToggleform()}>{isLogin ? 'Signup Instead' : 'Login Instead'}</button>
+            <button className='modalBtn' type='button' onClick={() => handleToggleform()}>{isLogin ? 'to Signup' : 'to Login'}</button>
             </div>
             <h1 className='formTitle'>Login</h1>
+            <div className='loginBar'></div>
             <h3 className='formTag'>Please enter your account type, username, and password.</h3>
+            <label htmlFor='login_type'>Account Type:</label>
             <select id='login_type' className='loginInput' onChange={formikLogin.handleChange} value={formikLogin.values.login_type}>
               <option value=''>Select an Account Type</option>
               <option value='user'>User</option>
               <option value='business'>Business</option>
             </select>
+            <label htmlFor='username'>Username:</label>
             <input id='username' className='loginInput' type='text' onChange={formikLogin.handleChange} value={formikLogin.values.username} placeholder="Enter Username"></input>
+            <label htmlFor='username'>Password:</label>
             <input id='password' className='loginInput' type='password' onChange={formikLogin.handleChange} value={formikLogin.values.password} placeholder="Enter Password"></input>
             <div id='loginButtons'>
-              <button className='modalButton' type='submit'>Login</button>
+              <button className='modalBtn' type='submit'>Login</button>
             </div>
           </form>
         </div>
@@ -105,23 +109,29 @@ const Login = ({ setCurrentUser, setLoginType }) => {
     return (
       <>
         <div className='form'>
-          <form id='signupForm' onSubmit={formikSignup.handleSubmit}>
+          <form className='loginForm' onSubmit={formikSignup.handleSubmit}>
             <div id='loginSignup'>
-              <button className='modalButton' type='button' onClick={() => handleToggleform()}>{isLogin ? 'Signup Instead' : 'Login Instead'}</button>
+              <button className='modalBtn' type='button' onClick={() => handleToggleform()}>{isLogin ? 'to Signup' : 'to Login'}</button>
             </div>
             <h1 className='formTitle'>Signup</h1>
-            <h3 className='formTag'>Please enter your account type, username, and password.</h3>
+            <div className='loginBar'></div>
+            <h3 className='formTag'>Please enter your account type, email, username, and password.</h3>
+            <label htmlFor='login_type'>Account Type:</label>
             <select id='login_type' className='loginInput' onChange={formikSignup.handleChange} value={formikSignup.values.login_type}>
               <option value=''>Select an Account Type</option>
               <option value='user'>User</option>
               <option value='business'>Business</option>
             </select>
+            {formikSignup.values.login_type == 'business' ? <label htmlFor='email'>Business Name:</label> : null}
             {formikSignup.values.login_type == 'business' ? <input id='business_name' className='loginInput' type='text' onChange={formikSignup.handleChange} value={formikSignup.values.business_name} placeholder="Enter Business Name"></input> : null}
+            <label htmlFor='email'>Email:</label>
             <input id='email' className='loginInput' type='email' onChange={formikSignup.handleChange} value={formikSignup.values.email} placeholder="Enter Email"></input>
+            <label htmlFor='username'>Username:</label>
             <input id='username' className='loginInput' type='text' onChange={formikSignup.handleChange} value={formikSignup.values.username} placeholder="Enter Username"></input>
+            <label htmlFor='password'>Password:</label>
             <input id='password' className='loginInput' type='password' onChange={formikSignup.handleChange} value={formikSignup.values.password} placeholder="Enter Password"></input>
             <div id='loginButtons'>
-              <button className='modalButton' type='submit'>Signup</button>
+              <button className='modalBtn' type='submit'>Signup</button>
             </div>
           </form>
         </div>

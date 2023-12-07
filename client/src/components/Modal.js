@@ -5,6 +5,7 @@ const Modal = ({loginType, selectedListing, handleIsModal}) => {
       <>
         <div className="modal">
           <h1>{selectedListing.product}</h1>
+          <div className='modalBar'></div>
           <h3>Quantity: {selectedListing.quantity}</h3>
           <h3>Expiration Date: {selectedListing.expiration_date}</h3>
           <h3>Posted By: {selectedListing.posted_by}</h3>
