@@ -42,8 +42,8 @@ class UserListing(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, server_default=func.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    listing_id = db.Column(db.Integer, db.ForeignKey('listings.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    listing_id = db.Column(db.Integer, db.ForeignKey('listings.id'))
 
     # RELATIONSHIPS
     user = db.relationship('User', back_populates='user_listings')

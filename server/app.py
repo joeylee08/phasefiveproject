@@ -162,7 +162,6 @@ class ListingById(Resource):
             if session['login_type'] != 'business':
                 return make_response({"error" : "unauthorized to delete listing"}, 422)
             
-            
             target = db.session.get(Listing, id)
             db.session.delete(target)
             db.session.commit()
