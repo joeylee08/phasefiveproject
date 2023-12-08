@@ -75,7 +75,7 @@ const CreateListing = ({ currentUser, loginType, setCurrentUser, setLoginType })
               <label htmlFor='location'>Location:</label>
               <input id='location' className='loginInput' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.location} placeholder="Enter Location"></input>
               <label htmlFor='notes'>Enter Details:</label>
-              <textarea id='notes' className='loginInputTextarea' type='textarea' onChange={formikCreate.handleChange} value={formikCreate.values.notes} placeholder="Pickup Times, Contact Info."></textarea>
+              <textarea id='notes' className='loginInputTextarea' type='textarea' onChange={formikCreate.handleChange} value={formikCreate.values.notes} placeholder="Pickup Times, Contact Info, Additional Special Instructions."></textarea>
               <div className='checkBoxes'>
                 <div className='checkboxPair'>
                   <label htmlFor='vegan_safe'>Vegan Safe:</label>

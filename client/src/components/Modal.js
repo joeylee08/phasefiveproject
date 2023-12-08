@@ -91,23 +91,23 @@ const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
             <label htmlFor='location'>Location:</label>
             <input id='location' className='loginInput' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.location} placeholder="Enter Location"></input>
             <label htmlFor='notes'>Enter Details:</label>
-            <textarea id='notes' className='loginInputTextarea' type='textarea' onChange={formikCreate.handleChange} value={formikCreate.values.notes} placeholder="Pickup Times, Contact Info."></textarea>
+            <textarea id='notes' className='loginInputTextarea' type='textarea' onChange={formikCreate.handleChange} value={formikCreate.values.notes} placeholder="Pickup Times, Contact Info, Additional Special Instructions."></textarea>
             <div className='checkBoxes'>
                 <div className='checkboxPair'>
                   <label htmlFor='vegan_safe'>Vegan Safe:</label>
-                  <input id='vegan_safe' className='loginCheckbox' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.soy_free} value={formikCreate.values.vegan_safe}></input>
+                  <input id='vegan_safe' className='loginCheckbox' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.vegan_safe} value={formikCreate.values.vegan_safe}></input>
                 </div>
                 <div className='checkboxPair'>
                   <label htmlFor='non_dairy'>Non Dairy:</label>
-                  <input id='non_dairy' className='loginCheckbox' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.soy_free} value={formikCreate.values.non_dairy}></input>
+                  <input id='non_dairy' className='loginCheckbox' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.non_dairy} value={formikCreate.values.non_dairy}></input>
                 </div>
                 <div className='checkboxPair'>
                   <label htmlFor='gluten_free'>Gluten Free:</label>
-                <input id='gluten_free' className='loginCheckbox' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.soy_free} value={formikCreate.values.gluten_free}></input>
+                <input id='gluten_free' className='loginCheckbox' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.gluten_free} value={formikCreate.values.gluten_free}></input>
                 </div>
                 <div className='checkboxPair'>
                   <label htmlFor='nut_free'>Nut Free:</label>
-                <input id='nut_free' className='loginCheckbox' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.soy_free} value={formikCreate.values.nut_free}></input>
+                <input id='nut_free' className='loginCheckbox' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.nut_free} value={formikCreate.values.nut_free}></input>
                 </div>
                 <div className='checkboxPair'>
                   <label htmlFor='soy_free'>Soy Free:</label>
