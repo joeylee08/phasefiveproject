@@ -30,6 +30,11 @@ body {
   margin-top: -0.6rem;
 }
 
+.formBtnWrapper {
+  display: flex;
+  gap: 1.2rem;
+}
+
 .container {
   font-family: math, fantasy;
   display: flex;
@@ -116,7 +121,7 @@ a:hover {
   justify-content: space-evenly;
 }
 
-.cardBtn {
+.cardBtnWrapper {
   width: 90px;
   height: 40px;
   margin: 0.2rem;

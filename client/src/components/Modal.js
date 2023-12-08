@@ -104,8 +104,8 @@ const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
               <label htmlFor='soy_free'>Soy Free:</label>
               <input id='soy_free' className='loginInput' type='checkbox' onChange={formikCreate.handleChange} value={formikCreate.values.vegan_safe} checked={formikCreate.values.soy_free}></input>
             </div>
-            <div id='loginButtons'>
-              <button className='modalBtn' type='submit'>Create</button>
+            <div className='formBtnWrapper'>
+              <button className='modalBtn' type='submit'>Edit</button>
               <button className='modalBtn' onClick={handleIsModal}>Cancel</button>
             </div>
           </form>
