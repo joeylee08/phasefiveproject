@@ -26,8 +26,18 @@ body {
 
 .loginInput {
   width: 220px;
-  height: 1.2rem;
+  height: 1.4rem;
   margin-top: -0.6rem;
+  font-family: math, fantasy;
+  font-size: 1rem;
+}
+
+.loginInputTextarea {
+  width: 480px;
+  height: 5.2rem;
+  margin-top: -0.6rem;
+  font-family: math, fantasy;
+  font-size: 1rem;
 }
 
 .formBtnWrapper {

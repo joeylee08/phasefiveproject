@@ -91,7 +91,7 @@ const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
             <label htmlFor='location'>Location:</label>
             <input id='location' className='loginInput' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.location} placeholder="Enter Location"></input>
             <label htmlFor='notes'>Enter Details:</label>
-            <input id='notes' className='loginInput' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.notes} placeholder="Pickup Times, Contact Info."></input>
+            <textarea id='notes' className='loginInputTextarea' type='textarea' onChange={formikCreate.handleChange} value={formikCreate.values.notes} placeholder="Pickup Times, Contact Info."></textarea>
             <div className='checkBoxes'>
               <label htmlFor='vegan_safe'>Vegan Safe:</label>
               <input id='vegan_safe' className='loginInput' type='checkbox' onChange={formikCreate.handleChange} value={formikCreate.values.vegan_safe} checked={formikCreate.values.vegan_safe}></input>
