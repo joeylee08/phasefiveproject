@@ -40,6 +40,12 @@ body {
   font-size: 1rem;
 }
 
+.loginCheckbox {
+  width: 1.4rem;
+  height: 1.4rem;
+  font-family: math, fantasy;
+}
+
 .formBtnWrapper {
   display: flex;
   gap: 1.2rem;
@@ -62,7 +68,7 @@ body {
   flex-wrap: wrap;
   gap: 2rem;
   align-items: flex-start;
-  padding: 2rem;
+  padding: 2rem 1rem 2rem 2rem;
   height: auto;
 }
 
@@ -184,7 +190,14 @@ a:hover {
 }
 
 .checkBoxes {
-  border: 2px solid red;
+  width: 180px;
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+}
+
+.checkboxPair {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
 }
