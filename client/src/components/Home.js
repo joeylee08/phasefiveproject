@@ -1,13 +1,16 @@
 import NavBar from './NavBar'
 import Header from './Header'
+import { useContext } from 'react'
+import { UserContext } from '../context/UserContext'
 
-
-const Home = ({loginType, setCurrentUser, setLoginType}) => {
+const Home = () => {
+  const { loginType } = useContext(UserContext)
   const title = loginType === 'user' ? 'Manna User Home' : 'Manna Business Home'
+
   return (
     <div className='container'>
-      <Header title={title} setCurrentUser={setCurrentUser} setLoginType={setLoginType}/>
-      <NavBar loginType={loginType}/>
+      <Header title={title}/>
+      <NavBar/>
       <div className='content'>
 
       </div>

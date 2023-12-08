@@ -1,16 +1,18 @@
-import React, { useEffect, useState, createContext, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
-import Login from "./Login";
+import Login from './Login';
 import Home from './Home';
 import MyListings from './MyListings';
 import FindListing from './FindListing';
 import CreateListing from './CreateListing';
 import Profile from './Profile';
 import Error from './Error';
-import { UserContext } from "../context/UserContext";
+import { useContext } from 'react';
+import UserContext from '../context/UserContext'
 
-function App() {
-  const {loginType} = useContext(UserContext)
+function MyRouter() {
+  const context = useContext(UserContext)
+  console.log(context)
+  const loginType = 'user'
 
   const base_routes = (
     <>
@@ -40,7 +42,7 @@ function App() {
   if (loginType === 'user') routes = user_routes
   else if (loginType === 'business') routes = business_routes
   else routes = base_routes
-  
+
   return (
     <>
       <Routes>
@@ -51,4 +53,4 @@ function App() {
   )
 }
 
-export default App;
+export default MyRouter;

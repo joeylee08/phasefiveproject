@@ -1,12 +1,15 @@
 import NavBar from './NavBar'
 import Header from './Header'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import Modal from './Modal'
+import { UserContext } from '../context/UserContext'
 
-const FindListing = ({ currentUser, loginType, setCurrentUser, setLoginType }) => {
-  const [activeListings, setActiveListings] = useState([])
+const FindListing = () => {
   const [isModal, setIsModal] = useState(false)
+  const [activeListings, setActiveListings] = useState([])
   const [selectedListing, setSelectedListing] = useState({})
+
+  const {currentUser, loginType, setUser, setLogin} = useContext(UserContext)
 
   const handleIsModal = () => {
     setIsModal(isModal => !isModal)
@@ -51,9 +54,9 @@ const FindListing = ({ currentUser, loginType, setCurrentUser, setLoginType }) =
 
   return (
     <div className='container'>
-      <Header title={'Find Listing'} setCurrentUser={setCurrentUser} setLoginType={setLoginType}/>
-      <NavBar loginType={loginType}/>
-      {isModal ? <Modal loginType={loginType} selectedListing={selectedListing} handleIsModal={handleIsModal} /> : null}
+      <Header title={'Find Listing'} />
+      <NavBar />
+      {isModal ? <Modal selectedListing={selectedListing} handleIsModal={handleIsModal} /> : null}
       <div className='content'>
         {mapped}
       </div>

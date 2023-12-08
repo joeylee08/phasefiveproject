@@ -2,11 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useState, useContext, useEffect } from 'react'
-import UserContext from './App'
+import UserContext from '../context/UserContext'
 
-const Login = ({ setCurrentUser, setLoginType }) => {
+const Login = () => {
   const navigate = useNavigate()
   const [isLogin, setIsLogin] = useState(true)
+
+  const {handleSetUser, handleSetLogin} = useContext(UserContext)
 
   const fsLogin = yup.object().shape({
     login_type: yup.string().required('Please select an account type.').min(1),
@@ -38,8 +40,8 @@ const Login = ({ setCurrentUser, setLoginType }) => {
       })
       .then(res => res.json())
       .then(data => {
-        setCurrentUser(data)
-        setLoginType(data['login_type'])
+        handleSetUser(data)
+        handleSetLogin(data['login_type'])
         formikLogin.resetForm();
         navigate('/')
       })
@@ -65,8 +67,8 @@ const Login = ({ setCurrentUser, setLoginType }) => {
       })
       .then(res => res.json())
       .then(data => {
-        setCurrentUser(data)
-        setLoginType(data['login_type'])
+        handleSetUser(data)
+        handleSetLogin(data['login_type'])
         formikSignup.resetForm();
         navigate('/')
       })

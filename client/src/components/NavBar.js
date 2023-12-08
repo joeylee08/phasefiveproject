@@ -1,7 +1,10 @@
 import { NavLink } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
+import { useContext } from 'react'
 
-const NavBar = ({ loginType }) => {
-
+const NavBar = () => {
+  const {loginType} = useContext(UserContext)
+  
   if (loginType == 'user') {
     return (
       <nav className='navbar'>

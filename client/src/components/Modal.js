@@ -1,9 +1,13 @@
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import UserContext from '../context/UserContext'
 
-const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
+const Modal = ({selectedListing, handleIsModal}) => {
   const navigate = useNavigate()
+
+  const {currentUser, loginType} = useContext(UserContext)
   
   const fsEdit = yup.object().shape({
     product: yup.string().required('Please enter a product name.'),
