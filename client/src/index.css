@@ -48,6 +48,7 @@ body {
   gap: 2rem;
   align-items: flex-start;
   padding: 2rem;
+  height: 2500px
 }
 
 .header {
@@ -129,13 +130,19 @@ a:hover {
 }
 
 .modal {
+  position:fixed;
+  margin: auto;
+  align-self: center;
+}
+
+.modalDetails {
+  margin:auto;
   display: block;
-  position: fixed;
   align-self: center;
   width: 520px;
   height: auto;
   border: 5px solid #435334;
-  background-color: #FAF1E4;
+  background-color: #ffffff;
   padding: 0.5rem 2rem 1.5rem 2rem;
 }
 
