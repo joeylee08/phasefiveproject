@@ -85,7 +85,7 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
   )
   return (
     <div className='container'>
-      <Header title={'My Listings'} setCurrentUser={setCurrentUser} setLoginType={setLoginType}/>
+      <Header title={loginType === 'user' ? 'Saved Listings' : 'Active Listings'} setCurrentUser={setCurrentUser} setLoginType={setLoginType}/>
       <NavBar loginType={loginType}/>
       {isModal ? <Modal loginType={loginType} selectedListing={selectedListing} handleIsModal={handleIsModal} /> : null}
       <div className='content'>
