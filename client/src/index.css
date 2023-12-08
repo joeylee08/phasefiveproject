@@ -116,12 +116,12 @@ a:hover {
   border-radius: 10px;
 }
 
-.btnWrapper {
+.cardBtnWrapper {
   display: flex;
   justify-content: space-evenly;
 }
 
-.cardBtnWrapper {
+.cardBtn {
   width: 90px;
   height: 40px;
   margin: 0.2rem;
