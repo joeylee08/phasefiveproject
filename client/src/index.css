@@ -1,5 +1,5 @@
 body {
-  background-color: #FAF1E4;
+  background-color: #eeedeb;
 }
 
 .loginForm {
@@ -38,11 +38,11 @@ body {
   width: 100%;
   height: auto;
   min-width: 900px;
-  max-width: 1300px;
+  max-width: auto;
 }
 
 .content {
-  background-color: #efe7e1;
+  background-color: #eeedeb;
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;

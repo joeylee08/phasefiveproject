@@ -3,6 +3,8 @@ import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 
 const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
+  const navigate = useNavigate()
+  
   const fsCreate = yup.object().shape({
     product: yup.string().required('Please enter a product name.'),
     quantity: yup.number().required('Please enter a quantity.').min(1),
@@ -16,18 +18,20 @@ const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
     soy_free: yup.string()
   })
 
+  const sl = selectedListing
+
   const formikCreate = useFormik({
     initialValues: {
-      product: '',
-      quantity: 0,
-      expiration_date: '',
-      location: '',
-      notes: '',
-      vegan_safe: false,
-      non_dairy: false,
-      gluten_free: false,
-      nut_free: false,
-      soy_free: false
+      product: sl.product,
+      quantity: sl.quantity,
+      expiration_date: sl.expiration_date,
+      location: sl.location,
+      notes: sl.notes,
+      vegan_safe: sl.vegan_safe,
+      non_dairy: sl.non_dairy,
+      gluten_free: sl.gluten_free,
+      nut_free: sl.nut_free,
+      soy_free: sl.soy_free
     },
     validationSchema: fsCreate,
     onSubmit: (values) => {
@@ -44,10 +48,9 @@ const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
         body: JSON.stringify(submitted, null, 2)
       })
       .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        // formikCreate.resetForm();
-        // navigate('/mylistings')
+      .then(() => {
+        formikCreate.resetForm()
+        navigate('/mylistings')
       })
     }
   })
@@ -91,15 +94,15 @@ const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
             <input id='notes' className='loginInput' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.notes} placeholder="Pickup Times, Contact Info."></input>
             <div className='checkBoxes'>
               <label htmlFor='vegan_safe'>Vegan Safe:</label>
-              <input id='vegan_safe' className='loginInput' type='checkbox' onChange={formikCreate.handleChange} value={formikCreate.values.vegan_safe}></input>
+              <input id='vegan_safe' className='loginInput' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.vegan_safe}></input>
               <label htmlFor='non_dairy'>Non Dairy:</label>
-              <input id='non_dairy' className='loginInput' type='checkbox' onChange={formikCreate.handleChange} value={formikCreate.values.non_dairy}></input>
+              <input id='non_dairy' className='loginInput' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.non_dairy}></input>
               <label htmlFor='gluten_free'>Gluten Free:</label>
-              <input id='gluten_free' className='loginInput' type='checkbox' onChange={formikCreate.handleChange} value={formikCreate.values.gluten_free}></input>
+              <input id='gluten_free' className='loginInput' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.gluten_free}></input>
               <label htmlFor='nut_free'>Nut Free:</label>
-              <input id='nut_free' className='loginInput' type='checkbox' onChange={formikCreate.handleChange} value={formikCreate.values.nut_free}></input>
+              <input id='nut_free' className='loginInput' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.nut_free}></input>
               <label htmlFor='soy_free'>Soy Free:</label>
-              <input id='soy_free' className='loginInput' type='checkbox' onChange={formikCreate.handleChange} value={formikCreate.values.soy_free}></input>
+              <input id='soy_free' className='loginInput' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.soy_free}></input>
             </div>
             <div id='loginButtons'>
               <button className='modalBtn' type='submit'>Create</button>
