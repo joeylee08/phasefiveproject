@@ -75,6 +75,7 @@ const MyListings = ({currentUser, loginType, setCurrentUser, setLoginType}) => {
       <h3>{item.product}</h3>
       <h4>Quantity: {item.quantity}</h4>
       <p>Posted By: {item.posted_by}</p>
+      <br/>
       <p>Expires: {item.expiration_date}</p>
       <div className='cardBtnWrapper'>
         <button type='button' id={item.id} className='cardBtn' onClick={() => handleDetails(item)}>DETAILS</button>

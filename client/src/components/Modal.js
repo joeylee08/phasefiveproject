@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
   const navigate = useNavigate()
   
-  const fsCreate = yup.object().shape({
+  const fsEdit = yup.object().shape({
     product: yup.string().required('Please enter a product name.'),
     quantity: yup.number().required('Please enter a quantity.').min(1),
     expiration_date: yup.string().required("Please enter a username."),
@@ -20,7 +20,7 @@ const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
 
   const sl = selectedListing
 
-  const formikCreate = useFormik({
+  const formikEdit = useFormik({
     initialValues: {
       product: sl.product,
       quantity: sl.quantity,
@@ -33,15 +33,15 @@ const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
       nut_free: sl.nut_free,
       soy_free: sl.soy_free
     },
-    validationSchema: fsCreate,
+    validationSchema: fsEdit,
     onSubmit: (values) => {
       const submitted = {
         ...values,
         "business_id": currentUser.id,
         "posted_by": currentUser.business_name
       }
-      fetch('/listings', {
-        method: 'POST',
+      fetch(`/listingbyid/${sl.id}`, {
+        method: 'PATCH',
         headers: {
           "Content-Type": "application/json",
         },
@@ -49,7 +49,7 @@ const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
       })
       .then(res => res.json())
       .then(() => {
-        formikCreate.resetForm()
+        formikEdit.resetForm()
         navigate('/mylistings')
       })
     }
@@ -82,40 +82,40 @@ const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
     return (
       <>
         <div className='modal'>
-          <form className='loginForm' onSubmit={formikCreate.handleSubmit}>
+          <form className='loginForm' onSubmit={formikEdit.handleSubmit}>
             <h1 className='formTitle'>Edit Listing</h1>
             <div className='loginBar'></div>
             <h3 className='formTag'>Please enter your listing information.</h3>
             <label htmlFor='product'>Product:</label>
-            <input id='product' className='loginInputProduct' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.product} placeholder="Enter Product"></input>
+            <input id='product' className='loginInputProduct' type='text' onChange={formikEdit.handleChange} value={formikEdit.values.product} placeholder="Enter Product"></input>
             <label htmlFor='quantity'>Quantity:</label>
-            <input id='quantity' className='loginInput' type='number' onChange={formikCreate.handleChange} value={formikCreate.values.quantity} placeholder="Enter Password"></input>
+            <input id='quantity' className='loginInput' type='number' onChange={formikEdit.handleChange} value={formikEdit.values.quantity} placeholder="Enter Password"></input>
             <label htmlFor='expiration_date'>Expiration Date:</label>
-            <input id='expiration_date' className='loginInput' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.expiration_date} placeholder="MM/DD/YY"></input>
+            <input id='expiration_date' className='loginInput' type='text' onChange={formikEdit.handleChange} value={formikEdit.values.expiration_date} placeholder="MM/DD/YY"></input>
             <label htmlFor='location'>Location:</label>
-            <input id='location' className='loginInputLocation' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.location} placeholder="Enter Location"></input>
+            <input id='location' className='loginInputLocation' type='text' onChange={formikEdit.handleChange} value={formikEdit.values.location} placeholder="Enter Location"></input>
             <label htmlFor='notes'>Enter Details:</label>
-            <textarea id='notes' className='loginInputTextarea' type='textarea' onChange={formikCreate.handleChange} value={formikCreate.values.notes} placeholder="Pickup Times, Contact Info, Additional Special Instructions."></textarea>
+            <textarea id='notes' className='loginInputTextarea' type='textarea' onChange={formikEdit.handleChange} value={formikEdit.values.notes} placeholder="Pickup Times, Contact Info, Additional Special Instructions."></textarea>
             <div className='checkBoxes'>
                 <div className='checkboxPair'>
                   <label htmlFor='vegan_safe'>Vegan Safe:</label>
-                  <input id='vegan_safe' className='loginCheckbox' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.vegan_safe} value={formikCreate.values.vegan_safe}></input>
+                  <input id='vegan_safe' className='loginCheckbox' type='checkbox' onChange={formikEdit.handleChange} checked={formikEdit.values.vegan_safe} value={formikEdit.values.vegan_safe}></input>
                 </div>
                 <div className='checkboxPair'>
                   <label htmlFor='non_dairy'>Non Dairy:</label>
-                  <input id='non_dairy' className='loginCheckbox' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.non_dairy} value={formikCreate.values.non_dairy}></input>
+                  <input id='non_dairy' className='loginCheckbox' type='checkbox' onChange={formikEdit.handleChange} checked={formikEdit.values.non_dairy} value={formikEdit.values.non_dairy}></input>
                 </div>
                 <div className='checkboxPair'>
                   <label htmlFor='gluten_free'>Gluten Free:</label>
-                <input id='gluten_free' className='loginCheckbox' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.gluten_free} value={formikCreate.values.gluten_free}></input>
+                <input id='gluten_free' className='loginCheckbox' type='checkbox' onChange={formikEdit.handleChange} checked={formikEdit.values.gluten_free} value={formikEdit.values.gluten_free}></input>
                 </div>
                 <div className='checkboxPair'>
                   <label htmlFor='nut_free'>Nut Free:</label>
-                <input id='nut_free' className='loginCheckbox' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.nut_free} value={formikCreate.values.nut_free}></input>
+                <input id='nut_free' className='loginCheckbox' type='checkbox' onChange={formikEdit.handleChange} checked={formikEdit.values.nut_free} value={formikEdit.values.nut_free}></input>
                 </div>
                 <div className='checkboxPair'>
                   <label htmlFor='soy_free'>Soy Free:</label>
-                  <input id='soy_free' className='loginCheckbox' type='checkbox' onChange={formikCreate.handleChange} checked={formikCreate.values.soy_free} value={formikCreate.values.soy_free}></input>
+                  <input id='soy_free' className='loginCheckbox' type='checkbox' onChange={formikEdit.handleChange} checked={formikEdit.values.soy_free} value={formikEdit.values.soy_free}></input>
                 </div>
               </div>
             <div className='formBtnWrapper'>
