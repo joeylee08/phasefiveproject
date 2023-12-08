@@ -67,13 +67,13 @@ const CreateListing = ({ currentUser, loginType, setCurrentUser, setLoginType })
               <div className='loginBar'></div>
               <h3 className='formTag'>Please enter your listing information.</h3>
               <label htmlFor='product'>Product:</label>
-              <input id='product' className='loginInput' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.product} placeholder="Enter Product"></input>
+              <input id='product' className='loginInputProduct' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.product} placeholder="Enter Product"></input>
               <label htmlFor='quantity'>Quantity:</label>
               <input id='quantity' className='loginInput' type='number' onChange={formikCreate.handleChange} value={formikCreate.values.quantity} placeholder="Enter Password"></input>
               <label htmlFor='expiration_date'>Expiration Date:</label>
               <input id='expiration_date' className='loginInput' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.expiration_date} placeholder="MM/DD/YY"></input>
               <label htmlFor='location'>Location:</label>
-              <input id='location' className='loginInput' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.location} placeholder="Enter Location"></input>
+              <input id='location' className='loginInputLocation' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.location} placeholder="Enter Location"></input>
               <label htmlFor='notes'>Enter Details:</label>
               <textarea id='notes' className='loginInputTextarea' type='textarea' onChange={formikCreate.handleChange} value={formikCreate.values.notes} placeholder="Pickup Times, Contact Info, Additional Special Instructions."></textarea>
               <div className='checkBoxes'>

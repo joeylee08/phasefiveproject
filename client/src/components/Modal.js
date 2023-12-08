@@ -68,7 +68,11 @@ const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
           <h3>Location: {sl.location}</h3>
           <h3>Additional Notes: {sl.notes}</h3>
           <img className='map' src='https://cdn.serc.carleton.edu/images/sp/library/google_earth/google_maps_hello_world.webp'></img>
-          <br/>
+          <p className='dietTag'>Vegan {sl.vegan_safe ? "✔" : "✗"}</p>
+          <p className='dietTag'>Non Dairy {sl.non_dairy ? "✔" : "✗"}</p>
+          <p className='dietTag'>Gluten Free {sl.gluten_free ? "✔" : "✗"}</p>
+          <p className='dietTag'>Nut Free {sl.nut_free ? "✔" : "✗"}</p>
+          <p className='dietTag'>Soy Free {sl.soy_free ? "✔" : "✗"}</p>
           <button className='modalBtn' onClick={handleIsModal}>CLOSE</button>
         </div>
       </div>
@@ -83,13 +87,13 @@ const Modal = ({currentUser, loginType, selectedListing, handleIsModal}) => {
             <div className='loginBar'></div>
             <h3 className='formTag'>Please enter your listing information.</h3>
             <label htmlFor='product'>Product:</label>
-            <input id='product' className='loginInput' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.product} placeholder="Enter Product"></input>
+            <input id='product' className='loginInputProduct' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.product} placeholder="Enter Product"></input>
             <label htmlFor='quantity'>Quantity:</label>
             <input id='quantity' className='loginInput' type='number' onChange={formikCreate.handleChange} value={formikCreate.values.quantity} placeholder="Enter Password"></input>
             <label htmlFor='expiration_date'>Expiration Date:</label>
             <input id='expiration_date' className='loginInput' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.expiration_date} placeholder="MM/DD/YY"></input>
             <label htmlFor='location'>Location:</label>
-            <input id='location' className='loginInput' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.location} placeholder="Enter Location"></input>
+            <input id='location' className='loginInputLocation' type='text' onChange={formikCreate.handleChange} value={formikCreate.values.location} placeholder="Enter Location"></input>
             <label htmlFor='notes'>Enter Details:</label>
             <textarea id='notes' className='loginInputTextarea' type='textarea' onChange={formikCreate.handleChange} value={formikCreate.values.notes} placeholder="Pickup Times, Contact Info, Additional Special Instructions."></textarea>
             <div className='checkBoxes'>
