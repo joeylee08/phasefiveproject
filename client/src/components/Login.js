@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useState, useContext, useEffect } from 'react'
-import UserContext from '../context/UserContext'
+import { UserContext } from '../context/UserContext'
 
 const Login = () => {
   const navigate = useNavigate()

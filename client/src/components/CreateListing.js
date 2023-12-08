@@ -4,9 +4,13 @@ import Modal from './Modal'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
+import { useContext } from 'react'
 
-const CreateListing = ({ currentUser, loginType, setCurrentUser, setLoginType }) => {
+const CreateListing = () => {
   const navigate = useNavigate()
+
+  const {currentUser, loginType, setCurrentUser, setLoginType} = useContext(UserContext)
 
   const fsCreate = yup.object().shape({
     product: yup.string().required('Please enter a product name.'),
@@ -51,8 +55,8 @@ const CreateListing = ({ currentUser, loginType, setCurrentUser, setLoginType })
       .then(res => res.json())
       .then(data => {
         console.log(data)
-        // formikCreate.resetForm();
-        // navigate('/mylistings')
+        formikCreate.resetForm();
+        navigate('/mylistings')
       })
     }
   })

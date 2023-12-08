@@ -2,7 +2,7 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
-import UserContext from '../context/UserContext'
+import { UserContext } from '../context/UserContext'
 
 const Modal = ({selectedListing, handleIsModal}) => {
   const navigate = useNavigate()
