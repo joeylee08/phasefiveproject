@@ -17,11 +17,16 @@ body {
   font-family: math, fantasy;
 }
 
+h1.formTitle {
+  font-family: fantasy, math;
+  color: #435334;
+}
+
 .loginBar {
   margin-top: -1rem;
   height: 0.5rem;
   width: 100%;
-  background-color: #435334;
+  background-color: #0b6623;
 }
 
 .loginInput {
@@ -90,6 +95,7 @@ body {
 }
 
 .header {
+  font-family: fantasy, math;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -100,7 +106,7 @@ body {
   text-align: center;
   padding-top: 2rem;
   padding-bottom: 1.6rem;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   color: #ffffff;
 }
 
@@ -157,7 +163,7 @@ a:hover {
 .cardBtnWrapper {
   display: flex;
   justify-content: space-evenly;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .cardBtn {
@@ -168,6 +174,7 @@ a:hover {
   padding-top: 0.2rem;
   border-radius: 7px;
   font-family: fantasy, math;
+  border: 2px solid green;
 }
 
 .cardBtn:hover {
@@ -191,6 +198,11 @@ a:hover {
   padding: 0.5rem 2rem 1.5rem 2rem;
 }
 
+.modalDetails h1 {
+  color: #435334;
+  font-family: fantasy, math;
+}
+
 .map {
   margin-bottom: 0.5rem;
 }
@@ -203,9 +215,8 @@ a:hover {
   height: 0.5rem;
   width: 100%;
   margin: -0.4rem 0rem 1.5rem 0rem;
-  background-color: #435334;
+  background-color: #0b6623;
 }
-
 
 .modalBtn {
   width: 120px;
@@ -215,6 +226,7 @@ a:hover {
   margin-top: 1rem;
   font-family: fantasy, math;
   font-size: 1.1rem;
+  border: 2px solid green;
 }
 
 .modalBtn:hover {
@@ -236,17 +248,20 @@ a:hover {
 
 div.listingCard p {
   height: 1.5rem;
-  margin: 0px;
+  margin: 0.1rem;
 }
 
 div.listingCard h3 {
   height: 1.2rem;
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
+  line-height: 1.5rem;
   width: 240px;
   align-self: center;
+  color: #0b6623;
+  font-family: fantasy, math;
 }
 
 div.listingCard h4 {
   height: 1rem;
-  margin-top: 0.8rem;
+  margin-top: 1.2rem;
 }

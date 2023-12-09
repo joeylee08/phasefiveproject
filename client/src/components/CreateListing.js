@@ -54,7 +54,6 @@ const CreateListing = () => {
       })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         formikCreate.resetForm();
         navigate('/mylistings')
       })
