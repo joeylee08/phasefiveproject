@@ -1,11 +1,10 @@
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 
 const Modal = ({selectedListing, fetchListings, handleIsModal, handleAdd, handleDelete}) => {
-  const navigate = useNavigate()
   const location = useLocation()
   const path = location.pathname
 
@@ -73,12 +72,12 @@ const Modal = ({selectedListing, fetchListings, handleIsModal, handleAdd, handle
           <h3>Posted By: {sl.posted_by}</h3>
           <h3>Location: {sl.location}</h3>
           <h3>Additional Notes: {sl.notes}</h3>
-          <img className='map' src='https://cdn.serc.carleton.edu/images/sp/library/google_earth/google_maps_hello_world.webp'></img>
-          <p className='dietTag'>Vegan {sl.vegan_safe ? "✔" : "✗"}</p>
-          <p className='dietTag'>Non Dairy {sl.non_dairy ? "✔" : "✗"}</p>
-          <p className='dietTag'>Gluten Free {sl.gluten_free ? "✔" : "✗"}</p>
-          <p className='dietTag'>Nut Free {sl.nut_free ? "✔" : "✗"}</p>
-          <p className='dietTag'>Soy Free {sl.soy_free ? "✔" : "✗"}</p>
+          <img className='map' src='https://cdn.serc.carleton.edu/images/sp/library/google_earth/google_maps_hello_world.webp' alt='map'></img>
+          <p className='dietTag'>Vegan {sl.vegan_safe ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
+          <p className='dietTag'>Non Dairy {sl.non_dairy ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
+          <p className='dietTag'>Gluten Free {sl.gluten_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
+          <p className='dietTag'>Nut Free {sl.nut_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
+          <p className='dietTag'>Soy Free {sl.soy_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
           <div className='formBtnWrapper'>
             <button className='modalBtn' onClick={handleIsModal}>CLOSE</button>
             {path === '/mylistings' ? <button className='modalBtn' id={sl.id} onClick={handleDelete}>REMOVE</button> : <button className='modalBtn' onClick={() => handleAdd(sl)}>ADD</button>}

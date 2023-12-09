@@ -211,6 +211,14 @@ a:hover {
   margin: 0.5rem 0rem 0.5rem 0rem;
 }
 
+.greenCheck {
+  color: green;
+}
+
+.redX {
+  color: red;
+}
+
 .modalBar {
   height: 0.5rem;
   width: 100%;

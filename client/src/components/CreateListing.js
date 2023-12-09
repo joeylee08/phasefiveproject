@@ -1,6 +1,5 @@
 import NavBar from './NavBar'
 import Header from './Header'
-import Modal from './Modal'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
@@ -10,7 +9,7 @@ import { useContext } from 'react'
 const CreateListing = () => {
   const navigate = useNavigate()
 
-  const {currentUser, loginType, setCurrentUser, setLoginType} = useContext(UserContext)
+  const {currentUser} = useContext(UserContext)
 
   const fsCreate = yup.object().shape({
     product: yup.string().required('Please enter a product name.'),
@@ -102,7 +101,7 @@ const CreateListing = () => {
                 </div>
               </div>
               <div id='loginButtons'>
-                <button className='modalBtn' type='submit'>Create</button>
+                <button className='modalBtn' type='submit'>CREATE</button>
               </div>
             </form>
           </div>
