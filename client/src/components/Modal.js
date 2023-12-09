@@ -128,8 +128,8 @@ const Modal = ({selectedListing, fetchListings, handleIsModal, handleAdd, handle
                 </div>
               </div>
             <div className='formBtnWrapper'>
-              <button className='modalBtn' type='submit'>Edit</button>
-              <button className='modalBtn' onClick={handleIsModal}>Cancel</button>
+              <button className='modalBtn' type='submit'>EDIT</button>
+              <button className='modalBtn' onClick={handleIsModal}>CANCEL</button>
             </div>
           </form>
           </div>

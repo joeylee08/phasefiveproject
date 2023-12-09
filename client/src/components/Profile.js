@@ -2,11 +2,11 @@ import NavBar from './NavBar'
 import Header from './Header'
 
 
-const Profile = ({loginType, setCurrentUser, setLoginType}) => {
+const Profile = () => {
   return (
     <div className='container'>
-      <Header title={'Profile'} setCurrentUser={setCurrentUser} setLoginType={setLoginType}/>
-      <NavBar loginType={loginType}/>
+      <Header title={'My Manna Profile'} />
+      <NavBar />
       <div className='content'>
 
       </div>
