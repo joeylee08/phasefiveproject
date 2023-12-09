@@ -9,7 +9,7 @@ const FindListing = () => {
   const [activeListings, setActiveListings] = useState([])
   const [selectedListing, setSelectedListing] = useState({})
 
-  const {currentUser, loginType, setUser, setLogin} = useContext(UserContext)
+  const {currentUser, loginType} = useContext(UserContext)
 
   const handleIsModal = () => {
     setIsModal(isModal => !isModal)
@@ -34,7 +34,26 @@ const FindListing = () => {
   }
 
   const handleAdd = (item) => {
-    return 'poo'
+    const userId = currentUser.id
+    const listingId = item.id
+
+    const request = {
+      "user_id": userId,
+      "listing_id": listingId
+    }
+
+    fetch('/userlistings', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(request)
+    })
+    .then(res => res.json())
+    .then(() => {
+      setIsModal(false)
+      alert('added')
+    })
   }
 
   const mapped = activeListings.map(item => (
@@ -56,7 +75,7 @@ const FindListing = () => {
     <div className='container'>
       <Header title={'Find Listing'} />
       <NavBar />
-      {isModal ? <Modal selectedListing={selectedListing} handleIsModal={handleIsModal} /> : null}
+      {isModal ? <Modal selectedListing={selectedListing} handleAdd={handleAdd} handleIsModal={handleIsModal} /> : null}
       <div className='content'>
         {mapped}
       </div>

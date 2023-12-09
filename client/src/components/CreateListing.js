@@ -62,8 +62,8 @@ const CreateListing = () => {
   })
   return (
     <div className='container'>
-      <Header title={'Create Listing'} setCurrentUser={setCurrentUser} setLoginType={setLoginType}/>
-      <NavBar loginType={loginType}/>
+      <Header title={'Create Listing'} />
+      <NavBar />
       <div className='content'>
         <div className='form'>
             <form className='loginForm' onSubmit={formikCreate.handleSubmit}>

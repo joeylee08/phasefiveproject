@@ -1,11 +1,13 @@
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 
-const Modal = ({selectedListing, handleIsModal}) => {
+const Modal = ({selectedListing, fetchListings, handleIsModal, handleAdd, handleDelete}) => {
   const navigate = useNavigate()
+  const location = useLocation()
+  const path = location.pathname
 
   const {currentUser, loginType} = useContext(UserContext)
   
@@ -53,8 +55,8 @@ const Modal = ({selectedListing, handleIsModal}) => {
       })
       .then(res => res.json())
       .then(() => {
-        formikEdit.resetForm()
-        navigate('/mylistings')
+        handleIsModal()
+        fetchListings()
       })
     }
   })
@@ -77,7 +79,10 @@ const Modal = ({selectedListing, handleIsModal}) => {
           <p className='dietTag'>Gluten Free {sl.gluten_free ? "✔" : "✗"}</p>
           <p className='dietTag'>Nut Free {sl.nut_free ? "✔" : "✗"}</p>
           <p className='dietTag'>Soy Free {sl.soy_free ? "✔" : "✗"}</p>
-          <button className='modalBtn' onClick={handleIsModal}>CLOSE</button>
+          <div className='formBtnWrapper'>
+            <button className='modalBtn' onClick={handleIsModal}>CLOSE</button>
+            {path === '/mylistings' ? <button className='modalBtn' id={sl.id} onClick={handleDelete}>DELETE</button> : <button className='modalBtn' onClick={() => handleAdd(sl)}>ADD</button>}
+          </div>
         </div>
       </div>
       </>

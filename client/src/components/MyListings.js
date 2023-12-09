@@ -50,7 +50,7 @@ const MyListings = () => {
 
   const handleDelete = (e) => {
     const listing_id = e.target.id
-
+  
     if (loginType === 'user') {
       fetch(`/ulbyuserid/${currentUser.id}`)
       .then(res => res.json())
@@ -60,16 +60,24 @@ const MyListings = () => {
         fetch(`/userlistingbyid/${target_id}`, {
           method: "DELETE"
         })
-        .then(() => fetchListings())
+        .then(() => {
+          if (isModal) setIsModal(false)
+          fetchListings()
+          alert('deleted')
+        })
       })
-    } else {
+   } else {
       fetch(`/listingbyid/${listing_id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
         }
       })
-      .then(() => fetchListings())
+      .then(() => {
+        if (isModal) setIsModal(false)
+        fetchListings()
+        alert('deleted')
+      })
     }
   }
 
@@ -91,7 +99,7 @@ const MyListings = () => {
     <div className='container'>
       <Header title={loginType === 'user' ? 'Saved Listings' : 'Active Listings'} />
       <NavBar />
-      {isModal ? <Modal selectedListing={selectedListing} handleIsModal={handleIsModal} /> : null}
+      {isModal ? <Modal selectedListing={selectedListing} handleIsModal={handleIsModal} handleDelete={handleDelete} fetchListings={fetchListings}/> : null}
       <div className='content'>
         {mapped}
       </div>
