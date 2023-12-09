@@ -90,7 +90,7 @@ const MyListings = () => {
       <p>Expires: {item.expiration_date}</p>
       <div className='cardBtnWrapper'>
         <button type='button' id={item.id} className='cardBtn' onClick={() => handleDetails(item)}>DETAILS</button>
-        <button type='button' id={item.id} className='cardBtn' onClick={handleDelete}>DELETE</button>
+        <button type='button' id={item.id} className='cardBtn' onClick={handleDelete}>REMOVE</button>
       </div>
     </div>
     )
