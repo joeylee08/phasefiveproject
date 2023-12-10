@@ -3,6 +3,7 @@ import Header from './Header'
 import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 import UserInfo from './UserInfo'
+import Profile from './Profile'
 
 const Home = () => {
   const { loginType } = useContext(UserContext)
