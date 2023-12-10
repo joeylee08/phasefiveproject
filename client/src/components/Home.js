@@ -2,6 +2,7 @@ import NavBar from './NavBar'
 import Header from './Header'
 import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
+import UserInfo from './UserInfo'
 
 const Home = () => {
   const { loginType } = useContext(UserContext)
@@ -12,7 +13,7 @@ const Home = () => {
       <Header title={title}/>
       <NavBar/>
       <div className='content'>
-
+        <UserInfo />
       </div>
     </div>
   )
