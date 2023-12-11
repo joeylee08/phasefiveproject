@@ -78,6 +78,8 @@ const Profile = () => {
         <div className='profileInfo'>
           <div className='form'>
           <form className='loginForm' onSubmit={formik.handleSubmit}>
+            <h1 className='formTitle'>Current Profile Information</h1>
+            <div className='loginBar'></div>
             <h3 className='formTag'>Update your account information.</h3>
             <label htmlFor='email'>Updated Email:</label>
             <input id='email' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.email} placeholder="Enter Email"></input>
@@ -88,9 +90,7 @@ const Profile = () => {
                 <input id='business_name' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.business_name} placeholder="Enter Business Name"></input>
               </> 
               : null
-            }
-           
-            
+            } 
             <label htmlFor='username'>Updated Username:</label>
             <input id='username' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.username} placeholder="Enter Username"></input>
             <label htmlFor='username'>Updated Location:</label>

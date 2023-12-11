@@ -40,19 +40,22 @@ def create_businesses():
     b1 = Business(
         username='mjspies',
         business_name='Mary Jane\'s Pies',
-        email='mjspies12@fis.com'
+        email='mjspies12@fis.com',
+        location='1223 Beach Blvd, Santa Ana CA'
     )
     b1.password_hash = 'password'
     b2 = Business(
         username='arpdenver',
         business_name='Alfredo Rosales Pizzeria',
-        email='arpd@fis.com'
+        email='arpd@fis.com',
+        location='12 Mountain Way, Denver CO'
     )
     b2.password_hash = 'password'
     b3 = Business(
         username='swportland',
         business_name='Safeway Portland',
-        email='swp12@fis.com'
+        email='swp12@fis.com',
+        location='5234 State Hwy, Portland OR'
     )
     b3.password_hash = 'password'
 

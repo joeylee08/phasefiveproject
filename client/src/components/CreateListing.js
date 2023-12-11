@@ -29,7 +29,7 @@ const CreateListing = () => {
       product: '',
       quantity: 0,
       expiration_date: '',
-      location: '',
+      location: currentUser.location,
       notes: '',
       vegan_safe: false,
       non_dairy: false,
