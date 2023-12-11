@@ -63,27 +63,27 @@ const Modal = ({selectedListing, fetchListings, handleIsModal, handleAdd, handle
   if (loginType === 'user') {
     return (
       <>
-      <div className='modal'>
-        <div className="modalDetails">
-          <h1>{sl.product}</h1>
-          <div className='modalBar'></div>
-          <h3>Quantity: {sl.quantity}</h3>
-          <h3>Expiration Date: {sl.expiration_date}</h3>
-          <h3>Posted By: {sl.posted_by}</h3>
-          <h3>Location: {sl.location}</h3>
-          <h3>Additional Notes: {sl.notes}</h3>
-          <img className='map' src='https://cdn.serc.carleton.edu/images/sp/library/google_earth/google_maps_hello_world.webp' alt='map'></img>
-          <p className='dietTag'>Vegan {sl.vegan_safe ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
-          <p className='dietTag'>Non Dairy {sl.non_dairy ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
-          <p className='dietTag'>Gluten Free {sl.gluten_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
-          <p className='dietTag'>Nut Free {sl.nut_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
-          <p className='dietTag'>Soy Free {sl.soy_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
-          <div className='formBtnWrapper'>
-            <button className='modalBtn' onClick={handleIsModal}>CLOSE</button>
-            {path === '/mylistings' ? <button className='modalBtn' id={sl.id} onClick={handleDelete}>REMOVE</button> : <button className='modalBtn' onClick={() => handleAdd(sl)}>ADD</button>}
+        <div className='modal'>
+          <div className="modalDetails">
+            <h1>{sl.product}</h1>
+            <div className='modalBar'></div>
+            <h3>Quantity: {sl.quantity}</h3>
+            <h3>Expiration Date: {sl.expiration_date}</h3>
+            <h3>Posted By: {sl.posted_by}</h3>
+            <h3>Location: {sl.location}</h3>
+            <h3>Additional Notes: {sl.notes}</h3>
+            <img className='map' src='https://cdn.serc.carleton.edu/images/sp/library/google_earth/google_maps_hello_world.webp' alt='map'></img>
+            <p className='dietTag'>Vegan {sl.vegan_safe ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
+            <p className='dietTag'>Non Dairy {sl.non_dairy ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
+            <p className='dietTag'>Gluten Free {sl.gluten_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
+            <p className='dietTag'>Nut Free {sl.nut_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
+            <p className='dietTag'>Soy Free {sl.soy_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
+            <div className='formBtnWrapper'>
+              <button className='modalBtn' onClick={handleIsModal}>CLOSE</button>
+              {path === '/mylistings' ? <button className='modalBtn' id={sl.id} onClick={handleDelete}>REMOVE</button> : <button className='modalBtn' onClick={() => handleAdd(sl)}>ADD</button>}
+            </div>
           </div>
         </div>
-      </div>
       </>
     )
   } else {

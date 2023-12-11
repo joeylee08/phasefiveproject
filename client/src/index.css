@@ -17,6 +17,11 @@ body {
   font-family: math, fantasy;
 }
 
+.formTag {
+  height: 1.5rem;
+  margin: 1rem 0px 0.5rem 0px;
+}
+
 h1.formTitle {
   font-family: fantasy, math;
   color: #435334;
@@ -94,6 +99,12 @@ h1.formTitle {
   height: auto;
 }
 
+.loginContent {
+  background-color: #eeedeb;
+  padding: 2rem 1rem 2rem 1rem;
+  height: auto;
+}
+
 .header {
   font-family: fantasy, math;
   display: flex;
@@ -158,7 +169,7 @@ a:hover {
   text-align: center;
   display: flex;
   flex-direction: column;
-  box-shadow: 3px 3px 3px gray;
+  box-shadow: 2px 2px 4px #435334;
 }
 
 .cardBtnWrapper {
@@ -173,7 +184,7 @@ a:hover {
   margin: 0.2rem;
   background-color: #ffffff;
   padding-top: 0.2rem;
-  border-radius: 7px;
+  border-radius: 6px;
   font-family: fantasy, math;
   border: 2px solid green;
 }
@@ -186,6 +197,7 @@ a:hover {
   position:fixed;
   margin: auto;
   align-self: center;
+  margin-top: 2rem;
 }
 
 .modalDetails {
@@ -231,7 +243,7 @@ a:hover {
   width: 120px;
   height: 40px;
   background-color: #ffffff;
-  border-radius: 7px;
+  border-radius: 6px;
   margin-top: 1rem;
   font-family: fantasy, math;
   font-size: 1.1rem;
@@ -280,7 +292,7 @@ div.listingCard h4 {
   background-color: #ffffff;
   width: 100%;
   padding: 2rem;
-  box-shadow: 2px 2px 2px gray;
+  box-shadow: 3px 3px 12px #435334;
   border: 1px solid black;
 }
 
@@ -298,4 +310,9 @@ div.listingCard h4 {
   flex-direction: column;
   align-items: center;
   padding-top: 2rem;
+}
+
+.profileBtnWrapper {
+  display: flex;
+  gap: 1.2rem;
 }

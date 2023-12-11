@@ -5,7 +5,7 @@ import Home from './Home';
 import MyListings from './MyListings';
 import FindListing from './FindListing';
 import CreateListing from './CreateListing';
-import Profile from './Profile';
+import Account from './Account';
 import Error from './Error';
 import { UserContext } from "../context/UserContext";
 
@@ -22,7 +22,7 @@ function App() {
       <Route path='/' element={<Home  />} />
       <Route path='/mylistings' element={<MyListings  />} />
       <Route path='/findlisting' element={<FindListing  />} />
-      <Route path='/profile' element={<Profile  />} />
+      <Route path='/account' element={<Account  />} />
     </>
   )
 
@@ -31,7 +31,7 @@ function App() {
       <Route path='/' element={<Home/>}/>
       <Route path='/mylistings' element={<MyListings />}/>
       <Route path='/createlisting' element={<CreateListing />}/>
-      <Route path='/profile' element={<Profile />}/>
+      <Route path='/account' element={<Account />}/>
     </>
   )
 

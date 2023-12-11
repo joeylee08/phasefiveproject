@@ -3,10 +3,11 @@ import Header from './Header'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { UserContext } from '../context/UserContext'
-import { useContext } from 'react'
+import { useState, useContext } from 'react'
 
-const Profile = () => {
+const Account = () => {
   const { currentUser, loginType, handleSetUser } = useContext(UserContext)
+  const [isDelete, setIsDelete] = useState(false)
 
   const fsU = yup.object().shape({
     email: yup.string(),
@@ -68,18 +69,68 @@ const Profile = () => {
     }     
   })
 
-  const formik = loginType === 'user' ? formikProfileU : formikProfileB
+  const fsD = yup.object().shape({
+    username: yup.string(),
+    password: yup.string()
+  })
+
+  const formikProfileD = useFormik({
+    initialValues: {
+      username: '',
+      password: ''
+    },
+    validationSchema: fsU,
+    onSubmit: (values) => {
+      
+    }     
+  })
+
+  const formik = isDelete ?
+    formikProfileD : 
+    loginType === 'user' ?
+    formikProfileU :
+    formikProfileB
+
+  const handleDelete = () => {
+    return 'poo'
+  }
+
+  const handleToggle = () => {
+    setIsDelete(isDelete => !isDelete)
+  }
 
   return (
     <div className='container'>
-      <Header title={'My Manna Profile'} />
+      <Header title={'My Manna Foods'} />
       <NavBar />
+      {
+      isDelete ? 
       <div className='profileContent'>
         <div className='profileInfo'>
           <div className='form'>
+            <form className='loginForm' onSubmit={formik.handleSubmit}>
+              <h1 className='formTitle'>Delete Account</h1>
+              <div className='loginBar'></div>
+              <h3 className='formTag'>Please confirm your username and password.</h3>
+              <label htmlFor='username'>Confirm Username:</label>
+              <input id='username' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.username} placeholder="Confirm Username"></input>
+              <label htmlFor='password'>Confirm Password:</label>
+              <input id='password' className='loginInput' type='password' onChange={formik.handleChange} value={formik.values.password} placeholder="Confirm Password"></input>
+              <div className='profileBtnWrapper'>
+                <button className='modalBtn' type='submit' onClick={handleDelete}>DELETE</button>
+                <button className='modalBtn' type='button' onClick={handleToggle}>CANCEL</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div> :
+      <div className='profileContent'>
+      <div className='profileInfo'>
+        <div className='form'>
           <form className='loginForm' onSubmit={formik.handleSubmit}>
-            <h1 className='formTitle'>Current Profile Information</h1>
+            <h1 className='formTitle'>Update or Delete Account</h1>
             <div className='loginBar'></div>
+            <button className='modalBtn' type='button' onClick={handleToggle}>to Delete</button>
             <h3 className='formTag'>Update your account information.</h3>
             <label htmlFor='email'>Updated Email:</label>
             <input id='email' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.email} placeholder="Enter Email"></input>
@@ -95,16 +146,16 @@ const Profile = () => {
             <input id='username' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.username} placeholder="Enter Username"></input>
             <label htmlFor='username'>Updated Location:</label>
             <input id='location' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.location} placeholder="Enter Location"></input>
-            <div id='loginButtons'>
+            <div className='profileBtnWrapper'>
               <button className='modalBtn' type='submit'>UPDATE</button>
             </div>
           </form>
         </div>
-        </div>
       </div>
-      
+    </div> 
+    }  
     </div>
   )
 }
 
-export default Profile
+export default Account
