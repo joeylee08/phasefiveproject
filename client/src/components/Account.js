@@ -4,10 +4,12 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { UserContext } from '../context/UserContext'
 import { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Account = () => {
-  const { currentUser, loginType, handleSetUser } = useContext(UserContext)
+  const { currentUser, loginType, handleSetUser, handleSetLogin } = useContext(UserContext)
   const [isDelete, setIsDelete] = useState(false)
+  const navigate = useNavigate()
 
   const fsU = yup.object().shape({
     email: yup.string(),
@@ -79,9 +81,19 @@ const Account = () => {
       username: '',
       password: ''
     },
-    validationSchema: fsU,
+    validationSchema: fsD,
     onSubmit: (values) => {
-      
+    const deleteUrl = loginType === 'user' ? `/userbyid/${currentUser.id}` : `/businessbyid/${currentUser.id}`
+    fetch(deleteUrl, {
+      method: "DELETE"
+    })
+    .then(() =>{
+      alert('user deleted')
+      fetch('/logout')
+      handleSetUser({})
+      handleSetLogin('')
+      navigate('/')
+    })
     }     
   })
 
@@ -90,10 +102,6 @@ const Account = () => {
     loginType === 'user' ?
     formikProfileU :
     formikProfileB
-
-  const handleDelete = () => {
-    return 'poo'
-  }
 
   const handleToggle = () => {
     setIsDelete(isDelete => !isDelete)
@@ -117,7 +125,7 @@ const Account = () => {
               <label htmlFor='password'>Confirm Password:</label>
               <input id='password' className='loginInput' type='password' onChange={formik.handleChange} value={formik.values.password} placeholder="Confirm Password"></input>
               <div className='profileBtnWrapper'>
-                <button className='modalBtn' type='submit' onClick={handleDelete}>DELETE</button>
+                <button className='modalBtn' type='submit'>DELETE</button>
                 <button className='modalBtn' type='button' onClick={handleToggle}>CANCEL</button>
               </div>
             </form>

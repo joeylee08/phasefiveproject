@@ -17,7 +17,7 @@ class User(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default=func.now())
 
     # RELATIONSHIPS
-    user_listings = db.relationship('UserListing', back_populates='user')
+    user_listings = db.relationship('UserListing', back_populates='user', cascade='all, delete-orphan')
 
     # ASSOCIATION PROXY
     listings = association_proxy('user_listings', 'listing')
@@ -60,7 +60,7 @@ class Listing(db.Model, SerializerMixin):
     product = db.Column(db.String, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     expiration_date = db.Column(db.String, nullable=False)
-    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)
+    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id')) 
     posted_by = db.Column(db.String, nullable=False)
     location = db.Column(db.String, nullable=False)
     notes = db.Column(db.String)
@@ -94,7 +94,7 @@ class Business(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default=func.now())
 
     # RELATIONSHIPS
-    listings = db.relationship('Listing', back_populates='business')
+    listings = db.relationship('Listing', back_populates='business', cascade='all, delete-orphan')
 
     # SERIALIZATION
     serialize_rules = ('-listings.business',)

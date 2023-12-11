@@ -11,7 +11,7 @@ const Modal = ({selectedListing, fetchListings, handleIsModal, handleAdd, handle
   const {currentUser, loginType} = useContext(UserContext)
   
   const fsEdit = yup.object().shape({
-    product: yup.string().required('Please enter a product name.'),
+    product: yup.string().max(55).required('Please enter a product name.'),
     quantity: yup.number().required('Please enter a quantity.').min(1),
     expiration_date: yup.string().required("Please enter a username."),
     location: yup.string().required("Please enter a location.").min(5),
