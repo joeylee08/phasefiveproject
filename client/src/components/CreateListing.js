@@ -62,7 +62,7 @@ const CreateListing = () => {
     <div className='container'>
       <Header title={'Create Listing'} />
       <NavBar />
-      <div className='content'>
+      <div className='profileContent'>
         <div className='form'>
             <form className='loginForm' onSubmit={formikCreate.handleSubmit}>
               <h1 className='formTitle'>Create Listing</h1>

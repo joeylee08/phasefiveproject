@@ -292,3 +292,10 @@ div.listingCard h4 {
 .homeDetails p {
   font-family: math, fantasy;
 }
+
+.profileContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2rem;
+}

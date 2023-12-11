@@ -13,6 +13,7 @@ class User(db.Model, SerializerMixin):
     email = db.Column(db.String, nullable=False)
     username = db.Column(db.String, nullable=False)
     _password_hash = db.Column(db.String, nullable=False)
+    location = db.Column(db.String, server_default='')
     created_at = db.Column(db.DateTime, server_default=func.now())
 
     # RELATIONSHIPS
@@ -89,6 +90,7 @@ class Business(db.Model, SerializerMixin):
     business_name = db.Column(db.String)
     email = db.Column(db.String, nullable=False)
     _password_hash = db.Column(db.String, nullable=False)
+    location = db.Column(db.String, server_default='')
     created_at = db.Column(db.DateTime, server_default=func.now())
 
     # RELATIONSHIPS

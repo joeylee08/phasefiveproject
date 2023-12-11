@@ -4,67 +4,102 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { UserContext } from '../context/UserContext'
 import { useContext } from 'react'
-import UserInfo from './UserInfo'
 
 const Profile = () => {
-  const { currentUser, loginType } = useContext(UserContext)
+  const { currentUser, loginType, handleSetUser } = useContext(UserContext)
 
-  const fsProfile = yup.object().shape({
-    product: yup.string().required('Please enter a product name.'),
-    quantity: yup.number().required('Please enter a quantity.').min(1),
-    expiration_date: yup.string().required("Please enter a username."),
-    location: yup.string().required("Please enter a location.").min(5),
-    notes: yup.string(),
-    vegan_safe: yup.string(),
-    non_dairy: yup.string(),
-    gluten_free: yup.string(),
-    nut_free: yup.string(),
-    soy_free: yup.string()
+  const fsU = yup.object().shape({
+    email: yup.string(),
+    username: yup.string(),
+    location: yup.string(),
   })
 
-  const formikProfile = useFormik({
+  const formikProfileU = useFormik({
     initialValues: {
-      product: '',
-      quantity: 0,
-      expiration_date: '',
-      location: '',
-      notes: '',
-      vegan_safe: false,
-      non_dairy: false,
-      gluten_free: false,
-      nut_free: false,
-      soy_free: false
+      email: currentUser.email,
+      username: currentUser.username,
+      location: currentUser.location
     },
-    validationSchema: fsProfile,
+    validationSchema: fsU,
     onSubmit: (values) => {
-      const submitted = {
-        ...values,
-        "business_id": currentUser.id,
-        "posted_by": currentUser.business_name
-      }
-      fetch('/listings', {
-        method: 'POST',
+      fetch(`/userbyid/${currentUser.id}`, {
+        method: "PATCH",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify(submitted, null, 2)
+        body: JSON.stringify(values)
       })
       .then(res => res.json())
       .then(data => {
-        formikProfile.resetForm();
-        // navigate('/mylistings')
+        handleSetUser(data)
+        alert('user updated')
       })
-    }
+    }     
   })
+  
+  const fsB = yup.object().shape({
+    email: yup.string(),
+    business_name: yup.string(),
+    username: yup.string(),
+    location: yup.string(),
+  })
+
+  const formikProfileB = useFormik({
+    initialValues: {
+      email: currentUser.email,
+      business_name: currentUser.business_name,
+      username: currentUser.username,
+      location: currentUser.location
+    },
+    validationSchema: fsB,
+    onSubmit: (values) => {
+      fetch(`/businessbyid/${currentUser.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(values)
+      })
+      .then(res => res.json())
+      .then(data => {
+        handleSetUser(data)
+        alert('user updated')
+      })
+    }     
+  })
+
+  const formik = loginType === 'user' ? formikProfileU : formikProfileB
 
   return (
     <div className='container'>
       <Header title={'My Manna Profile'} />
       <NavBar />
-      <div className='content'>
-        <UserInfo />
+      <div className='profileContent'>
         <div className='profileInfo'>
-          <h2>Username: {currentUser.username}</h2>
+          <div className='form'>
+          <form className='loginForm' onSubmit={formik.handleSubmit}>
+            <h3 className='formTag'>Update your account information.</h3>
+            <label htmlFor='email'>Updated Email:</label>
+            <input id='email' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.email} placeholder="Enter Email"></input>
+            { 
+              loginType === 'business' ?
+              <>
+                <label htmlFor='business_name'>Updated Business Name:</label>
+                <input id='business_name' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.business_name} placeholder="Enter Business Name"></input>
+              </> 
+              : null
+            }
+           
+            
+            <label htmlFor='username'>Updated Username:</label>
+            <input id='username' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.username} placeholder="Enter Username"></input>
+            <label htmlFor='username'>Updated Location:</label>
+            <input id='location' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.location} placeholder="Enter Location"></input>
+            <div id='loginButtons'>
+              <button className='modalBtn' type='submit'>UPDATE</button>
+            </div>
+          </form>
+        </div>
         </div>
       </div>
       
