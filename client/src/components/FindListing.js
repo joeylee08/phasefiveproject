@@ -27,7 +27,6 @@ const FindListing = () => {
 
   useEffect(() => {
     fetchListings()
-    initMap()
   }, [])
 
   const handleDetails = (item) => {

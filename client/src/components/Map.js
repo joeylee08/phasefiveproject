@@ -1,26 +1,43 @@
-// npm install @googlemaps/js-api-loader
+// npm install @react-google-maps/api use-places-autocomplete
 
+import React from 'react';
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
-import { Loader } from "@googlemaps/js-api-loader"
+const libraries = ['places'];
+const mapContainerStyle = {
+  width: '100%',
+  height: '100%',
+};
+const center = {
+  lat: 7.2905715, // default latitude
+  lng: 80.6337262, // default longitude
+};
 
 const Map = () => {
-  const loader = new Loader({
-    apiKey: 'AIzaSyDQ_T0IBMGJKmVeSYD8BnHxIgmnkAqPM2E'
-  })
-  loader.load().then(async () => {
-    const { Map } = await google.maps.importLibrary('maps');
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: 'AIzaSyDQ_T0IBMGJKmVeSYD8BnHxIgmnkAqPM2E',
+    libraries,
+  });
 
-    const map = new Map(<div className='map'></div>, {
-      center: { lat: -34.397, lng: 150.644 },
-      zoom: 8,
-    });
+  if (loadError) {
+    return <div>Error loading maps</div>;
+  }
 
-    return (
-      <>
-        {map}
-      </>
-    )
-  })
-}
+  if (!isLoaded) {
+    return <div>Loading maps</div>;
+  }
 
-export default Map
+  return (
+    <div className='map'>
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        zoom={10}
+        center={center}
+      >
+        <Marker position={center} />
+      </GoogleMap>
+    </div>
+  );
+};
+
+export default Map;

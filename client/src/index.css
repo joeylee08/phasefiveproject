@@ -222,7 +222,9 @@ a:hover {
 }
 
 .map {
-  margin-bottom: 0.5rem;
+  width: 100%;
+  margin: 0px 0px 1rem 0px;
+  height: 300px;
 }
 
 .dietTag {
