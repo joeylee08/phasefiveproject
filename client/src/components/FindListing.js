@@ -10,7 +10,7 @@ const FindListing = () => {
   const [activeListings, setActiveListings] = useState([])
   const [selectedListing, setSelectedListing] = useState({})
 
-  const {currentUser, loginType} = useContext(UserContext)
+  const {currentUser} = useContext(UserContext)
 
   const handleIsModal = () => {
     setIsModal(isModal => !isModal)
@@ -72,13 +72,16 @@ const FindListing = () => {
     )
   )
 
+  const address = '13430 lucas place, cerritos CA'
+  const items = [];
+
   return (
     <div className='container'>
       <Header title={'Find Listing'} />
       <NavBar />
       {isModal ? <Modal selectedListing={selectedListing} handleAdd={handleAdd} handleIsModal={handleIsModal} /> : null}
       <div className='content'>
-        <Map />
+        <Map center={address} items={items}/>
         {mapped}
       </div>
     </div>

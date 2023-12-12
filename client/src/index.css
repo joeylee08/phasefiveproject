@@ -203,6 +203,7 @@ a:hover {
   margin: auto;
   align-self: center;
   margin-top: 2rem;
+  z-index: 9;
 }
 
 .modalDetails {
@@ -224,7 +225,8 @@ a:hover {
 .map {
   width: 100%;
   margin: 0px 0px 1rem 0px;
-  height: 300px;
+  height: 400px;
+  border: 2px solid #435334;
 }
 
 .dietTag {

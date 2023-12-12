@@ -1,23 +1,40 @@
 // npm install @react-google-maps/api use-places-autocomplete
 
-import React from 'react';
+import {React, useState, useEffect, useRef } from 'react';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
-const libraries = ['places'];
-const mapContainerStyle = {
-  width: '100%',
-  height: '100%',
-};
-const center = {
-  lat: 7.2905715, // default latitude
-  lng: 80.6337262, // default longitude
-};
+const Map = ({center, items}) => {
+  const [centerCoords, setCenterCoords] = useState({})
+  const mapRef = useRef()
 
-const Map = () => {
+  const mapContainerStyle = {
+    width: '100%',
+    height: '100%',
+  };
+  
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: 'AIzaSyDQ_T0IBMGJKmVeSYD8BnHxIgmnkAqPM2E',
-    libraries,
+    items,
   });
+
+  const handleSetCoords = (center) => {
+    const geocoder = new window.google.maps.Geocoder()
+    geocoder.geocode({'address': center}, (results, status) => {
+      if (status === "OK") {
+        const coords = {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
+        setCenterCoords(coords)
+        return coords;
+      }
+    })
+  }
+
+  useEffect(() => {
+    handleSetCoords(center)
+  }, [])
+
+  useEffect(() => {
+    handleSetCoords(center)
+  }, [isLoaded])
 
   if (loadError) {
     return <div>Error loading maps</div>;
@@ -28,13 +45,13 @@ const Map = () => {
   }
 
   return (
-    <div className='map'>
+    <div className='map' ref={mapRef}>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={10}
-        center={center}
+        center={centerCoords}
       >
-        <Marker position={center} />
+        <Marker position={centerCoords} />
       </GoogleMap>
     </div>
   );
