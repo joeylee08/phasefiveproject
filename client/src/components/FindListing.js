@@ -3,6 +3,7 @@ import Header from './Header'
 import { useState, useEffect, useContext } from 'react'
 import Modal from './Modal'
 import { UserContext } from '../context/UserContext'
+import Map from './Map'
 
 const FindListing = () => {
   const [isModal, setIsModal] = useState(false)
@@ -26,6 +27,7 @@ const FindListing = () => {
 
   useEffect(() => {
     fetchListings()
+    initMap()
   }, [])
 
   const handleDetails = (item) => {
@@ -77,6 +79,7 @@ const FindListing = () => {
       <NavBar />
       {isModal ? <Modal selectedListing={selectedListing} handleAdd={handleAdd} handleIsModal={handleIsModal} /> : null}
       <div className='content'>
+        <Map />
         {mapped}
       </div>
     </div>
