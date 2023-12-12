@@ -243,11 +243,12 @@ class UserById(Resource):
         try:
             if session['login_type'] != 'user':
                 return make_response({"error" : "unauthorized to delete profile"}, 422)
-            
+    
             target = db.session.get(User, id)
             db.session.delete(target)
             db.session.commit()
             return make_response({}, 204)
+        
         except Exception as e:
             db.session.rollback()
             return make_response({"error" : str(e)}, 400)
@@ -287,6 +288,7 @@ class BusinessById(Resource):
             db.session.delete(target)
             db.session.commit()
             return make_response({}, 204)
+        
         except Exception as e:
             db.session.rollback()
             return make_response({"error" : str(e)}, 400)

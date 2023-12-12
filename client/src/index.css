@@ -22,6 +22,11 @@ body {
   margin: 1rem 0px 0.5rem 0px;
 }
 
+.formTagDelete {
+  height: 1.5rem;
+  margin: 1rem 0px 2rem 0px;
+}
+
 h1.formTitle {
   font-family: fantasy, math;
   color: #435334;

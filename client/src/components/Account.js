@@ -73,28 +73,45 @@ const Account = () => {
 
   const fsD = yup.object().shape({
     username: yup.string(),
-    password: yup.string()
+    password: yup.string(),
+    login_type: yup.string()
   })
 
   const formikProfileD = useFormik({
     initialValues: {
       username: '',
-      password: ''
+      password: '',
+      login_type: loginType
     },
     validationSchema: fsD,
     onSubmit: (values) => {
-    const deleteUrl = loginType === 'user' ? `/userbyid/${currentUser.id}` : `/businessbyid/${currentUser.id}`
-    fetch(deleteUrl, {
-      method: "DELETE"
-    })
-    .then(() =>{
-      alert('user deleted')
-      fetch('/logout')
-      handleSetUser({})
-      handleSetLogin('')
-      navigate('/')
-    })
-    }     
+      fetch('/login', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(values)
+      })
+      .then(res => {
+        if (res.ok) return res.json()
+        else throw Error('invalid user credentials')
+      })
+      .then(() => {
+        const deleteUrl = loginType === 'user' ? `/userbyid/${currentUser.id}` : `/businessbyid/${currentUser.id}`
+        fetch(deleteUrl, {
+          method: "DELETE"
+        })
+        .then(() => {
+          fetch('/logout')
+          .then(() => {
+            handleSetUser({})
+            handleSetLogin('')
+            navigate('/')
+          })
+        })
+      })
+      .catch(e => alert(e))
+    }
   })
 
   const formik = isDelete ?
@@ -119,7 +136,7 @@ const Account = () => {
             <form className='loginForm' onSubmit={formik.handleSubmit}>
               <h1 className='formTitle'>Delete Account</h1>
               <div className='loginBar'></div>
-              <h3 className='formTag'>Please confirm your username and password.</h3>
+              <h3 className='formTagDelete'>We wish you the best in the next chapter of your journey. Please confirm your username and password to continue.</h3>
               <label htmlFor='username'>Confirm Username:</label>
               <input id='username' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.username} placeholder="Confirm Username"></input>
               <label htmlFor='password'>Confirm Password:</label>
