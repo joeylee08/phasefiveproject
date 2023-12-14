@@ -1,5 +1,9 @@
 body {
-  background-color: #eeedeb;
+  background-color: #f4f4f4;
+}
+
+.form {
+  background-color: #f4f4f4;
 }
 
 .loginForm {
@@ -95,7 +99,7 @@ h1.formTitle {
 }
 
 .content {
-  background-color: #eeedeb;
+  background-color: #f4f4f4;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -105,7 +109,7 @@ h1.formTitle {
 }
 
 .loginContent {
-  background-color: #eeedeb;
+  background-color: #f4f4f4;
   padding: 2rem 1rem 2rem 1rem;
   height: auto;
 }
@@ -317,6 +321,7 @@ div.listingCard h4 {
   padding: 2rem;
   box-shadow: 3px 3px 12px #435334;
   border: 1px solid black;
+  margin-bottom: 0.4rem;
 }
 
 .homeDetails h1 {
