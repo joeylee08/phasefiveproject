@@ -136,7 +136,7 @@ const Account = () => {
             <form className='loginForm' onSubmit={formik.handleSubmit}>
               <h1 className='formTitle'>Delete Account</h1>
               <div className='loginBar'></div>
-              <h3 className='formTagDelete'>We wish you the best in the next chapter of your journey. Please confirm your username and password to continue.</h3>
+              <h3 className='formTagDelete'>Please confirm your username and password to continue.</h3>
               <label htmlFor='username'>Confirm Username:</label>
               <input id='username' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.username} placeholder="Confirm Username"></input>
               <label htmlFor='password'>Confirm Password:</label>
