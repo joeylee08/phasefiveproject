@@ -3,6 +3,7 @@ import * as yup from 'yup'
 import { useLocation } from 'react-router-dom'
 import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
+import Map from './Map'
 
 const Modal = ({selectedListing, fetchListings, handleIsModal, handleAdd, handleDelete}) => {
   const location = useLocation()
@@ -72,7 +73,7 @@ const Modal = ({selectedListing, fetchListings, handleIsModal, handleAdd, handle
             <h3>Posted By: {sl.posted_by}</h3>
             <h3>Location: {sl.location}</h3>
             <h3>Additional Notes: {sl.notes}</h3>
-            <img className='map' src='https://cdn.serc.carleton.edu/images/sp/library/google_earth/google_maps_hello_world.webp' alt='map'></img>
+            <Map center={sl.location} items={[]} mapClass={'modalMap'}/>
             <p className='dietTag'>Vegan {sl.vegan_safe ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
             <p className='dietTag'>Non Dairy {sl.non_dairy ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
             <p className='dietTag'>Gluten Free {sl.gluten_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>

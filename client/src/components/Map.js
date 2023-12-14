@@ -3,7 +3,7 @@
 import {React, useState, useEffect} from 'react';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
-const Map = ({center, items}) => {
+const Map = ({center, items, mapClass}) => {
   const [centerCoords, setCenterCoords] = useState({})
   const [geocoder, setGeocoder] = useState(null)
 
@@ -18,7 +18,6 @@ const Map = ({center, items}) => {
   });
 
   const handleSetCoords = (center) => { 
-    console.log('center',center)
     if (!isLoaded) return;
     if (!geocoder) return;
 
@@ -54,10 +53,10 @@ const Map = ({center, items}) => {
   }
 
   return (
-    <div className='map'>
+    <div className={mapClass}>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={10}
+        zoom={mapClass === 'modalMap' ? 15 : 10}
         center={centerCoords}
       >
         <Marker position={centerCoords} />

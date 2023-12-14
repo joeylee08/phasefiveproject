@@ -72,7 +72,7 @@ const FindListing = () => {
     )
   )
 
-  const address = '13430 lucas place, cerritos CA'
+  const address = currentUser.location || '3 United Nations Plaza, New York, NY 10017'
   const items = [];
 
   return (
@@ -81,7 +81,7 @@ const FindListing = () => {
       <NavBar />
       {isModal ? <Modal selectedListing={selectedListing} handleAdd={handleAdd} handleIsModal={handleIsModal} /> : null}
       <div className='content'>
-        <Map center={address} items={items}/>
+        <Map mapClass={'listingsMap'} center={address} items={items}/>
         {mapped}
       </div>
     </div>
