@@ -44,7 +44,8 @@ class Login(Resource):
                 session['login_type'] = 'business'
             
             if current_user:
-                    session['current_id'] = current_user.to_dict()['id']
+                
+                    session['current_id'] = current_user.id
                     return make_response(current_user.to_dict(), 200)
             else:
                 return make_response({}, 404)
@@ -58,8 +59,8 @@ class Logout(Resource):
             session['current_id'] = '0'
             session['login_type'] = ''
             return make_response({}, 200)
-        except Exception as e:
-            return make_response({"error" : str(e)}, 400)
+        except Exception:
+            return make_response({"error" : "unable to logout user"}, 400)
         
 class Signup(Resource):
     def post(self):
@@ -67,7 +68,6 @@ class Signup(Resource):
             body = request.get_json()
             if body['login_type'] == 'user':
                 new_user = User(
-                    id=None,
                     login_type=body['login_type'],
                     email=body['email'],
                     username=body['username'],
@@ -76,7 +76,6 @@ class Signup(Resource):
                 session['login_type'] = 'user'
             else:
                 new_user = Business(
-                    id=None,
                     login_type=body['login_type'],
                     business_name=body['business_name'],
                     username=body['username'],
