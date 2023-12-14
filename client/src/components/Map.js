@@ -32,12 +32,18 @@ const Map = ({center, items}) => {
   }
 
   useEffect(() => {
-    handleSetCoords(center)
-  }, [geocoder])
+    if (window.google) {
+      setGeocoder(new window.google.maps.Geocoder())
+    }
+  }, [window.google]) 
 
   useEffect(() => {
-    setGeocoder(new window.google.maps.Geocoder())
-  }, [])
+    if (geocoder) {
+      handleSetCoords(center)
+    }
+  }, [geocoder])
+
+ 
 
   if (loadError) {
     return <div>Error loading maps</div>;
