@@ -14,6 +14,7 @@ from models import User, UserListing, Listing, Business
 from dotenv import load_dotenv
 import os
 import ipdb
+from datetime import datetime
 
 load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
@@ -112,14 +113,8 @@ class Listings(Resource):
     def get(self):
         try:
             all_listings = [listing.to_dict() for listing in Listing.query]
-            # ipdb.set_trace()
+            all_listings.sort(key=lambda item: datetime.strptime(item['created_at'], '%Y-%m-%d %H:%M:%S').timestamp() , reverse=True)
 
-            #datetime strptime with the string format passed in
-            #then use timedelta to find the timestamp
-            #then sort by the timestamp before sending it back
-
-            # all_listings.sort(key=lambda item: item['created_at'], reverse=True)
-            
             return make_response(all_listings, 200)
         except Exception:
             return make_response({}, 404)
