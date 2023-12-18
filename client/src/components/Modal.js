@@ -80,8 +80,8 @@ const Modal = ({selectedListing, fetchListings, handleIsModal, handleAdd, handle
             <p className='dietTag'>Nut Free {sl.nut_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
             <p className='dietTag'>Soy Free {sl.soy_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
             <div className='formBtnWrapper'>
-              <button className='modalBtn' onClick={handleIsModal}>CLOSE</button>
               {path === '/mylistings' ? <button className='modalBtn' id={sl.id} onClick={handleDelete}>REMOVE</button> : <button className='modalBtn' onClick={() => handleAdd(sl)}>ADD</button>}
+              <button className='modalBtn' onClick={handleIsModal}>CLOSE</button>
             </div>
           </div>
         </div>

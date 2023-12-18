@@ -126,7 +126,7 @@ const Account = () => {
 
   return (
     <div className='container'>
-      <Header title={'My Manna Foods'} />
+      <Header title={'My Manna Foods Account'} />
       <NavBar />
       {
       isDelete ? 

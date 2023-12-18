@@ -124,30 +124,32 @@ h1.formTitle {
   height: 80px;
   background-color: #435334;
   text-align: center;
-  padding-top: 2rem;
-  padding-bottom: 1.6rem;
-  font-size: 2.8rem;
+  padding-top: 2.5rem;
+  padding-bottom: 1.2rem;
+  font-size: 3rem;
   color: #ffffff;
 }
 
 .navbar {
   margin: 0px;
   width: 100%;
-  height: 80px;
-  background-color: #ffffff;
+  height: 70px;
+  background-color: #596a48;
+  font-family: fantasy, math;
 }
 
 .linksList {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 3rem;
   list-style-type: none;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 a {
-  color: #435334;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 a:hover {
@@ -158,7 +160,8 @@ a:hover {
   width: 9rem;
   height: 2.8rem;
   border-radius: 7px;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  font-weight: bold;
   font-family: fantasy, math;
   background-color: #ffffff;
   padding-top: 0.5rem;
