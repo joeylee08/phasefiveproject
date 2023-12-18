@@ -176,7 +176,7 @@ a:hover {
   width: 252px;
   height: 265px;
   background-color: #ffffff;
-  border: 2px solid #435334;
+  border: 1px solid #435334;
   padding: 0rem 0.5rem 0rem 0.5rem;
   border-radius: 5px;
   text-align: center;
@@ -234,14 +234,12 @@ a:hover {
   width: 100%;
   margin: 0px 0px 1rem 0px;
   height: 400px;
-  border: 1px solid black;
 }
 
 .homeMap {
   width: 100%;
   margin: 1rem 0px 1.5rem 0px;
   height: 500px;
-  border: 1px solid black;
 }
 
 .modalMap {
@@ -322,17 +320,13 @@ div.listingCard h4 {
   background-color: #ffffff;
   width: 100%;
   padding: 2rem;
-  box-shadow: 3px 3px 12px #435334;
-  border: 1px solid black;
   margin-bottom: 0.5rem;
 }
 
 .homeQuotes {
   background-color: #ffffff;
   width: 100%;
-  padding: 1rem 2rem 0.8rem 2rem;
-  box-shadow: 3px 3px 12px #435334;
-  border: 1px solid black;
+  padding: 1.2rem 2rem 0.8rem 2rem;
   margin-top: 0px;
   margin-bottom: 0.4rem;
 }
