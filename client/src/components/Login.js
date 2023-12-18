@@ -3,10 +3,13 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../context/UserContext'
+import Snackbar from './Snackbar'
 
 const Login = () => {
   const navigate = useNavigate()
   const [isLogin, setIsLogin] = useState(true)
+  const [isSnack, setIsSnack] = useState(true)
+  const [snackText, setSnackText] = useState('')
 
   const {handleSetUser, handleSetLogin} = useContext(UserContext)
 
@@ -105,6 +108,7 @@ const Login = () => {
           </form>
         </div>
       </div>
+      {isSnack ? <Snackbar /> : null}
       </>
     )
   } else {
