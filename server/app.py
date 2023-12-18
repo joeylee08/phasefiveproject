@@ -112,6 +112,14 @@ class Listings(Resource):
     def get(self):
         try:
             all_listings = [listing.to_dict() for listing in Listing.query]
+            # ipdb.set_trace()
+
+            #datetime strptime with the string format passed in
+            #then use timedelta to find the timestamp
+            #then sort by the timestamp before sending it back
+
+            # all_listings.sort(key=lambda item: item['created_at'], reverse=True)
+            
             return make_response(all_listings, 200)
         except Exception:
             return make_response({}, 404)
