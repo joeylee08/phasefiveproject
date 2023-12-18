@@ -164,7 +164,8 @@ a:hover {
   font-weight: bold;
   font-family: fantasy, math;
   background-color: #ffffff;
-  padding-top: 0.5rem;
+  padding-top: 0.4rem;
+  color: #435334;
 }
 
 #logoutBtn:hover {
