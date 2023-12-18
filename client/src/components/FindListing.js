@@ -72,7 +72,7 @@ const FindListing = () => {
     )
   )
 
-  const address = currentUser.location || '3 United Nations Plaza, New York, NY 10017'
+  const address = currentUser.location || 'Kiev, Ukraine'
   const items = [];
 
   return (

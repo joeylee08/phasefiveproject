@@ -8,7 +8,7 @@ import Map from './Map'
 const Home = () => {
   const { loginType, currentUser } = useContext(UserContext)
   const title = loginType === 'user' ? 'Manna Foods Home' : 'Manna Foods Business Home'
-  const address = currentUser.location || '3 United Nations Plaza, New York, NY 10017'
+  const address = currentUser.location || 'Kiev, Ukraine'
 
   const [quote, setQuote] = useState('')
   const [author, setAuthor] = useState('')
