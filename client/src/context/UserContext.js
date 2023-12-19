@@ -16,7 +16,7 @@ const UserProvider = ({children}) => {
   const handleOpenSnack = (message) => {
     setSnackText(message)
     setIsSnack(true)
-    setTimeout(() => handleCloseSnack(), 2000)
+    setTimeout(() => handleCloseSnack(), 1500)
   }
 
   useEffect(() => {

@@ -193,11 +193,13 @@ a:hover {
 
 .listingCard {
   width: 252px;
-  height: 265px;
+  height: 252px;
   background-color: #ffffff;
   border: 1px solid #435334;
-  padding: 0rem 0.5rem 0rem 0.5rem;
+  padding: 0rem 0.6rem 0rem 0.6rem;
   border-radius: 5px;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -205,9 +207,11 @@ a:hover {
 }
 
 .cardBtnWrapper {
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
-  margin-top: 1rem;
+  align-items: center;
+  margin-top: 0.9rem;
 }
 
 .cardBtn {
@@ -216,7 +220,7 @@ a:hover {
   margin: 0.2rem;
   background-color: #ffffff;
   padding-top: 0.2rem;
-  border-radius: 6px;
+  border-radius: 5px;
   font-family: fantasy, math;
   border: 2px solid green;
 }
@@ -315,24 +319,49 @@ a:hover {
   justify-content: space-between;
 }
 
-div.listingCard p {
-  height: 1.5rem;
-  margin: 0.1rem;
+div.listingCard p#poster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 2.5rem;
+  line-height: 1.25rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0px;
+}
+
+div.listingCard p#expires {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 1rem;
+  margin-top: -0.4rem;
+  margin-bottom: 0px;
 }
 
 div.listingCard h3 {
-  height: 1.2rem;
-  margin-top: 1.3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 2.2rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0rem;
   line-height: 1.5rem;
-  width: 240px;
-  align-self: center;
   color: #0b6623;
   font-family: fantasy, math;
 }
 
 div.listingCard h4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   height: 1rem;
   margin-top: 1.2rem;
+  margin-bottom: 0rem;
 }
 
 .homeDetails {
