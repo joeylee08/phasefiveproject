@@ -8,22 +8,38 @@ import Snackbar from './Snackbar'
 const Login = () => {
   const navigate = useNavigate()
   const [isLogin, setIsLogin] = useState(true)
-  const [isSnack, setIsSnack] = useState(true)
+  const [isSnack, setIsSnack] = useState(false)
   const [snackText, setSnackText] = useState('')
 
   const {handleSetUser, handleSetLogin} = useContext(UserContext)
 
+  const handleToggleForm = () => {
+    setIsLogin(isLogin => !isLogin)
+  }
+
+  const handleCloseSnack = () => {
+    setIsSnack(false)
+    setSnackText('')
+  }
+
+  const handleOpenSnack = (message) => {
+    console.log('snacky poo')
+    setSnackText(message)
+    setIsSnack(true)
+    setTimeout(() => handleCloseSnack(), 3500)
+  }
+
   const fsLogin = yup.object().shape({
-    login_type: yup.string().required('Please select an account type.').min(1),
+    login_type: yup.string().required('Please select an account type.'),
     username: yup.string().required("Please enter a username."),
-    password: yup.string().required("Please enter a password.").min(5)
+    password: yup.string().required("Please enter a password.")
   })
 
   const fsSignup= yup.object().shape({
-    login_type: yup.string().required('Please select an account type.').min(1),
+    login_type: yup.string().required('Please select an account type.'),
     email: yup.string().email('Please enter a valid email.').required('Please enter an email.'),
     username: yup.string().required("Please enter a username."),
-    password: yup.string().required("Please enter a password.").min(5)
+    password: yup.string().required("Please enter a password.")
   })
 
   const formikLogin = useFormik({
@@ -41,12 +57,17 @@ const Login = () => {
         },
         body: JSON.stringify(values, null, 2)
       })
-      .then(res => res.json())
+      .then(res => {
+        if (res.status === 200) return res.json()
+      })
       .then(data => {
         handleSetUser(data)
         handleSetLogin(data['login_type'])
         formikLogin.resetForm();
         navigate('/')
+      })
+      .catch(() => {
+        handleOpenSnack("Invalid user credentials.")
       })
     }
   })
@@ -68,19 +89,20 @@ const Login = () => {
         },
         body: JSON.stringify(values, null, 2)
       })
-      .then(res => res.json())
+      .then(res => {
+        if (res.status === 201) return res.json()
+      })
       .then(data => {
         handleSetUser(data)
         handleSetLogin(data['login_type'])
         formikSignup.resetForm();
         navigate('/')
       })
+      .catch(() => {
+        handleOpenSnack("That username already exists.")
+      })
     }
   })
-
-  const handleToggleform = () => {
-    setIsLogin(isLogin => !isLogin)
-  }
 
   if (isLogin) {
     return (
@@ -88,7 +110,7 @@ const Login = () => {
       <div className='loginContent'>
         <div className='form'>
           <form className='loginForm' onSubmit={formikLogin.handleSubmit}>
-            <button className='modalBtn' type='button' onClick={() => handleToggleform()}>{isLogin ? 'to Signup' : 'to Login'}</button>
+            <button className='modalBtn' type='button' onClick={() => handleToggleForm()}>{isLogin ? 'to Signup' : 'to Login'}</button>
             <h1 className='formTitle'>Manna Foods Login</h1>
             <div className='loginBar'></div>
             <h3 className='formTag'>Please enter your account information.</h3>
@@ -108,7 +130,7 @@ const Login = () => {
           </form>
         </div>
       </div>
-      {isSnack ? <Snackbar /> : null}
+      {isSnack ? <Snackbar message={snackText} handleCloseSnack={handleCloseSnack} /> : null}
       </>
     )
   } else {
@@ -117,7 +139,7 @@ const Login = () => {
       <div className='loginContent'>
         <div className='form'>
           <form className='loginForm' onSubmit={formikSignup.handleSubmit}>
-            <button className='modalBtn' type='button' onClick={() => handleToggleform()}>{isLogin ? 'to Signup' : 'to Login'}</button>
+            <button className='modalBtn' type='button' onClick={() => handleToggleForm()}>{isLogin ? 'to Signup' : 'to Login'}</button>
             <h1 className='formTitle'>Manna Foods Signup</h1>
             <div className='loginBar'></div>
             <h3 className='formTag'>Please enter your account information.</h3>
@@ -141,6 +163,7 @@ const Login = () => {
           </form>
         </div>
       </div>
+      {isSnack ? <Snackbar message={snackText} handleCloseSnack={handleCloseSnack} /> : null}
       </>
     )
   }

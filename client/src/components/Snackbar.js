@@ -1,11 +1,10 @@
 
-const Snackbar = ({ message }) => {
+const Snackbar = ({ message, handleCloseSnack}) => {
 
   return (
     <>
-        <div className='snackbar'>
-          <h1>PENIS:</h1>
-          {message}
+        <div className='snackbar' onClick={handleCloseSnack}>
+          <h2>{message}</h2>
         </div>
     </>
   )

@@ -33,14 +33,14 @@ class Login(Resource):
                 current_user = User.query.filter_by(username=username).first()
 
                 if not current_user or not current_user.authenticate(password):
-                    return make_response({"error" : "invalid credentials"}, 422)
-                
+                    return make_response({"message" : "Invalid user credentials."}, 422)
+                     
                 session['login_type'] = 'user'               
             else:
                 current_user = Business.query.filter_by(username=username).first()
 
                 if not current_user or not current_user.authenticate(password):
-                    return make_response({"error" : "invalid credentials"}, 422)
+                    return make_response({"message" : "Invalid user credentials."}, 422)
                 
                 session['login_type'] = 'business'
             
@@ -52,7 +52,7 @@ class Login(Resource):
                 return make_response({}, 404)
 
         except Exception as e:
-            return make_response({'error' : str(e)}, 404)
+            return make_response({"message" : "Invalid user credentials."}, 404)
 
 class Logout(Resource):
     def get(self):
@@ -65,9 +65,13 @@ class Logout(Resource):
         
 class Signup(Resource):
     def post(self):
+        body = request.get_json()
+
+        if User.query.filter_by(username=body['username']).first() or Business.query.filter_by(username=body['username']).first():
+            return make_response({"error" : "already exists"}, 400)
+        
         try:
-            body = request.get_json()
-            if body['login_type'] == 'user':
+            if body['login_type'] == 'user':    
                 new_user = User(
                     login_type=body['login_type'],
                     email=body['email'],
