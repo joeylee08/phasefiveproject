@@ -17,10 +17,6 @@ body {
   font-family: fantasy, math;
 }
 
-.snackbar:hover {
-  border: 3px solid red;
-}
-
 .snackbar h2 {
   margin-left: 0.5rem;
   line-height: 4.5rem;

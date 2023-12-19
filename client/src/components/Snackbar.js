@@ -1,8 +1,8 @@
 import { UserContext } from '../context/UserContext'
 import { useContext } from 'react'
 
-const Snackbar = ({ message, handleCloseSnack}) => {
-  const {snackText} = useContext(UserContext)
+const Snackbar = ({}) => {
+  const {snackText, handleCloseSnack} = useContext(UserContext)
   return (
     <>
         <div className='snackbar' onClick={handleCloseSnack}>
