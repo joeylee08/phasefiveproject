@@ -1,10 +1,9 @@
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useLocation } from 'react-router-dom'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 import Map from './Map'
-import Snackbar from './Snackbar'
 
 const Modal = ({selectedListing, fetchListings, handleIsModal, handleOpenSnack, handleAdd, handleDelete}) => {
   const location = useLocation()
@@ -84,7 +83,7 @@ const Modal = ({selectedListing, fetchListings, handleIsModal, handleOpenSnack, 
             <p className='dietTag'>Soy Free {sl.soy_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
             <div className='formBtnWrapper'>
             <button className='modalBtn' onClick={handleIsModal}>CLOSE</button>
-              {path === '/mylistings' ? <button className='modalBtn' id={sl.id} onClick={handleDelete}>REMOVE</button> : <button className='modalBtn' onClick={() => handleAdd(sl)}>ADD</button>}
+              {path === '/mylistings' ? <button className='modalBtn' id={sl.id} onClick={handleDelete}>REMOVE</button> : <button className='modalBtn' onClick={() => handleAdd(sl)}>SAVE</button>}
             </div>
           </div>
         </div>

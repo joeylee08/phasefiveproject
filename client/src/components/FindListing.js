@@ -73,7 +73,7 @@ const FindListing = () => {
       <p id='expires'>Expires: {item.expiration_date}</p>
       <div className='cardBtnWrapper'>
         <button type='button' id={item.id} className='cardBtn' onClick={() => handleDetails(item)}>DETAILS</button>
-        <button type='button' id={item.id} className='cardBtn' onClick={() => handleAdd(item)}>ADD</button>
+        <button type='button' id={item.id} className='cardBtn' onClick={() => handleAdd(item)}>SAVE</button>
       </div>
     </div>
     )
