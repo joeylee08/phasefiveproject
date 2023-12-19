@@ -116,7 +116,7 @@ def create_listings():
         notes='Please pickup between 3 and 6 PM. Ask for manager Victoria.'
     )
     l5 = Listing(
-        product='Ensure 20g Protien Formula 12 Pack',
+        product='Ensure 20g Protein Formula 12 Pack',
         quantity=8,
         expiration_date='2/12/24',
         business_id = 1,

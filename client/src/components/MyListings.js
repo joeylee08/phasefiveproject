@@ -17,6 +17,8 @@ const MyListings = () => {
     setIsModal(isModal => !isModal)
   }
 
+  // const sorted = myListings.sort((a, b) => +Date.parse(b.created_at).getTime() - +Date.parse(a.created_at).getTime())
+
   const fetchListings = () => {
     if (loginType == 'user') {
       fetch(`/ulbyuserid/${currentUser['id']}`)
@@ -89,7 +91,9 @@ const MyListings = () => {
     }
   }
 
-  const mapped = myListings.map(item => (
+  const sorted = myListings.sort((a, b) =>  Date.parse(b.created_at) - Date.parse(a.created_at))
+
+  const mapped = sorted.map(item => (
     <div className='listingCard' listing_id={item.id} key={item.id}>
       <h3>{item.product}</h3>
       <h4>Quantity: {item.quantity}</h4>
