@@ -4,13 +4,17 @@ import { useState, useEffect, useContext } from 'react'
 import Modal from './Modal'
 import { UserContext } from '../context/UserContext'
 import Map from './Map'
+import Snackbar from './Snackbar'
 
 const FindListing = () => {
   const [isModal, setIsModal] = useState(false)
   const [activeListings, setActiveListings] = useState([])
   const [selectedListing, setSelectedListing] = useState({})
 
+
   const {currentUser} = useContext(UserContext)
+  const {isSnack, snackText, handleCloseSnack, handleOpenSnack} = useContext(UserContext)
+
 
   const handleIsModal = () => {
     setIsModal(isModal => !isModal)
@@ -50,11 +54,14 @@ const FindListing = () => {
       },
       body: JSON.stringify(request)
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.status === 201) return res.json()
+    })
     .then(() => {
       setIsModal(false)
-      alert('added')
+      handleOpenSnack('Listing saved.')
     })
+    .catch(() => handleOpenSnack('Unable to save listing.'))
   }
 
   const mapped = activeListings.map(item => (
@@ -75,6 +82,11 @@ const FindListing = () => {
   const address = currentUser.location || 'Kiev, Ukraine'
   const items = [];
 
+  //1. Filter the activeListings for
+  //   a. keyword
+  //   b. distance
+  //   c. dietary restrictions
+
   return (
     <div className='container'>
       <Header title={'Find Listing'} />
@@ -84,6 +96,7 @@ const FindListing = () => {
         <Map mapClass={'listingsMap'} center={address} items={items}/>
         {mapped}
       </div>
+      {isSnack ? <Snackbar message={snackText} handleCloseSnack={handleCloseSnack} /> : null}
     </div>
   )
 }

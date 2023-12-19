@@ -7,26 +7,13 @@ import Snackbar from './Snackbar'
 
 const Login = () => {
   const navigate = useNavigate()
-  const [isLogin, setIsLogin] = useState(true)
-  const [isSnack, setIsSnack] = useState(false)
-  const [snackText, setSnackText] = useState('')
-
+  const {isSnack, snackText, handleCloseSnack, handleOpenSnack} = useContext(UserContext)
   const {handleSetUser, handleSetLogin} = useContext(UserContext)
+  
+  const [isLogin, setIsLogin] = useState(true)
 
   const handleToggleForm = () => {
     setIsLogin(isLogin => !isLogin)
-  }
-
-  const handleCloseSnack = () => {
-    setIsSnack(false)
-    setSnackText('')
-  }
-
-  const handleOpenSnack = (message) => {
-    console.log('snacky poo')
-    setSnackText(message)
-    setIsSnack(true)
-    setTimeout(() => handleCloseSnack(), 3500)
   }
 
   const fsLogin = yup.object().shape({
@@ -130,7 +117,7 @@ const Login = () => {
           </form>
         </div>
       </div>
-      {isSnack ? <Snackbar message={snackText} handleCloseSnack={handleCloseSnack} /> : null}
+      {isSnack ? <Snackbar /> : null}
       </>
     )
   } else {

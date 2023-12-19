@@ -68,7 +68,7 @@ class Signup(Resource):
         body = request.get_json()
 
         if User.query.filter_by(username=body['username']).first() or Business.query.filter_by(username=body['username']).first():
-            return make_response({"error" : "already exists"}, 400)
+            return make_response({}, 400)
         
         try:
             if body['login_type'] == 'user':    

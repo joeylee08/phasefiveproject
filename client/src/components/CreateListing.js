@@ -4,12 +4,25 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+import Snackbar from './Snackbar'
 
 const CreateListing = () => {
   const navigate = useNavigate()
-
   const {currentUser} = useContext(UserContext)
+  const [isSnack, setIsSnack] = useState(false)
+  const [snackText, setSnackText] = useState('')
+
+  const handleCloseSnack = () => {
+    setIsSnack(false)
+    setSnackText('')
+  }
+
+  const handleOpenSnack = (message) => {
+    setSnackText(message)
+    setIsSnack(true)
+    setTimeout(() => handleCloseSnack(), 2000)
+  }
 
   const fsCreate = yup.object().shape({
     product: yup.string().max(55).required('Please enter a product name.'),
@@ -51,11 +64,15 @@ const CreateListing = () => {
         },
         body: JSON.stringify(submitted, null, 2)
       })
-      .then(res => res.json())
-      .then(data => {
-        formikCreate.resetForm();
-        navigate('/mylistings')
+      .then(res => {
+        if (res.status === 201) {
+          
+          formikCreate.resetForm();
+          navigate('/mylistings')
+          handleOpenSnack('Listing created.')
+        }
       })
+      .catch(() => handleOpenSnack('Unable to remove listing.'))
     }
   })
   return (
@@ -106,6 +123,7 @@ const CreateListing = () => {
             </form>
           </div>
       </div>
+      {isSnack ? <Snackbar message={snackText} handleCloseSnack={handleCloseSnack} /> : null}
     </div>
   )
 }

@@ -3,6 +3,7 @@ import Header from './Header'
 import { useState, useEffect, useContext } from 'react'
 import Modal from './Modal'
 import { UserContext } from '../context/UserContext'
+import Snackbar from './Snackbar'
 
 const MyListings = () => {
   const [myListings, setMyListings] = useState([])
@@ -10,6 +11,7 @@ const MyListings = () => {
   const [selectedListing, setSelectedListing] = useState({})
 
   const {currentUser, loginType} = useContext(UserContext)
+  const {isSnack, snackText, handleCloseSnack, handleOpenSnack} = useContext(UserContext)
   
   const handleIsModal = () => {
     setIsModal(isModal => !isModal)
@@ -60,11 +62,14 @@ const MyListings = () => {
         fetch(`/userlistingbyid/${target_id}`, {
           method: "DELETE"
         })
-        .then(() => {
-          if (isModal) setIsModal(false)
-          fetchListings()
-          alert('deleted')
+        .then(res => {
+          if (res.status === 204) {
+            if (isModal) setIsModal(false)
+            handleOpenSnack('Listing removed.')
+            fetchListings()
+          }
         })
+        .catch(() => handleOpenSnack('Unable to remove listing.'))
       })
    } else {
       fetch(`/listingbyid/${listing_id}`, {
@@ -73,11 +78,14 @@ const MyListings = () => {
           "Content-Type": "application/json"
         }
       })
-      .then(() => {
-        if (isModal) setIsModal(false)
-        fetchListings()
-        alert('deleted')
+      .then(res => {
+        if (res.status === 204) {
+          if (isModal) setIsModal(false)
+          fetchListings()
+          handleOpenSnack('Listing deleted.')
+        }
       })
+      .catch(() => handleOpenSnack('Unable to delete listing.'))
     }
   }
 
@@ -101,10 +109,11 @@ const MyListings = () => {
     <div className='container'>
       <Header title={loginType === 'user' ? 'Saved Listings' : 'Active Listings'} />
       <NavBar />
-      {isModal ? <Modal selectedListing={selectedListing} handleIsModal={handleIsModal} handleDelete={handleDelete} fetchListings={fetchListings}/> : null}
+      {isModal ? <Modal selectedListing={selectedListing} handleIsModal={handleIsModal} handleOpenSnack={handleOpenSnack} handleDelete={handleDelete} fetchListings={fetchListings}/> : null}
       <div className='content'>
         {mapped}
       </div>
+      {isSnack ? <Snackbar message={snackText} handleCloseSnack={handleCloseSnack} /> : null}
     </div>
   )
 }

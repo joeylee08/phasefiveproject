@@ -1,14 +1,14 @@
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { useLocation } from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { UserContext } from '../context/UserContext'
 import Map from './Map'
+import Snackbar from './Snackbar'
 
-const Modal = ({selectedListing, fetchListings, handleIsModal, handleAdd, handleDelete}) => {
+const Modal = ({selectedListing, fetchListings, handleIsModal, handleOpenSnack, handleAdd, handleDelete}) => {
   const location = useLocation()
   const path = location.pathname
-
   const {currentUser, loginType} = useContext(UserContext)
   
   const fsEdit = yup.object().shape({
@@ -53,11 +53,14 @@ const Modal = ({selectedListing, fetchListings, handleIsModal, handleAdd, handle
         },
         body: JSON.stringify(submitted, null, 2)
       })
-      .then(res => res.json())
-      .then(() => {
-        handleIsModal()
-        fetchListings()
+      .then(res => {
+        if (res.status === 200) {
+          handleOpenSnack('Listing updated.')
+          handleIsModal()
+          fetchListings()
+        }
       })
+      .catch(() => handleOpenSnack('Unable to update listing.'))
     }
   })
 

@@ -5,6 +5,19 @@ export const UserContext = createContext()
 const UserProvider = ({children}) => {
   const [currentUser, setCurrentUser] = useState({})
   const [loginType, setLoginType] = useState('')
+  const [isSnack, setIsSnack] = useState(false)
+  const [snackText, setSnackText] = useState('')
+
+  const handleCloseSnack = () => {
+    setIsSnack(false)
+    setSnackText('')
+  }
+
+  const handleOpenSnack = (message) => {
+    setSnackText(message)
+    setIsSnack(true)
+    setTimeout(() => handleCloseSnack(), 2000)
+  }
 
   useEffect(() => {
     // check for currentUser
@@ -25,7 +38,7 @@ const UserProvider = ({children}) => {
   }
 
   return (
-    <UserContext.Provider value={{currentUser, loginType, handleSetUser, handleSetLogin}}>
+    <UserContext.Provider value={{currentUser, loginType, handleSetUser, handleSetLogin, isSnack, snackText, handleOpenSnack, handleCloseSnack}}>
       {children}
     </UserContext.Provider>
   )

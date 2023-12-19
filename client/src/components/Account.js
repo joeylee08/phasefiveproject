@@ -5,10 +5,15 @@ import * as yup from 'yup'
 import { UserContext } from '../context/UserContext'
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Snackbar from './Snackbar'
 
 const Account = () => {
   const { currentUser, loginType, handleSetUser, handleSetLogin } = useContext(UserContext)
+  const {isSnack, snackText, handleCloseSnack, handleOpenSnack} = useContext(UserContext)
+
+  
   const [isDelete, setIsDelete] = useState(false)
+
   const navigate = useNavigate()
 
   const fsU = yup.object().shape({
@@ -32,11 +37,14 @@ const Account = () => {
         },
         body: JSON.stringify(values)
       })
-      .then(res => res.json())
+      .then(res => {
+        if (res.status === 200) return res.json()
+      })
       .then(data => {
         handleSetUser(data)
-        alert('user updated')
+        handleOpenSnack('User updated.')
       })
+      .catch(() => handleOpenSnack('Unable to update user.'))
     }     
   })
   
@@ -63,11 +71,14 @@ const Account = () => {
         },
         body: JSON.stringify(values)
       })
-      .then(res => res.json())
+      .then(res => {
+        if (res.status === 200) return res.json()
+      })
       .then(data => {
         handleSetUser(data)
-        alert('user updated')
+        handleOpenSnack('User updated.')
       })
+      .catch(() => handleOpenSnack('Unable to update user.'))
     }     
   })
 
@@ -93,8 +104,8 @@ const Account = () => {
         body: JSON.stringify(values)
       })
       .then(res => {
-        if (res.ok) return res.json()
-        else throw Error('invalid user credentials')
+        if (res.status === 200) return
+        else throw Error
       })
       .then(() => {
         const deleteUrl = loginType === 'user' ? `/userbyid/${currentUser.id}` : `/businessbyid/${currentUser.id}`
@@ -104,13 +115,17 @@ const Account = () => {
         .then(() => {
           fetch('/logout')
           .then(() => {
-            handleSetUser({})
-            handleSetLogin('')
-            navigate('/')
+            handleOpenSnack('Thank you for using Manna Foods.')
+            setTimeout(() => {
+              navigate('/')
+              handleSetUser({})
+              handleSetLogin('')
+            }, 2000)
           })
         })
+        .catch(() => handleOpenSnack('Unable to delete account.'))
       })
-      .catch(e => alert(e))
+      .catch(() => handleOpenSnack('Invalid user credentials.'))
     }
   })
 
@@ -150,35 +165,36 @@ const Account = () => {
         </div>
       </div> :
       <div className='profileContent'>
-      <div className='profileInfo'>
-        <div className='form'>
-          <form className='loginForm' onSubmit={formik.handleSubmit}>
-            <h1 className='formTitle'>Update or Delete Account</h1>
-            <div className='loginBar'></div>
-            <button className='modalBtn' type='button' onClick={handleToggle}>to Delete</button>
-            <h3 className='formTag'>Update your account information.</h3>
-            <label htmlFor='email'>Updated Email:</label>
-            <input id='email' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.email} placeholder="Enter Email"></input>
-            { 
-              loginType === 'business' ?
-              <>
-                <label htmlFor='business_name'>Updated Business Name:</label>
-                <input id='business_name' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.business_name} placeholder="Enter Business Name"></input>
-              </> 
-              : null
-            } 
-            <label htmlFor='username'>Updated Username:</label>
-            <input id='username' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.username} placeholder="Enter Username"></input>
-            <label htmlFor='username'>Updated Location:</label>
-            <input id='location' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.location} placeholder="Enter Location"></input>
-            <div className='profileBtnWrapper'>
-              <button className='modalBtn' type='submit'>UPDATE</button>
-            </div>
-          </form>
+        <div className='profileInfo'>
+          <div className='form'>
+            <form className='loginForm' onSubmit={formik.handleSubmit}>
+              <h1 className='formTitle'>Update or Delete Account</h1>
+              <div className='loginBar'></div>
+              <button className='modalBtn' type='button' onClick={handleToggle}>to Delete</button>
+              <h3 className='formTag'>Update your account information.</h3>
+              <label htmlFor='email'>Updated Email:</label>
+              <input id='email' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.email} placeholder="Enter Email"></input>
+              { 
+                loginType === 'business' ?
+                <>
+                  <label htmlFor='business_name'>Updated Business Name:</label>
+                  <input id='business_name' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.business_name} placeholder="Enter Business Name"></input>
+                </> 
+                : null
+              } 
+              <label htmlFor='username'>Updated Username:</label>
+              <input id='username' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.username} placeholder="Enter Username"></input>
+              <label htmlFor='username'>Updated Location:</label>
+              <input id='location' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.location} placeholder="Enter Location"></input>
+              <div className='profileBtnWrapper'>
+                <button className='modalBtn' type='submit'>UPDATE</button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    </div> 
-    }  
+      </div> 
+      }  
+      {isSnack ? <Snackbar message={snackText} handleCloseSnack={handleCloseSnack} /> : null}
     </div>
   )
 }
