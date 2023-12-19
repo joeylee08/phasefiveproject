@@ -4,13 +4,12 @@ body {
 
 .snackbar {
   position: fixed;
-  left: 1rem;
-  bottom: 2rem;
+  left: 2.2rem;
+  bottom: 2.2rem;
   width: 400px;
   height: 110px;
   background-color: #e0f0e3;
   border: 3px solid green;
-  margin-left: 1rem;
   padding: 0rem 1rem 0rem 1rem;
   border-radius: 10px;
   color: green;
