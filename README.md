@@ -1,6 +1,6 @@
 # Manna Foods Web App
 
-![](https://github.com/joeylee08/phaseoneproject/blob/final_maybe/phaseoneprojectgif.gif)
+![](https://github.com/joeylee08/phasefiveproject/mvp/mannafoods.jpg)
 
 ## Project Description
 
