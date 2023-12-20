@@ -16,69 +16,32 @@ const Account = () => {
 
   const navigate = useNavigate()
 
-  const fsU = yup.object().shape({
-    email: yup.string(),
-    username: yup.string(),
-    location: yup.string(),
+  const fsL = yup.object().shape({
+    location: yup.string().required()
   })
 
-  const formikProfileU = useFormik({
+  const formikLocation = useFormik({
     initialValues: {
-      email: currentUser.email,
-      username: currentUser.username,
-      location: currentUser.location
+      location: currentUser.location || ''
     },
-    validationSchema: fsU,
+    validationSchema: fsL,
     onSubmit: (values) => {
-      fetch(`/userbyid/${currentUser.id}`, {
+      const patchUrl = loginType === 'user' ? `/userbyid/${currentUser.id}` : `/businessbyid/${currentUser.id}`
+      fetch(patchUrl, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(values)
       })
-      .then(res => {
+      .then(res => {                                  
         if (res.status === 200) return res.json()
       })
       .then(data => {
         handleSetUser(data)
-        handleOpenSnack('User updated.')
+        handleOpenSnack('Location updated.')
       })
-      .catch(() => handleOpenSnack('Username already in use.'))
-    }     
-  })
-  
-  const fsB = yup.object().shape({
-    email: yup.string(),
-    business_name: yup.string(),
-    username: yup.string(),
-    location: yup.string(),
-  })
-
-  const formikProfileB = useFormik({
-    initialValues: {
-      email: currentUser.email,
-      business_name: currentUser.business_name,
-      username: currentUser.username,
-      location: currentUser.location
-    },
-    validationSchema: fsB,
-    onSubmit: (values) => {
-      fetch(`/businessbyid/${currentUser.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(values)
-      })
-      .then(res => {
-        if (res.status === 200) return res.json()
-      })
-      .then(data => {
-        handleSetUser(data)
-        handleOpenSnack('User updated.')
-      })
-      .catch(() => handleOpenSnack('Unable to update user.'))
+      .catch(() => handleOpenSnack('Unable to update location.'))
     }     
   })
 
@@ -129,11 +92,7 @@ const Account = () => {
     }
   })
 
-  const formik = isDelete ?
-    formikProfileD : 
-    loginType === 'user' ?
-    formikProfileU :
-    formikProfileB
+  const formik = isDelete ? formikProfileD : formikLocation
 
   const handleToggle = () => {
     setIsDelete(isDelete => !isDelete)
@@ -168,24 +127,11 @@ const Account = () => {
         <div className='profileInfo'>
           <div className='form'>
             <form className='loginForm' onSubmit={formik.handleSubmit}>
-              <h1 className='formTitle'>Update or Delete Account</h1>
+              <h1 className='formTitle'>Save Location or Delete Account</h1>
               <div className='loginBar'></div>
               <button className='modalBtn' type='button' onClick={handleToggle}>to Delete</button>
-              <h3 className='formTag'>Update your account information.</h3>
-              <label htmlFor='email'>Updated Email:</label>
-              <input id='email' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.email} placeholder="Enter Email"></input>
-              { 
-                loginType === 'business' ?
-                <>
-                  <label htmlFor='business_name'>Updated Business Name:</label>
-                  <input id='business_name' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.business_name} placeholder="Enter Business Name"></input>
-                </> 
-                : null
-              } 
-              <label htmlFor='username'>Updated Username:</label>
-              <input id='username' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.username} placeholder="Enter Username"></input>
-              <label htmlFor='username'>Updated Location:</label>
-              <input id='location' className='loginInput' type='text' onChange={formik.handleChange} value={formik.values.location} placeholder="Enter Location"></input>
+              <h3 className='formTag'>Update your current location.</h3>              
+              <input id='location' className='loginInput' style={{width: '100%'}} type='text' onChange={formik.handleChange} value={formik.values.location} placeholder="Enter Location Address"></input>
               <div className='profileBtnWrapper'>
                 <button className='modalBtn' type='submit'>UPDATE</button>
               </div>
