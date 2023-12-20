@@ -1,6 +1,6 @@
 # Manna Foods Web App
 
-![](https://github.com/joeylee08/phasefiveproject/mvp/mannafoods.jpg)
+![](mannafoods.jpg)
 
 ## Project Description
 
