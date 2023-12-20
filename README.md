@@ -39,6 +39,12 @@ This SPA [single page application] is a React / Flask app that allows businesses
 8. Once an item has been picked up, please delete your original listing.
 9. You can modify your user information or delete your account under the Account page.
 
+
+## Notes on Environment Variables
+
+1. The Maps API key has not been uploaded to the GitHub repo.
+2. The Flask SECRET_KEY has not been uploaded to the GitHub repo.
+
 ## Credits
 
 Code written, tested, and submitted by Joseph L.
