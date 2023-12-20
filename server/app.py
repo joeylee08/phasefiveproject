@@ -230,10 +230,15 @@ class UserById(Resource):
     def patch(self, id):
         try:
             if session['login_type'] != 'user':
-                return make_response({"error" : "unauthorized to update profile"}, 422)
+                return make_response({"message" : "Unauthorized to update profile"}, 422)
             
             new_data = request.get_json()
             selected = db.session.get(User, id)
+            username = new_data['username']
+
+            if User.query.filter_by(username=username).first():
+                return make_response({"message": "Username already in use."}, 400)
+
             for key in new_data:
                 if new_data[key] == '' or new_data[key] == 0:
                     continue
@@ -248,7 +253,7 @@ class UserById(Resource):
     def delete(self, id):
         try:
             if session['login_type'] != 'user':
-                return make_response({"error" : "unauthorized to delete profile"}, 422)
+                return make_response({"message" : "Unauthorized to delete profile"}, 422)
     
             target = db.session.get(User, id)
             db.session.delete(target)

@@ -2,8 +2,10 @@
 
 import {React, useState, useEffect} from 'react';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import MAPS_API_KEY from '../api/MapsKey';
 
 const Map = ({center, items, mapClass}) => {
+
   const [centerCoords, setCenterCoords] = useState({})
   const [geocoder, setGeocoder] = useState(null)
 
@@ -13,7 +15,7 @@ const Map = ({center, items, mapClass}) => {
   };
   
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyDQ_T0IBMGJKmVeSYD8BnHxIgmnkAqPM2E',
+    googleMapsApiKey: MAPS_API_KEY,
     items
   });
 

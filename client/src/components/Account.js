@@ -44,7 +44,7 @@ const Account = () => {
         handleSetUser(data)
         handleOpenSnack('User updated.')
       })
-      .catch(() => handleOpenSnack('Unable to update user.'))
+      .catch(() => handleOpenSnack('Username already in use.'))
     }     
   })
   

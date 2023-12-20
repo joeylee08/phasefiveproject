@@ -67,3 +67,6 @@ package-lock.json
 
 # environment
 .env
+
+# api keys
+client/src/api
