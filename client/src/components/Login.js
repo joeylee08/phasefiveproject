@@ -46,6 +46,8 @@ const Login = () => {
       })
       .then(res => {
         if (res.status === 200) return res.json()
+        else throw Error
+
       })
       .then(data => {
         handleSetUser(data)
@@ -54,7 +56,7 @@ const Login = () => {
         navigate('/')
       })
       .catch(() => {
-        handleOpenSnack("Invalid user credentials.")
+        handleOpenSnack('Invalid user credentials.')
       })
     }
   })
@@ -86,7 +88,7 @@ const Login = () => {
         navigate('/')
       })
       .catch(() => {
-        handleOpenSnack("That username already exists.")
+        handleOpenSnack('Username already exists.')
       })
     }
   })

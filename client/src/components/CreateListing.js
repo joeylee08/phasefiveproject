@@ -14,7 +14,7 @@ const CreateListing = () => {
   const fsCreate = yup.object().shape({
     product: yup.string().max(55).required('Please enter a product name.'),
     quantity: yup.number().required('Please enter a quantity.').min(1),
-    expiration_date: yup.string().required("Please enter a username."),
+    expiration_date: yup.string().required("Please enter an expiration date."),
     location: yup.string().required("Please enter a location.").min(5),
     notes: yup.string(),
     vegan_safe: yup.string(),

@@ -68,7 +68,7 @@ class Signup(Resource):
         body = request.get_json()
 
         if User.query.filter_by(username=body['username']).first() or Business.query.filter_by(username=body['username']).first():
-            return make_response({}, 400)
+            return make_response({"message", "Username already exists."}, 400)
         
         try:
             if body['login_type'] == 'user':    
@@ -96,7 +96,7 @@ class Signup(Resource):
             return make_response(new_user.to_dict(), 201)
         except Exception as e:
             db.session.rollback()
-            return make_response({"error" : str(e)}, 400)
+            return make_response({"message" : "Unable to create account."}, 400)
 
 class CurrentUser(Resource):
     def get(self):
@@ -121,21 +121,21 @@ class Listings(Resource):
 
             return make_response(all_listings, 200)
         except Exception:
-            return make_response({}, 404)
+            return make_response({"message": "Unable to fetch listings."}, 404)
         
     def post(self):
         try:
             if session['login_type'] != 'business':
-                return make_response({"error" : "unauthorized to create listing"}, 422)
+                return make_response({"message" : "Unauthorized to create listing."}, 422)
             
             body = request.get_json()
             new_listing = Listing(**body)
             db.session.add(new_listing)
             db.session.commit()
             return make_response(new_listing.to_dict(), 201)
-        except Exception as e:
+        except Exception:
             db.session.rollback()
-            return make_response({"error" : str(e)}, 400)
+            return make_response({"message" : "Unable to create listing."}, 400)
 
 class ListingById(Resource):
     def get(self, id):
@@ -148,7 +148,7 @@ class ListingById(Resource):
     def patch(self, id):
         try:
             if session['login_type'] != 'business':
-                return make_response({"error" : "unauthorized to update listing"}, 422)
+                return make_response({"message" : "Unauthorized to update listing."}, 422)
             
             new_data = request.get_json()
             selected = db.session.get(Listing, id)
@@ -166,15 +166,15 @@ class ListingById(Resource):
     def delete(self, id):
         try:
             if session['login_type'] != 'business':
-                return make_response({"error" : "unauthorized to delete listing"}, 422)
+                return make_response({"message" : "Unauthorized to delete listing."}, 422)
             
             target = db.session.get(Listing, id)
             db.session.delete(target)
             db.session.commit()
             return make_response({}, 204)
-        except Exception as e:
+        except Exception:
             db.session.rollback()
-            return make_response({"error" : str(e)}, 400)
+            return make_response({"message": "Unable to delete listing."}, 400)
         
 class UserListings(Resource):
     def post(self):

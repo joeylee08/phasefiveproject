@@ -4,6 +4,7 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from config import db, bcrypt
+import re
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
@@ -37,6 +38,29 @@ class User(db.Model, SerializerMixin):
 
     def authenticate(self, password):
         return bcrypt.check_password_hash(self._password_hash, password)
+    
+    # must be 'user' or 'business'
+    @validates('login_type')
+    def validate_login(self, _, value):
+        if value != 'user':
+            raise Exception('Login type must be user.')
+        return value
+    
+    # must include @
+    @validates('email')
+    def validate_email(self, _, value):
+        if not isinstance(value, str) or len(value) < 1:
+            raise Exception('Email must be a string')
+        elif not value.find('@'):
+            raise Exception('Please provide a valid email.')
+        return value
+
+    # must exist and be a string
+    @validates('username')
+    def validate_username(self, _, value):
+        if not isinstance(value, str) or len(value) < 1:
+            raise Exception('Username must be a string')
+        return value
 
 class UserListing(db.Model, SerializerMixin):
     __tablename__ = 'userlistings'
@@ -52,6 +76,21 @@ class UserListing(db.Model, SerializerMixin):
 
     # SERIALIZATION
     serialize_only = ('id', 'user_id', 'listing_id')
+
+    # must be a valid user in our db
+    @validates('user_id')
+    def validate_user_id(self, _, value):
+        if not User.query.filter_by(id=value):
+            raise Exception('That user does not exist.')
+        return value
+    
+    # must be a valid listing in our db
+    @validates('listing_id')
+    def validate_listing_id(self, _, value):
+        if not Listing.query.filter_by(id=value):
+            raise Exception('That listing does not exist.')
+        return value
+
 
 class Listing(db.Model, SerializerMixin):
     __tablename__ = 'listings'
@@ -80,6 +119,47 @@ class Listing(db.Model, SerializerMixin):
 
     # SERIALIZATION
     serialize_rules = ('-user_listings.listing', '-business.listings', '-users.listings')
+
+    # must exist and be a string
+    @validates('product')
+    def validate_product(self, _, value):
+        if not isinstance(value, str) or len(value) < 1:
+            raise Exception('Product must be a string')
+        return value
+
+    # must exist and be an integer greater than 0
+    @validates('quantity')
+    def validate_quantity(self, _, value):
+        if not isinstance(value, int):
+            raise Exception('Quantity must be an integer')
+        elif value < 1:
+            raise Exception('Quantity must be at least 1.')
+        return value
+
+    # must exist and be in date formant mm/dd/yy
+    @validates('expiration_date')
+    def validate_expiration_date(self, _, value):
+        date_format = re.compile(r'\b\d{2}/\d{2}/\d{2}\b')
+
+        if not isinstance(value, str) or len(value) < 1:
+            raise Exception('Expiration date must be a string')
+        elif not date_format.match(value):
+            raise Exception('Please use format mm/dd/yy.')
+        return value
+    
+    # creator business must exist
+    @validates('business_id')
+    def validate_business_id(self, _, value):
+        if not Business.query.filter_by(id=value):
+            raise Exception('That business does not exist.')
+        return value
+
+    # must exist and be a string
+    @validates('location')
+    def validate_location(self, _, value):
+        if not isinstance(value, str) or len(value) < 1:
+            raise Exception('Location must be a string')
+        return value
 
 class Business(db.Model, SerializerMixin):
     __tablename__ = 'businesses'
@@ -111,3 +191,33 @@ class Business(db.Model, SerializerMixin):
 
     def authenticate(self, password):
         return bcrypt.check_password_hash(self._password_hash, password)
+    
+    # must be 'user' or 'business'
+    @validates('login_type')
+    def validate_login(self, _, value):
+        if value != 'business':
+            raise Exception('Login type must be business.')
+        return value
+    
+    # must exist and be a string
+    @validates('username')
+    def validate_username(self, _, value):
+        if not isinstance(value, str) or len(value) < 1:
+            raise Exception('Username must be a string')
+        return value
+    
+    # must exist and be a string
+    @validates('business_name')
+    def validate_business_name(self, _, value):
+        if not isinstance(value, str) or len(value) < 1:
+            raise Exception('Username must be a string')
+        return value
+    
+    # must include @
+    @validates('email')
+    def validate_email(self, _, value):
+        if not isinstance(value, str) or len(value) < 1:
+            raise Exception('Email must be a string')
+        elif not value.find('@'):
+            raise Exception('Please provide a valid email.')
+        return value
