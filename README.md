@@ -21,7 +21,7 @@ This SPA [single page application] is a React / Flask app that allows businesses
 
 ## Usage: User
 
-1. Create a free aaccount by using the signup form.
+1. Create a free account by using the signup form.
 2. Go to your Account tab and set your location to see nearby listings.
 3. Browse listing and save them to your My Listings page.
 4. Remove unwanted listings from your saved collection.
@@ -41,11 +41,6 @@ This SPA [single page application] is a React / Flask app that allows businesses
 
 ## Credits
 
-Code written, tested, and submitted by Kat T and Joseph L.
+Code written, tested, and submitted by Joseph L.
 
-Github: https://github.com/ktannehill <br>
-Github: https://github.com/joeylee08 
-
-Images via <a href="https://unsplash.com/collections/Ews7vJAozR4/phase-1-project">Unsplash</a>
-
-We do not claim ownership over any of the fictional names or places used in this project. All rights belong to their respective creators. We express our appreciation for their inspiration.
+Github: https://github.com/joeylee08
