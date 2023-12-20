@@ -16,9 +16,7 @@ const MyListings = () => {
   const handleIsModal = () => {
     setIsModal(isModal => !isModal)
   }
-
-  // const sorted = myListings.sort((a, b) => +Date.parse(b.created_at).getTime() - +Date.parse(a.created_at).getTime())
-
+  
   const fetchListings = () => {
     if (loginType == 'user') {
       fetch(`/ulbyuserid/${currentUser['id']}`)

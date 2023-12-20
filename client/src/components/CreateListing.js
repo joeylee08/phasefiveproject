@@ -3,7 +3,7 @@ import Header from './Header'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { UserContext } from '../context/UserContext'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import Snackbar from './Snackbar'
 
 const CreateListing = () => {

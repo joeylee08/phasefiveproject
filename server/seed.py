@@ -1,15 +1,6 @@
-#!/usr/bin/env python3
-
-# Standard library imports
-from random import randint, choice as rc
-
-# Remote library imports
-from faker import Faker
-
 # Local imports
 from app import app
 from models import db, User, UserListing, Listing, Business
-from datetime import date, timedelta
 
 def create_users():
     users = []
@@ -17,27 +8,27 @@ def create_users():
         username='johnsmith12',
         email='js12@fis.com',
     )
-    u1.password_hash = 'password'
+    u1.password_hash = 'pass1234'
     u2 = User(
-        username='brendasong88',
+        username='bsong88',
         email='bs88@fis.com'
     )
-    u2.password_hash = 'password'
+    u2.password_hash = 'pass1234'
     u3 = User(
         username='floydrose54',
         email='fr54@fis.com'
     )
-    u3.password_hash = 'password'
+    u3.password_hash = 'pass1234'
     u4 = User(
-        username='matteo_the_goat',
+        username='matteo12',
         email='matteo12@fis.com'
     )
-    u4.password_hash = 'password'
+    u4.password_hash = 'pass1234'
     u5 = User(
         username='joeylee08',
         email='joeylee08@fis.com'
     )
-    u5.password_hash = 'password'
+    u5.password_hash = 'pass1234'
 
     users.append(u1)
     users.append(u2)
@@ -69,7 +60,7 @@ def create_businesses():
         email='ricky12@fis.com',
         location='3905 SW Orbit St Suite 110, Beaverton OR'
     )
-    b3.password_hash = 'password'
+    b3.password_hash = 'pass1234'
 
     businesses.append(b1)
     businesses.append(b2)
@@ -82,7 +73,7 @@ def create_listings():
     l1 = Listing(
         product='22oz Ragu Pasta Sauce',
         quantity=25,
-        expiration_date='2/12/24',
+        expiration_date='02/12/24',
         business_id = 1,
         posted_by='Sureway PDX',
         location='1030 SW Jefferson St, Portland OR',
@@ -91,7 +82,7 @@ def create_listings():
     l2 = Listing(
         product='Nature\'s Best Trail Mix Bars',
         quantity=200,
-        expiration_date='2/12/24',
+        expiration_date='02/12/24',
         business_id = 1,
         posted_by='Sureway PDX',
         location='1030 SW Jefferson St, Portland OR',
@@ -100,7 +91,7 @@ def create_listings():
     l3 = Listing(
         product='Rainman\'s Best Fishsticks Frozen 24oz',
         quantity=12,
-        expiration_date='2/12/24',
+        expiration_date='02/12/24',
         business_id = 1,
         posted_by='Sureway PDX',
         location='1030 SW Jefferson St, Portland OR',
@@ -109,7 +100,7 @@ def create_listings():
     l4 = Listing(
         product='Large Pepperoni Pizzas, Frozen',
         quantity=12,
-        expiration_date='2/12/24',
+        expiration_date='02/12/24',
         business_id = 1,
         posted_by='Sureway PDX',
         location='1030 SW Jefferson St, Portland OR',
@@ -118,7 +109,7 @@ def create_listings():
     l5 = Listing(
         product='Ensure 20g Protein Formula 12 Pack',
         quantity=8,
-        expiration_date='2/12/24',
+        expiration_date='02/12/24',
         business_id = 1,
         posted_by='Sureway PDX',
         location='1030 SW Jefferson St, Portland OR',
@@ -127,7 +118,7 @@ def create_listings():
     l6 = Listing(
         product='Assorted Pies, 14"',
         quantity=8,
-        expiration_date='2/12/24',
+        expiration_date='02/12/24',
         business_id = 2,
         posted_by='Sandi\'s Cafe and Pies',
         location='7451 SW Garden Home Rd, Portland OR',
@@ -136,7 +127,7 @@ def create_listings():
     l7 = Listing(
         product='Dinner Rolls, 5oz',
         quantity=75,
-        expiration_date='2/12/24',
+        expiration_date='02/12/24',
         business_id = 2,
         posted_by='Sandi\'s Cafe and Pies',
         location='7451 SW Garden Home Rd, Portland OR',
@@ -145,7 +136,7 @@ def create_listings():
     l8 = Listing(
         product='Frozen Vegetables, Mixed 16oz bags',
         quantity=8,
-        expiration_date='2/12/24',
+        expiration_date='02/12/24',
         business_id = 2,
         posted_by='Sandi\'s Cafe and Pies',
         location='7451 SW Garden Home Rd, Portland OR',
@@ -154,7 +145,7 @@ def create_listings():
     l9 = Listing(
         product='Frozen Hamburger Patties 1/4 Pound',
         quantity=16,
-        expiration_date='2/12/24',
+        expiration_date='02/12/24',
         business_id = 2,
         posted_by='Sandi\'s Cafe and Pies',
         location='7451 SW Garden Home Rd, Portland OR',
@@ -163,7 +154,7 @@ def create_listings():
     l10 = Listing(
         product='Mozzarella Cheese, 24oz bags',
         quantity=5,
-        expiration_date='2/12/24',
+        expiration_date='02/12/24',
         business_id = 3,
         posted_by='Ricardo Pizzeria',
         location='3905 SW Orbit St Suite 110, Beaverton OR',
@@ -172,7 +163,7 @@ def create_listings():
     l11 = Listing(
         product='Pizza Dough, 16oz Portions',
         quantity=20,
-        expiration_date='2/12/24',
+        expiration_date='02/12/24',
         business_id = 3,
         posted_by='Ricardo Pizzeria',
         location='3905 SW Orbit St Suite 110, Beaverton OR',
@@ -181,7 +172,7 @@ def create_listings():
     l12 = Listing(
         product='Various Fresh Vegetables',
         quantity=10,
-        expiration_date='2/12/24',
+        expiration_date='02/12/24',
         business_id = 3,
         posted_by='Ricardo Pizzeria',
         location='3905 SW Orbit St Suite 110, Beaverton OR',
@@ -261,7 +252,6 @@ def create_user_listings():
     db.session.commit()
 
 if __name__ == '__main__':
-    fake = Faker()
     with app.app_context():
         print("Starting seed...")
         create_users()

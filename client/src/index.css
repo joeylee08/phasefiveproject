@@ -236,7 +236,7 @@ a:hover {
   position:fixed;
   margin: auto;
   align-self: center;
-  margin-top: 0rem;
+  margin-top: 0.5rem;
   z-index: 9;
 }
 
@@ -248,12 +248,13 @@ a:hover {
   height: auto;
   border: 5px solid #435334;
   background-color: #ffffff;
-  padding: 0.5rem 2rem 1.5rem 2rem;
+  padding: 1rem 1.2rem 1rem 1.2rem;
 }
 
 .modalDetails h1 {
   color: #435334;
   font-family: fantasy, math;
+  margin-top: 0.5rem;
 }
 
 .listingsMap {
@@ -271,7 +272,7 @@ a:hover {
 .modalMap {
   width: 100%;
   margin: 1rem 0px 1.5rem 0px;
-  height: 300px;
+  height: 240px;
 }
 
 .dietTag {
