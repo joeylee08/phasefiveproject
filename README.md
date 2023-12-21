@@ -23,20 +23,20 @@ This SPA [single page application] is a React / Flask app that allows businesses
 
 1. Create a free account by using the signup form.
 2. Go to your Account tab and set your location to see nearby listings.
-3. Browse listing and save them to your My Listings page.
+3. Browse listings and save them to your My Listings page.
 4. Remove unwanted listings from your saved collection.
 5. You can modify your user information or delete your account under the Account page.
 
 ## Usage: Business
 
 1. Create a free account by using the signup form.
-2. Go to your Account tab and set your location for users to respond to your listings.
-3. Use your Create Listing page to post listings for the world to see.
-4. If desired, be sure to include additional notes such as pickup times anc contact information.
-5. As items are picked up, be sure to update the quantities accordingly.
-6. You can click on any listing card in Active Listings and edit their details.
-7. Do not post expired items, and be honest about expiration dates.
-8. Once an item has been picked up, please delete your original listing.
+2. Go to your Account tab and set a default pickup location for your listings.
+3. Use your Create Listing page to post listings for your community.
+4. Be sure to include additional notes such as pickup times anc contact information.
+5. As items are picked up, remember to update the quantities accordingly.
+6. You can click on any listing card in Active Listings and edit its details.
+7. Do not post expired items, and please be honest about expiration dates.
+8. Once an item has been picked up, don't forget to delete the original listing.
 9. You can modify your user information or delete your account under the Account page.
 
 
