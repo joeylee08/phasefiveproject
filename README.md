@@ -1,6 +1,6 @@
 # Manna Foods Web App
 
-![](mannafoods.jpg)
+![](mannafoods.gif)
 
 ## Project Description
 
