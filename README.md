@@ -4,7 +4,7 @@
 
 ## Project Description
 
-This SPA [single page application] is a React / Flask app that allows businesses, namely restaurants and grocers, to post listings of surplus food for users to come pick up for free. Individuals can create an account as either a user or business. Users can browse and save listings, while businesses can create and edit listings. Listings are location-based and can be filtered for specific dietary restrictions.
+This SPA [single page application] is a React / Flask app that allows businesses, namely restaurants and grocers, to post listings of surplus food for users to come pick up at no cost. Individuals can create an account as either a user or business. Users can browse and save listings, while businesses can create and edit listings. Listings are location-based and can be filtered for specific keywords and preset dietary restrictions.
 
 ## Installation
 
@@ -44,6 +44,7 @@ This SPA [single page application] is a React / Flask app that allows businesses
 
 1. The Maps API key has not been uploaded to the GitHub repo.
 2. The Flask SECRET_KEY has not been uploaded to the GitHub repo.
+3. The app will not run properly without these two keys provided.
 
 ## Credits
 
