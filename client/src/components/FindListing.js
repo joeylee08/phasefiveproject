@@ -56,12 +56,13 @@ const FindListing = () => {
     })
     .then(res => {
       if (res.status === 201) return res.json()
+      else throw Error
     })
     .then(() => {
       setIsModal(false)
       handleOpenSnack('Listing saved.')
     })
-    .catch(() => handleOpenSnack('Unable to save listing.'))
+    .catch(() => handleOpenSnack('Already saved.'))
   }
 
   const mapped = activeListings.map(item => (

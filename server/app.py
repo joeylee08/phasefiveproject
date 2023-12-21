@@ -178,11 +178,18 @@ class ListingById(Resource):
         
 class UserListings(Resource):
     def post(self):
+        body = request.get_json()
+        user_id = body['user_id']
+        listing_id = body['listing_id']
+
+        if UserListing.query.filter_by(user_id=user_id).filter_by(listing_id=listing_id).first():
+            return make_response({"message": "Listing already saved."}, 400)
+
         try:
             if session['login_type'] != 'user':
                 return make_response({"error" : "unauthorized to create userlisting"}, 422)
             
-            body = request.get_json()
+            # body = request.get_json()
             new_ul = UserListing(**body)
             db.session.add(new_ul)
             db.session.commit()
