@@ -233,11 +233,7 @@ class UserById(Resource):
                 return make_response({"message" : "Unauthorized to update profile"}, 422)
             
             new_data = request.get_json()
-            selected = db.session.get(User, id)
-            username = new_data['username']
-
-            if User.query.filter_by(username=username).first():
-                return make_response({"message": "Username already in use."}, 400)
+            selected = db.session.get(User, id) 
 
             for key in new_data:
                 if new_data[key] == '' or new_data[key] == 0:

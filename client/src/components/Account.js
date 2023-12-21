@@ -22,7 +22,7 @@ const Account = () => {
 
   const formikLocation = useFormik({
     initialValues: {
-      location: currentUser.location || ''
+      location: currentUser.location || 'Kiev, Ukraine'
     },
     validationSchema: fsL,
     onSubmit: (values) => {
@@ -127,7 +127,7 @@ const Account = () => {
         <div className='profileInfo'>
           <div className='form'>
             <form className='loginForm' onSubmit={formik.handleSubmit}>
-              <h1 className='formTitle'>Save Location or Delete Account</h1>
+              <h1 className='formTitle'>Update Location</h1>
               <div className='loginBar'></div>
               <button className='modalBtn' type='button' onClick={handleToggle}>to Delete</button>
               <h3 className='formTag'>Update your current location.</h3>              
