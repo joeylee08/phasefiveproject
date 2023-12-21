@@ -10,6 +10,7 @@ const FindListing = () => {
   const [isModal, setIsModal] = useState(false)
   const [activeListings, setActiveListings] = useState([])
   const [selectedListing, setSelectedListing] = useState({})
+  const [currentSaved, setCurrentSaved] = useState([])
 
 
   const {currentUser} = useContext(UserContext)
@@ -29,8 +30,23 @@ const FindListing = () => {
     })
   }
 
+  const fetchSaved = () => {
+    const userId = currentUser.id
+    fetch(`/ulbyuserid/${userId}`)
+    .then(res => {
+      if (res.status === 200) return res.json()
+      else throw Error
+    })
+    .then(data => {
+      const listings = data.map(item => item.listing_id)
+      setCurrentSaved(listings)
+    })
+    .catch(() => handleOpenSnack('Unable to fetch saved listings.'))
+  }
+
   useEffect(() => {
     fetchListings()
+    fetchSaved()
   }, [])
 
   const handleDetails = (item) => {
@@ -61,8 +77,34 @@ const FindListing = () => {
     .then(() => {
       setIsModal(false)
       handleOpenSnack('Listing saved.')
+      fetchListings()
+      fetchSaved()
     })
     .catch(() => handleOpenSnack('Already saved.'))
+  }
+
+  const handleDelete = (e) => {
+    const listing_id = e.target.id
+
+    fetch(`/ulbyuserid/${currentUser.id}`)
+    .then(res => res.json())
+    .then(data => {
+      data = data.filter(item => item.listing_id == listing_id)
+      const target_id = data[0].id
+
+      fetch(`/userlistingbyid/${target_id}`, {
+        method: "DELETE"
+      })
+      .then(res => {
+        if (res.status === 204) {
+          if (isModal) setIsModal(false)
+          fetchListings()
+          fetchSaved()
+          handleOpenSnack('Listing removed.')
+        }
+      })
+      .catch(() => handleOpenSnack('Unable to remove listing.'))
+    })
   }
 
   const mapped = activeListings.map(item => (
@@ -74,7 +116,13 @@ const FindListing = () => {
       <p id='expires'>Expires: {item.expiration_date}</p>
       <div className='cardBtnWrapper'>
         <button type='button' id={item.id} className='cardBtn' onClick={() => handleDetails(item)}>DETAILS</button>
-        <button type='button' id={item.id} className='cardBtn' onClick={() => handleAdd(item)}>SAVE</button>
+        {
+          currentSaved.includes(item.id) ? 
+          <button type='button' id={item.id} className='cardBtn' onClick={handleDelete}>REMOVE</button> :
+          <button type='button' id={item.id} className='cardBtn' onClick={() => handleAdd(item)}>SAVE</button>
+        }
+        
+        
       </div>
     </div>
     )
