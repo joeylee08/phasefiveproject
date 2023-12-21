@@ -10,10 +10,7 @@ import Snackbar from './Snackbar'
 const Account = () => {
   const { currentUser, loginType, handleSetUser, handleSetLogin } = useContext(UserContext)
   const {isSnack, snackText, handleCloseSnack, handleOpenSnack} = useContext(UserContext)
-
-  
   const [isDelete, setIsDelete] = useState(false)
-
   const navigate = useNavigate()
 
   const fsL = yup.object().shape({
@@ -127,7 +124,7 @@ const Account = () => {
         <div className='profileInfo'>
           <div className='form'>
             <form className='loginForm' onSubmit={formik.handleSubmit}>
-              <h1 className='formTitle'>Update Location</h1>
+              <h1 className='formTitle'>Location and Account</h1>
               <div className='loginBar'></div>
               <button className='modalBtn' type='button' onClick={handleToggle}>to Delete</button>
               <h3 className='formTag'>Update your current location.</h3>              

@@ -3,6 +3,7 @@ import { useContext } from 'react'
 
 const Snackbar = ({}) => {
   const {snackText, handleCloseSnack} = useContext(UserContext)
+  
   return (
     <>
         <div className='snackbar' onClick={handleCloseSnack}>

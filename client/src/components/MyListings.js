@@ -9,7 +9,6 @@ const MyListings = () => {
   const [myListings, setMyListings] = useState([])
   const [isModal, setIsModal] = useState(false)
   const [selectedListing, setSelectedListing] = useState({})
-
   const {currentUser, loginType} = useContext(UserContext)
   const {isSnack, snackText, handleCloseSnack, handleOpenSnack} = useContext(UserContext)
   
@@ -107,11 +106,12 @@ const MyListings = () => {
     </div>
     )
   )
+  
   return (
     <div className='container'>
       <Header title={loginType === 'user' ? 'Saved Listings' : 'Active Listings'} />
       <NavBar />
-      {isModal ? <Modal selectedListing={selectedListing} handleIsModal={handleIsModal} handleOpenSnack={handleOpenSnack} handleDelete={handleDelete} fetchListings={fetchListings}/> : null}
+      {isModal ? <Modal currentSaved={myListings} selectedListing={selectedListing} handleIsModal={handleIsModal} handleOpenSnack={handleOpenSnack} handleDelete={handleDelete} fetchListings={fetchListings}/> : null}
       <div className='content'>
         {mapped}
       </div>

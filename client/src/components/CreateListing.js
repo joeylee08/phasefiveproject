@@ -10,7 +10,6 @@ const CreateListing = () => {
   const {currentUser} = useContext(UserContext)
   const {isSnack, snackText, handleCloseSnack, handleOpenSnack} = useContext(UserContext)
 
-
   const fsCreate = yup.object().shape({
     product: yup.string().max(55).required('Please enter a product name.'),
     quantity: yup.number().required('Please enter a quantity.').min(1),
@@ -60,6 +59,7 @@ const CreateListing = () => {
       .catch(() => handleOpenSnack('Unable to remove listing.'))
     }
   })
+  
   return (
     <div className='container'>
       <Header title={'Create Listing'} />

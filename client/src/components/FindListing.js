@@ -1,6 +1,8 @@
 import NavBar from './NavBar'
 import Header from './Header'
 import { useState, useEffect, useContext } from 'react'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
 import Modal from './Modal'
 import { UserContext } from '../context/UserContext'
 import Map from './Map'
@@ -11,15 +13,9 @@ const FindListing = () => {
   const [activeListings, setActiveListings] = useState([])
   const [selectedListing, setSelectedListing] = useState({})
   const [currentSaved, setCurrentSaved] = useState([])
-
-
+  const [searchQuery, setSearchQuery] = useState('')
   const {currentUser} = useContext(UserContext)
   const {isSnack, snackText, handleCloseSnack, handleOpenSnack} = useContext(UserContext)
-
-
-  const handleIsModal = () => {
-    setIsModal(isModal => !isModal)
-  }
 
   const fetchListings = () => {
     fetch('/listings')
@@ -48,6 +44,10 @@ const FindListing = () => {
     fetchListings()
     fetchSaved()
   }, [])
+
+  const handleIsModal = () => {
+    setIsModal(isModal => !isModal)
+  }
 
   const handleDetails = (item) => {
     setIsModal(isModal => !isModal)
@@ -91,23 +91,45 @@ const FindListing = () => {
     .then(data => {
       data = data.filter(item => item.listing_id == listing_id)
       const target_id = data[0].id
-
       fetch(`/userlistingbyid/${target_id}`, {
         method: "DELETE"
       })
       .then(res => {
         if (res.status === 204) {
           if (isModal) setIsModal(false)
-          fetchListings()
-          fetchSaved()
           handleOpenSnack('Listing removed.')
+          fetchSaved()
+          fetchListings()
         }
       })
       .catch(() => handleOpenSnack('Unable to remove listing.'))
     })
   }
 
-  const mapped = activeListings.map(item => (
+  const handleClearSearch = () => {
+    formikSearch.resetForm()
+    setSearchQuery('')
+  }
+
+  const fsSearch = yup.object().shape({
+    searchQuery: yup.string()
+  })
+
+  const formikSearch = useFormik({
+    initialValues: {
+      searchQuery: ''
+    },
+    validationSchema: fsSearch,
+    onSubmit: (values) => {
+      setSearchQuery(values.searchQuery.trim().toLowerCase())
+    }
+  })
+
+  const filtered = activeListings.filter(item => {
+    return (item.product.toLowerCase().includes(searchQuery) || item.posted_by.toLowerCase().includes(searchQuery) || item.notes.includes(searchQuery))
+  })
+
+  const mapped = filtered.map(item => (
     <div className='listingCard' listing_id={item.id} key={item.id}>
       <h3>{item.product}</h3>
       <h4>Quantity: {item.quantity}</h4>
@@ -121,8 +143,11 @@ const FindListing = () => {
           <button type='button' id={item.id} className='cardBtn' onClick={handleDelete}>REMOVE</button> :
           <button type='button' id={item.id} className='cardBtn' onClick={() => handleAdd(item)}>SAVE</button>
         }
-        
-        
+        {
+          currentSaved.includes(item.id) ?
+          <span id='savedCheck'>&nbsp;✔ saved</span> :
+          null
+        }
       </div>
     </div>
     )
@@ -131,18 +156,19 @@ const FindListing = () => {
   const address = currentUser.location || 'Kiev, Ukraine'
   const items = [];
 
-  //1. Filter the activeListings for
-  //   a. keyword
-  //   b. distance
-  //   c. dietary restrictions
-
   return (
     <div className='container'>
       <Header title={'Find Listing'} />
       <NavBar />
-      {isModal ? <Modal selectedListing={selectedListing} handleAdd={handleAdd} handleIsModal={handleIsModal} /> : null}
+      {isModal ? <Modal selectedListing={selectedListing} handleAdd={handleAdd} handleDelete={handleDelete} handleIsModal={handleIsModal} currentSaved={currentSaved}/> : null}
+      <Map mapClass={'listingsMap'} center={address} items={items}/>
+      <form className='searchForm' onSubmit={formikSearch.handleSubmit}>
+        <label htmlFor='searchQuery' className='searchInput'>Search Listings:</label>  
+        <input type='text' id='searchQuery' className='searchInput' onChange={formikSearch.handleChange} value={formikSearch.values.searchQuery} placeholder='Enter Keywords'></input>
+        <button type='submit' className='searchInput'>GO</button>
+        <button type='button' className='searchInput' onClick={handleClearSearch}>CLEAR</button>
+      </form>
       <div className='content'>
-        <Map mapClass={'listingsMap'} center={address} items={items}/>
         {mapped}
       </div>
       {isSnack ? <Snackbar message={snackText} handleCloseSnack={handleCloseSnack} /> : null}

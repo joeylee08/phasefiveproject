@@ -91,7 +91,6 @@ class UserListing(db.Model, SerializerMixin):
             raise Exception('That listing does not exist.')
         return value
 
-
 class Listing(db.Model, SerializerMixin):
     __tablename__ = 'listings'
 

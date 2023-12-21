@@ -5,10 +5,10 @@ import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 import Map from './Map'
 
-const Modal = ({selectedListing, fetchListings, handleIsModal, handleOpenSnack, handleAdd, handleDelete}) => {
+const Modal = ({selectedListing, fetchListings, handleIsModal, handleAdd, handleDelete, currentSaved}) => {
   const location = useLocation()
   const path = location.pathname
-  const {currentUser, loginType} = useContext(UserContext)
+  const {currentUser, loginType, handleOpenSnack} = useContext(UserContext)
   
   const fsEdit = yup.object().shape({
     product: yup.string().max(55).required('Please enter a product name.'),
@@ -82,8 +82,19 @@ const Modal = ({selectedListing, fetchListings, handleIsModal, handleOpenSnack, 
             <p className='dietTag'>Nut Free {sl.nut_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
             <p className='dietTag'>Soy Free {sl.soy_free ? <span className='greenCheck'>✔</span> : <span className='redX'>✗</span>}</p>
             <div className='formBtnWrapper'>
-            <button className='modalBtn' onClick={handleIsModal}>CLOSE</button>
-              {path === '/mylistings' ? <button className='modalBtn' id={sl.id} onClick={handleDelete}>REMOVE</button> : <button className='modalBtn' onClick={() => handleAdd(sl)}>SAVE</button>}
+              <button className='modalBtn' onClick={handleIsModal}>CLOSE</button>
+              {path === '/mylistings' ? <button className='modalBtn' id={sl.id} onClick={handleDelete}>REMOVE</button> : null}
+              {path === '/findlisting' && currentSaved.includes(sl.id) ? 
+                <button className='modalBtn' id={sl.id} onClick={handleDelete}>REMOVE</button> :
+                path === '/findlisting' ?
+                <button className='modalBtn' id={sl.id} onClick={() => handleAdd(sl)}>SAVE</button> :
+                null
+              }
+              {
+                currentSaved.includes(sl.id) ?
+                <span id='savedListingCheck'>✔ saved</span> :
+                null
+              }
             </div>
           </div>
         </div>

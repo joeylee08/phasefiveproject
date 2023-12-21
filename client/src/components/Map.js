@@ -5,7 +5,6 @@ import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import MAPS_API_KEY from '../api/MapsKey';
 
 const Map = ({center, items, mapClass}) => {
-
   const [centerCoords, setCenterCoords] = useState({})
   const [geocoder, setGeocoder] = useState(null)
 
@@ -43,8 +42,6 @@ const Map = ({center, items, mapClass}) => {
       handleSetCoords(center)
     }
   }, [geocoder])
-
- 
 
   if (loadError) {
     return <div>Error loading maps</div>;
