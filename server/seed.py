@@ -46,14 +46,14 @@ def create_businesses():
         email='swpdx12@fis.com',
         location='1030 SW Jefferson St, Portland OR'
     )
-    b1.password_hash = 'password'
+    b1.password_hash = 'pass1234'
     b2 = Business(
         username='sandispdx',
         business_name='Sandi\'s Cafe and Pies',
         email='arpd@fis.com',
         location='7451 SW Garden Home Rd, Portland OR'
     )
-    b2.password_hash = 'password'
+    b2.password_hash = 'pass1234'
     b3 = Business(
         username='rickypizza',
         business_name='Ricardo Pizzeria',
