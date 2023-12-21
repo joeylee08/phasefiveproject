@@ -75,7 +75,6 @@ const FindListing = () => {
       else throw Error
     })
     .then(() => {
-      setIsModal(false)
       handleOpenSnack('Listing saved.')
       fetchListings()
       fetchSaved()
@@ -96,7 +95,6 @@ const FindListing = () => {
       })
       .then(res => {
         if (res.status === 204) {
-          if (isModal) setIsModal(false)
           handleOpenSnack('Listing removed.')
           fetchSaved()
           fetchListings()
@@ -126,7 +124,7 @@ const FindListing = () => {
   })
 
   const filtered = activeListings.filter(item => {
-    return (item.product.toLowerCase().includes(searchQuery) || item.posted_by.toLowerCase().includes(searchQuery) || item.notes.includes(searchQuery))
+    return item.product.toLowerCase().includes(searchQuery)
   })
 
   const mapped = filtered.map(item => (

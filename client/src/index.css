@@ -15,6 +15,7 @@ body {
   border-radius: 10px;
   color: green;
   font-family: fantasy, math;
+  z-index: 99;
 }
 
 .snackbar h2 {
@@ -181,6 +182,7 @@ h1.formTitle {
   height: 70px;
   background-color: #596a48;
   font-family: fantasy, math;
+  padding-bottom: 0.2rem;
 }
 
 .linksList {
@@ -408,8 +410,8 @@ div.listingCard h4 {
   background-color: #f4f4f4;
   width: 100%;
   padding: 1.2rem 2rem 0.8rem 2rem;
-  margin-top: 0px;
-  margin-bottom: 0.4rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0rem;
 }
 
 .homeQuotes h2 {
